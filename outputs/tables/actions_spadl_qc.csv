@@ -1,0 +1,2 @@
+n_actions,n_matches,actions_per_match_mean,x_min,x_max,y_min,y_max,top_type_names,top_result_names
+1484206,740,2005.6837837837838,0.0,105.0,0.0,68.0,"{'pass': 620643, 'dribble': 599194, 'throw_in': 37259, 'clearance': 35146, 'tackle': 28826, 'take_on': 24704, 'bad_touch': 22878, 'interception': 21026, 'shot': 18233, 'foul': 16415, 'cross': 15216, 'goalkick': 12281, 'freekick_short': 8466, 'freekick_crossed': 7814, 'corner_crossed': 5365}","{'success': 1237523, 'fail': 242486, 'offside': 2515, 'yellow_card': 1568, 'owngoal': 89, 'red_card': 25}"

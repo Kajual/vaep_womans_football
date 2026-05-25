@@ -1,0 +1,528 @@
+[
+  {
+    "case_id": 1,
+    "case_label": "manual_1",
+    "action": {
+      "match_id": 3998850,
+      "action_id": 1259,
+      "original_event_id": "e2b8989e-7707-4f37-8331-de221a5dcdb7",
+      "minute": 62.6,
+      "period_id": 2,
+      "type_name": "cross",
+      "result_name": "success",
+      "bodypart_name": "foot_right",
+      "phase": "final_third_creation",
+      "play_pattern": null,
+      "player_id": 10137,
+      "player_name": "Kadidiatou Diani",
+      "team_id": 861,
+      "team_name": "France Women's",
+      "opponent_name": "Wales",
+      "match_label": "France Women's vs Wales",
+      "start_spadl": [
+        99.79375,
+        17.72249999999999
+      ],
+      "end_spadl": [
+        100.66875,
+        32.3425
+      ],
+      "start_sb": [
+        114.05,
+        20.849999999999987
+      ],
+      "end_sb": [
+        115.05,
+        38.050000000000004
+      ]
+    },
+    "space_features": {
+      "nearest_opponent_distance": 0.649,
+      "nearest_teammate_distance": 8.819,
+      "n_opponents_visible": 9.0,
+      "n_teammates_visible": 4.0,
+      "n_opponents_ahead_of_ball": 2.0,
+      "n_opponents_between_ball_and_goal": 2.0,
+      "defensive_density_around_ball_5m": 2.0,
+      "defensive_density_around_ball_10m": 5.0,
+      "defensive_density_around_ball_15m": 7.0,
+      "defensive_density_in_front_of_ball": 4.0,
+      "is_central_zone": 0.0,
+      "is_half_space_left": 0.0,
+      "is_half_space_right": 1.0,
+      "is_wide_zone": 0.0,
+      "is_box_action": 1.0,
+      "is_box_entry": 1.0,
+      "is_final_third_entry": 1.0
+    },
+    "vaep_by_model": {
+      "model_A": {
+        "vaep_value": 0.118198,
+        "offensive_value": 0.118234,
+        "defensive_value": -3.6e-05,
+        "p_score": 0.167395,
+        "p_concede": 0.001105
+      },
+      "model_B": {
+        "vaep_value": 0.299465,
+        "offensive_value": 0.299553,
+        "defensive_value": -8.9e-05,
+        "p_score": 0.33945,
+        "p_concede": 0.000685
+      },
+      "model_C": {
+        "vaep_value": 0.505382,
+        "offensive_value": 0.505672,
+        "defensive_value": -0.00029,
+        "p_score": 0.575753,
+        "p_concede": 0.000721
+      }
+    },
+    "delta_vaep_CA": 0.387184,
+    "delta_vaep_BA": 0.181267,
+    "freeze_frame": {
+      "players": [
+        {
+          "x": 97.11581161635996,
+          "y": 45.45321896735787,
+          "role": "teammate",
+          "keeper": false
+        },
+        {
+          "x": 105.91979064429373,
+          "y": 52.41298030553001,
+          "role": "opponent",
+          "keeper": false
+        },
+        {
+          "x": 107.66222754324579,
+          "y": 46.990511358768245,
+          "role": "opponent",
+          "keeper": false
+        },
+        {
+          "x": 107.66540565156933,
+          "y": 39.00052688922594,
+          "role": "opponent",
+          "keeper": false
+        },
+        {
+          "x": 108.69708096733245,
+          "y": 61.699999833968384,
+          "role": "opponent",
+          "keeper": false
+        },
+        {
+          "x": 110.4844094927291,
+          "y": 38.84879099033978,
+          "role": "teammate",
+          "keeper": false
+        },
+        {
+          "x": 111.16035840469092,
+          "y": 49.2753072568995,
+          "role": "teammate",
+          "keeper": false
+        },
+        {
+          "x": 112.0613050564522,
+          "y": 39.90137544604114,
+          "role": "opponent",
+          "keeper": false
+        },
+        {
+          "x": 112.63041707013377,
+          "y": 48.311804948090646,
+          "role": "opponent",
+          "keeper": false
+        },
+        {
+          "x": 112.8679165877276,
+          "y": 41.861110676314425,
+          "role": "teammate",
+          "keeper": false
+        },
+        {
+          "x": 113.8493049026673,
+          "y": 54.12208550050484,
+          "role": "opponent",
+          "keeper": false
+        },
+        {
+          "x": 114.0999984741211,
+          "y": 59.20000076293945,
+          "role": "actor",
+          "keeper": false
+        },
+        {
+          "x": 114.6243296782057,
+          "y": 58.66076017463308,
+          "role": "opponent",
+          "keeper": false
+        },
+        {
+          "x": 119.84066501407976,
+          "y": 45.01936205626231,
+          "role": "opponent",
+          "keeper": true
+        }
+      ],
+      "visible_area": [
+        107.9966592676965,
+        80.0,
+        81.69788441145695,
+        22.895555326370673,
+        97.16071345028922,
+        11.127273424549141,
+        120.0,
+        32.28118314357666,
+        120.0,
+        80.0,
+        107.9966592676965,
+        80.0
+      ]
+    }
+  },
+  {
+    "case_id": 2,
+    "case_label": "manual_2",
+    "action": {
+      "match_id": 3998853,
+      "action_id": 459,
+      "original_event_id": "e7599307-e08c-4412-b94c-6e7be6437f30",
+      "minute": 23.69,
+      "period_id": 1,
+      "type_name": "dribble",
+      "result_name": "success",
+      "bodypart_name": "foot",
+      "phase": "final_third_creation",
+      "play_pattern": null,
+      "player_id": 10516,
+      "player_name": "Frida Maanum",
+      "team_id": 852,
+      "team_name": "Norway Women's",
+      "opponent_name": "Iceland Women's",
+      "match_label": "Norway Women's vs Iceland Women's",
+      "start_spadl": [
+        98.74375000000002,
+        33.3625
+      ],
+      "end_spadl": [
+        98.74375000000002,
+        33.3625
+      ],
+      "start_sb": [
+        112.85000000000002,
+        39.25
+      ],
+      "end_sb": [
+        112.85000000000002,
+        39.25
+      ]
+    },
+    "space_features": {
+      "nearest_opponent_distance": 1.588,
+      "nearest_teammate_distance": 4.508,
+      "n_opponents_visible": 6.0,
+      "n_teammates_visible": 2.0,
+      "n_opponents_ahead_of_ball": 4.0,
+      "n_opponents_between_ball_and_goal": 4.0,
+      "defensive_density_around_ball_5m": 4.0,
+      "defensive_density_around_ball_10m": 5.0,
+      "defensive_density_around_ball_15m": 5.0,
+      "defensive_density_in_front_of_ball": 1.0,
+      "is_central_zone": 1.0,
+      "is_half_space_left": 0.0,
+      "is_half_space_right": 0.0,
+      "is_wide_zone": 0.0,
+      "is_box_action": 1.0,
+      "is_box_entry": 1.0,
+      "is_final_third_entry": 1.0
+    },
+    "vaep_by_model": {
+      "model_A": {
+        "vaep_value": -0.196265,
+        "offensive_value": -0.183426,
+        "defensive_value": -0.012839,
+        "p_score": 0.110399,
+        "p_concede": 0.013273
+      },
+      "model_B": {
+        "vaep_value": -0.200464,
+        "offensive_value": -0.195062,
+        "defensive_value": -0.005402,
+        "p_score": 0.070231,
+        "p_concede": 0.007611
+      },
+      "model_C": {
+        "vaep_value": 0.204187,
+        "offensive_value": 0.204896,
+        "defensive_value": -0.000709,
+        "p_score": 0.238687,
+        "p_concede": 0.001147
+      }
+    },
+    "delta_vaep_CA": 0.400452,
+    "delta_vaep_BA": -0.004199,
+    "freeze_frame": {
+      "players": [
+        {
+          "x": 94.34702327377155,
+          "y": 50.825965061779314,
+          "role": "opponent",
+          "keeper": false
+        },
+        {
+          "x": 99.71718254416331,
+          "y": 47.593717626155055,
+          "role": "teammate",
+          "keeper": false
+        },
+        {
+          "x": 108.87338456393954,
+          "y": 37.49181973946358,
+          "role": "teammate",
+          "keeper": false
+        },
+        {
+          "x": 111.65409873714052,
+          "y": 38.029286392778225,
+          "role": "opponent",
+          "keeper": false
+        },
+        {
+          "x": 112.9000015258789,
+          "y": 40.79999923706055,
+          "role": "actor",
+          "keeper": false
+        },
+        {
+          "x": 113.98977379169924,
+          "y": 44.48547390274712,
+          "role": "opponent",
+          "keeper": false
+        },
+        {
+          "x": 114.15436057794776,
+          "y": 39.449299170975976,
+          "role": "opponent",
+          "keeper": false
+        },
+        {
+          "x": 116.98911959057803,
+          "y": 41.80658401240673,
+          "role": "opponent",
+          "keeper": true
+        },
+        {
+          "x": 117.08570576288713,
+          "y": 51.45475567785885,
+          "role": "opponent",
+          "keeper": false
+        }
+      ],
+      "visible_area": [
+        92.33769555599635,
+        77.25800008204732,
+        80.09878173255822,
+        63.86766030969957,
+        120.0,
+        5.993178821250588,
+        120.0,
+        57.444600586810644,
+        92.33769555599635,
+        77.25800008204732
+      ]
+    }
+  },
+  {
+    "case_id": 3,
+    "case_label": "manual_3",
+    "action": {
+      "match_id": 4018357,
+      "action_id": 2159,
+      "original_event_id": "d9c2488a-03f4-401f-b462-522c1fd84e56",
+      "minute": 120.26,
+      "period_id": 4,
+      "type_name": "clearance",
+      "result_name": "success",
+      "bodypart_name": "head",
+      "phase": "final_third_creation",
+      "play_pattern": null,
+      "player_id": 46885,
+      "player_name": "Rebecca Knaak",
+      "team_id": 857,
+      "team_name": "Germany Women's",
+      "opponent_name": "France Women's",
+      "match_label": "Germany Women's vs France Women's",
+      "start_spadl": [
+        98.39375,
+        33.8725
+      ],
+      "end_spadl": [
+        87.45625,
+        45.8575
+      ],
+      "start_sb": [
+        112.44999999999999,
+        39.85
+      ],
+      "end_sb": [
+        99.95,
+        53.95
+      ]
+    },
+    "space_features": {
+      "nearest_opponent_distance": 1.302,
+      "nearest_teammate_distance": 2.244,
+      "n_opponents_visible": 5.0,
+      "n_teammates_visible": 9.0,
+      "n_opponents_ahead_of_ball": 5.0,
+      "n_opponents_between_ball_and_goal": 4.0,
+      "defensive_density_around_ball_5m": 2.0,
+      "defensive_density_around_ball_10m": 3.0,
+      "defensive_density_around_ball_15m": 4.0,
+      "defensive_density_in_front_of_ball": 1.0,
+      "is_central_zone": 1.0,
+      "is_half_space_left": 0.0,
+      "is_half_space_right": 0.0,
+      "is_wide_zone": 0.0,
+      "is_box_action": 0.0,
+      "is_box_entry": 0.0,
+      "is_final_third_entry": 0.0
+    },
+    "vaep_by_model": {
+      "model_A": {
+        "vaep_value": -0.300145,
+        "offensive_value": 0.087876,
+        "defensive_value": -0.388021,
+        "p_score": 0.182275,
+        "p_concede": 0.394071
+      },
+      "model_B": {
+        "vaep_value": 0.315119,
+        "offensive_value": 0.14313,
+        "defensive_value": 0.17199,
+        "p_score": 0.231504,
+        "p_concede": 0.018477
+      },
+      "model_C": {
+        "vaep_value": 0.148666,
+        "offensive_value": 0.029614,
+        "defensive_value": 0.119052,
+        "p_score": 0.111835,
+        "p_concede": 0.162674
+      }
+    },
+    "delta_vaep_CA": 0.448811,
+    "delta_vaep_BA": 0.615264,
+    "freeze_frame": {
+      "players": [
+        {
+          "x": 3.3068793214940158,
+          "y": 42.048866619385784,
+          "role": "teammate",
+          "keeper": true
+        },
+        {
+          "x": 6.4990919728653225,
+          "y": 42.38955846639808,
+          "role": "teammate",
+          "keeper": false
+        },
+        {
+          "x": 7.599999904632568,
+          "y": 39.900001525878906,
+          "role": "actor",
+          "keeper": false
+        },
+        {
+          "x": 8.393398579914766,
+          "y": 41.19558973675584,
+          "role": "opponent",
+          "keeper": false
+        },
+        {
+          "x": 8.722085154514161,
+          "y": 45.980065696097476,
+          "role": "teammate",
+          "keeper": false
+        },
+        {
+          "x": 8.770983962706772,
+          "y": 36.10933514147672,
+          "role": "teammate",
+          "keeper": false
+        },
+        {
+          "x": 10.029484648920565,
+          "y": 40.7437619602063,
+          "role": "teammate",
+          "keeper": false
+        },
+        {
+          "x": 10.305245461704196,
+          "y": 40.156331969038995,
+          "role": "teammate",
+          "keeper": false
+        },
+        {
+          "x": 11.721363341167681,
+          "y": 42.5653162403009,
+          "role": "opponent",
+          "keeper": false
+        },
+        {
+          "x": 11.785343155164206,
+          "y": 67.80208842146183,
+          "role": "teammate",
+          "keeper": false
+        },
+        {
+          "x": 12.143085482890065,
+          "y": 33.95575476718894,
+          "role": "opponent",
+          "keeper": false
+        },
+        {
+          "x": 16.465164634445173,
+          "y": 59.570246117381764,
+          "role": "teammate",
+          "keeper": false
+        },
+        {
+          "x": 16.524078046065796,
+          "y": 40.40157905388361,
+          "role": "teammate",
+          "keeper": false
+        },
+        {
+          "x": 22.372070645774393,
+          "y": 43.60607395972961,
+          "role": "opponent",
+          "keeper": false
+        },
+        {
+          "x": 31.884194358899236,
+          "y": 62.982719018009895,
+          "role": "opponent",
+          "keeper": false
+        }
+      ],
+      "visible_area": [
+        21.81530779946775,
+        78.5892569090802,
+        0.0,
+        59.48332266577805,
+        0.0,
+        0.0,
+        3.614586040706666,
+        0.0,
+        38.874588815924426,
+        63.33772905178123,
+        21.81530779946775,
+        78.5892569090802
+      ]
+    }
+  }
+]

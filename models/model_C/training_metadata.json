@@ -1,0 +1,21 @@
+{
+  "model_id": "model_C",
+  "feature_sets": [
+    "baseline",
+    "phase",
+    "space"
+  ],
+  "train_corpora": [
+    "men_360_source",
+    "women_360_finetune"
+  ],
+  "eval_corpora": [
+    "women_360_evaluation"
+  ],
+  "k": 10,
+  "n_train_rows": 459240,
+  "n_val_rows": 77566,
+  "n_eval_rows": 51172,
+  "best_iter_score": 52,
+  "best_iter_concede": 58
+}

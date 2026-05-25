@@ -1,0 +1,10 @@
+metric,model_pair,n_players,spearman,kendall
+total,model_A_vs_model_B,117,0.9727,0.8694
+total,model_A_vs_model_C,117,0.6912,0.5225
+total,model_B_vs_model_C,117,0.6719,0.504
+offensive,model_A_vs_model_B,117,0.9811,0.8992
+offensive,model_A_vs_model_C,117,0.6445,0.4895
+offensive,model_B_vs_model_C,117,0.6213,0.4754
+defensive,model_A_vs_model_B,117,0.8628,0.7141
+defensive,model_A_vs_model_C,117,0.7361,0.5632
+defensive,model_B_vs_model_C,117,0.7037,0.5296

@@ -1,0 +1,15 @@
+{
+  "model_id": "model_B",
+  "variant": "fine_tuned",
+  "feature_sets": [
+    "baseline",
+    "phase"
+  ],
+  "k": 10,
+  "n_men_rows": 441553,
+  "n_women_rows": 158387,
+  "n_calib_rows": 28955,
+  "n_eval_rows": 60370,
+  "best_iter_score": 47,
+  "best_iter_concede": 38
+}

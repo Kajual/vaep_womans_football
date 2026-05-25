@@ -1,0 +1,125 @@
+# Default configuration for the VAEP pipeline.
+# Override on the CLI or set VAEP_CONFIG=path/to/other.yaml.
+
+paths:
+  # Root of the StatsBomb open-data clone.
+  statsbomb_root: "data/raw/statsbomb_open_data"
+
+  # Pipeline outputs.
+  inventory_dir: "data/processed/inventory"
+  events_clean_dir: "data/interim/events_clean"
+  events_360_dir: "data/interim/events_360_joined"
+  actions_dir: "data/processed/actions"
+  labels_dir: "data/processed/labels"
+  features_dir: "data/processed/features"
+  model_outputs_dir: "data/processed/model_outputs"
+
+  models_dir: "models"
+  figures_dir: "outputs/figures"
+  tables_dir: "outputs/tables"
+  reports_dir: "outputs/reports"
+
+# Competition selection. Names and seasons must match competitions.json exactly.
+# (Cross-check against outputs/tables/inventory_summary.csv after data_inventory runs.)
+competitions:
+  # Men's 360 — source domain for transfer-learning pre-training.
+  # Inventory shows 200 matches with full 360 coverage across these four.
+  men_360_source:
+    - { name: "FIFA World Cup",   season: "2022" }        # 64 matches
+    - { name: "UEFA Euro",        season: "2024" }        # 51 matches
+    - { name: "UEFA Euro",        season: "2020" }        # 51 matches
+    - { name: "1. Bundesliga",    season: "2023/2024" }   # 34 matches
+
+  # Women's 360 fine-tune — target-domain training data for the TL model.
+  women_360_finetune:
+    - { name: "Women's World Cup",   season: "2023" }     # 64 matches
+    - { name: "UEFA Women's Euro",   season: "2022" }     # 31 matches
+
+  # Women's 360 evaluation — held-out target-domain test set.
+  # This is the headline dataset for player rankings and case studies.
+  women_360_evaluation:
+    - { name: "UEFA Women's Euro",   season: "2025" }     # 31 matches
+
+  # Women's event-only — Model A baseline comparisons (no 360 available).
+  women_event_only:
+    - { name: "Women's World Cup",          season: "2019" }       # 52 matches
+    - { name: "NWSL",                       season: "2018" }       # 36 matches
+    - { name: "FA Women's Super League",    season: "2018/2019" }  # 108 matches
+    - { name: "FA Women's Super League",    season: "2019/2020" }  # 87 matches
+    - { name: "FA Women's Super League",    season: "2020/2021" }  # 131 matches
+
+  # Default corpus: which groups every pipeline stage processes by default.
+  # All four groups by default; override on the CLI with --competitions.
+  default_corpus:
+    - "men_360_source"
+    - "women_360_finetune"
+    - "women_360_evaluation"
+    - "women_event_only"
+
+# Train / validation / test split policy.
+split:
+  policy: "match_level"   # never split actions of the same match across folds
+  train_frac: 0.70
+  val_frac: 0.15
+  test_frac: 0.15
+  random_seed: 42
+
+# Label horizons.
+labels:
+  k_main: 10
+  k_control: [5, 15]
+
+# Baseline features.
+features_baseline:
+  n_previous_actions: 3
+
+# Phase labeling rules (thresholds tunable in src/phase_features.py).
+phases:
+  taxonomy:
+    - "build_up"
+    - "progression"
+    - "final_third_creation"
+    - "transition_attack"
+    - "defensive_transition"
+    - "set_piece"
+  pitch_thirds_x:
+    own_third_max: 40.0       # SPADL coordinates: pitch is 105x68
+    final_third_min: 70.0
+  transition_window_seconds: 5
+
+# Spatial features.
+space_features:
+  pressure_radius_m: 5.0
+  density_radii_m: [5.0, 10.0, 15.0]
+  half_space_y_bounds_left: [13.84, 24.84]
+  half_space_y_bounds_right: [43.16, 54.16]
+  box_x_min: 88.5
+  box_y_min: 13.84
+  box_y_max: 54.16
+
+# Modelling.
+modelling:
+  algorithm: "lightgbm"    # lightgbm | xgboost | catboost | logreg
+  lightgbm_params:
+    num_leaves: 63
+    max_depth: -1
+    learning_rate: 0.05
+    n_estimators: 1500
+    min_data_in_leaf: 100
+    feature_fraction: 0.8
+    bagging_fraction: 0.8
+    bagging_freq: 5
+    objective: "binary"
+    metric: "binary_logloss"
+    verbosity: -1
+  early_stopping_rounds: 50
+
+# Transfer learning.
+transfer_learning:
+  variants:
+    - "men_only"           # train on men, eval on women (zero-shot)
+    - "fine_tuned"         # train on men, then fine-tune on women's train fold
+    - "women_only"         # control: train on women only
+  fine_tune_learning_rate_mult: 0.2
+  fine_tune_n_estimators: 300
+  calibration_method: "isotonic"   # isotonic | platt | none

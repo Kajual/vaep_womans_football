@@ -1,0 +1,16 @@
+{
+  "model_id": "model_C",
+  "variant": "women_only",
+  "feature_sets": [
+    "baseline",
+    "phase",
+    "space"
+  ],
+  "k": 10,
+  "n_men_rows": 378296,
+  "n_women_rows": 133293,
+  "n_calib_rows": 25217,
+  "n_eval_rows": 51172,
+  "best_iter_score": 50,
+  "best_iter_concede": 46
+}

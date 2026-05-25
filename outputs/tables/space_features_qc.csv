@@ -1,0 +1,2 @@
+n_actions_with_features,n_actions_total,coverage_pct_of_all_actions,nearest_opp_dist_mean,nearest_opp_dist_min,n_opps_visible_mean,n_teammates_visible_mean,is_box_action_pct,is_final_third_entry_pct,missing_nearest_opp_pct
+587978,1484206,39.61565982080655,5.369796975542359,0.0,7.637896315848552,6.540295725350268,3.114402239539575,26.787056658582465,0.15306695148457936

@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data -- not committed. The raw StatsBomb open data is ~20 GB and several
+# processed files exceed GitHub's 100 MB per-file limit. The raw data is
+# public: clone github.com/statsbomb/open-data, then re-run the pipeline.
+data/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
