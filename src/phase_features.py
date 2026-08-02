@@ -219,11 +219,62 @@ def assign_phase(
 # Feature output (one-hot)
 # ---------------------------------------------------------------------------
 
-def build_phase_features(phase_labels: pd.DataFrame) -> pd.DataFrame:
-    """Return one-hot encoded phase features keyed by (match_id, action_id)."""
+# Action-type families used for the phase x action-type interactions.
+#
+# Crossing all six phases with all 21 SPADL action types would give 126 mostly
+# empty columns; grouping into seven families keeps the interaction block small
+# enough for a target corpus of this size while preserving the distinction that
+# motivates it — the same phase means something different for a pass, a duel and
+# a restart.
+ACTION_FAMILIES: dict[str, tuple[str, ...]] = {
+    "pass":      ("pass", "cross"),
+    "carry":     ("dribble",),
+    "take_on":   ("take_on",),
+    "shot":      ("shot", "shot_freekick", "shot_penalty"),
+    "defensive": ("tackle", "interception", "clearance", "foul", "bad_touch"),
+    "keeper":    ("keeper_save", "keeper_claim", "keeper_punch"),
+    "restart":   ("throw_in", "goalkick", "freekick_short", "freekick_crossed",
+                  "corner_crossed", "corner_short"),
+}
+
+
+def action_family(type_name: pd.Series) -> pd.Series:
+    """Map SPADL action types onto the seven families above."""
+    lookup = {t: fam for fam, types in ACTION_FAMILIES.items() for t in types}
+    return type_name.map(lookup).fillna("other")
+
+
+def build_phase_features(
+    phase_labels: pd.DataFrame,
+    actions: pd.DataFrame | None = None,
+) -> pd.DataFrame:
+    """One-hot phase features, keyed by (match_id, action_id).
+
+    When ``actions`` is supplied, phase x action-family interaction indicators
+    are appended. A tree ensemble can represent such an interaction by splitting
+    on both parents, but only if it spends depth doing so; providing the product
+    directly makes the distinction available at the root, which matters for the
+    rarer phases where the split would otherwise be starved of examples.
+    """
     out = phase_labels[["match_id", "action_id", "phase"]].copy()
     for p in PHASES:
         out[f"phase_{p}"] = (out["phase"] == p).astype("int8")
+
+    if actions is not None:
+        types = actions[["match_id", "action_id", "type_name"]].copy()
+        types["family"] = action_family(types["type_name"])
+        out = out.merge(
+            types[["match_id", "action_id", "family"]],
+            on=["match_id", "action_id"], how="left",
+        )
+        out["family"] = out["family"].fillna("other")
+        for p in PHASES:
+            for fam in ACTION_FAMILIES:
+                out[f"phase_{p}_x_{fam}"] = (
+                    (out["phase"] == p) & (out["family"] == fam)
+                ).astype("int8")
+        out = out.drop(columns=["family"])
+
     return out.drop(columns=["phase"])
 
 
@@ -268,7 +319,7 @@ def main(config_path: str | None) -> None:
     labels_out.to_parquet(labels_path, index=False)
     log.info("Wrote %d phase labels to %s", len(labels_out), labels_path)
 
-    feats = build_phase_features(labels_out)
+    feats = build_phase_features(labels_out, actions=actions)
     feats_path = cfg.paths.features_dir / "features_phase.parquet"
     feats.to_parquet(feats_path, index=False)
     log.info("Wrote phase features (%d cols) to %s", feats.shape[1], feats_path)
