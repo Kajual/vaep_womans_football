@@ -16,6 +16,19 @@
 
 set -euo pipefail
 
+# Some venvs expose only `python3`. Prefer whichever exists, and fail loudly
+# rather than halfway through if neither does.
+if command -v python >/dev/null 2>&1; then
+  PY=python
+elif command -v python3 >/dev/null 2>&1; then
+  PY=python3
+else
+  echo "ERROR: no python or python3 on PATH. Activate the venv first:" >&2
+  echo "    source .venv/bin/activate" >&2
+  exit 1
+fi
+echo "Using interpreter: $($PY --version 2>&1) at $(command -v $PY)"
+
 TRAIN_CORPORA="--train-corpus men_360_source --train-corpus women_360_finetune"
 EVAL_CORPUS="--eval-corpus women_360_evaluation"
 WITH_ES="${WITH_ES:-0}"
@@ -30,30 +43,30 @@ cp data/processed/features/features_phase.parquet "$BACKUP"/ 2>/dev/null || true
 echo "Backed up to $BACKUP"
 
 step "1. Rebuild phase features (now includes phase x action-type interactions)"
-python -m src.phase_features
+$PY -m src.phase_features
 
 step "2. Retrain the pooled models"
 # Model A is unaffected by the interaction change, but retraining it costs
 # little and guarantees all four models come from one consistent run.
-python -m src.modelling --model-id model_A --features baseline \
+$PY -m src.modelling --model-id model_A --features baseline \
     $TRAIN_CORPORA $EVAL_CORPUS
-python -m src.modelling --model-id model_B --features baseline --features phase \
+$PY -m src.modelling --model-id model_B --features baseline --features phase \
     $TRAIN_CORPORA $EVAL_CORPUS
-python -m src.modelling --model-id model_C --features baseline --features phase --features space \
+$PY -m src.modelling --model-id model_C --features baseline --features phase --features space \
     $TRAIN_CORPORA $EVAL_CORPUS
 
 if [ "$WITH_ES" = "1" ]; then
   step "2b. Train ES-VAEP (event + space, no phase) for the 2x2 ablation"
-  python -m src.modelling --model-id model_ES --features baseline --features space \
+  $PY -m src.modelling --model-id model_ES --features baseline --features space \
       $TRAIN_CORPORA $EVAL_CORPUS
 fi
 
 step "3. Retrain the transfer variants"
-python -m src.transfer --model-id model_A --features baseline
-python -m src.transfer --model-id model_B --features baseline --features phase
-python -m src.transfer --model-id model_C --features baseline --features phase --features space
+$PY -m src.transfer --model-id model_A --features baseline
+$PY -m src.transfer --model-id model_B --features baseline --features phase
+$PY -m src.transfer --model-id model_C --features baseline --features phase --features space
 if [ "$WITH_ES" = "1" ]; then
-  python -m src.transfer --model-id model_ES --features baseline --features space
+  $PY -m src.transfer --model-id model_ES --features baseline --features space
 fi
 
 step "4. Evaluation and calibration"
@@ -61,20 +74,20 @@ MODEL_FLAGS="--model-id model_A --model-id model_B --model-id model_C"
 if [ "$WITH_ES" = "1" ]; then
   MODEL_FLAGS="$MODEL_FLAGS --model-id model_ES"
 fi
-python -m src.evaluation $MODEL_FLAGS
-python -m src.evaluation $MODEL_FLAGS --restrict-to-360-subset
-python -m src.calibration $MODEL_FLAGS
+$PY -m src.evaluation $MODEL_FLAGS
+$PY -m src.evaluation $MODEL_FLAGS --restrict-to-360-subset
+$PY -m src.calibration $MODEL_FLAGS
 
 step "5. Action values and player rankings"
-python -m src.vaep_values $MODEL_FLAGS
+$PY -m src.vaep_values $MODEL_FLAGS
 # --matched is essential. Without it, player totals are summed over 60,370
 # actions for the event/phase models and 51,172 for the space models, which is
 # the error that produced the +102-rank shifts in the submitted paper.
-python -m src.aggregation --matched
-python -m src.case_studies
+$PY -m src.aggregation --matched
+$PY -m src.case_studies
 
 step "6. Revision analyses (bootstrap is the slow part, ~10 min)"
-python -m src.rebuttal_analysis --n-boot 1000
+$PY -m src.rebuttal_analysis --n-boot 1000
 
 step "Done"
 cat <<'EOF'
