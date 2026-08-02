@@ -1,186 +1,222 @@
-# Verification of the submitted paper against the pipeline outputs
+# Results of the MLSA 2026 revision (paper 306)
 
-All numbers below were recomputed from the artefacts in `data/processed/model_outputs/`
-by `src/rebuttal_analysis.py`. Results are in `outputs/tables/rebuttal/`.
+All numbers recomputed from the retrained four-variant models (A / B / ES / C,
+with phase x action-type interactions), on the matched 51,172-action subset,
+with paired match-level bootstrap intervals (B = 1000).
 
-The single underlying problem is that **three different action universes were mixed**
-across the paper's tables:
-
-- the full evaluation set: **60,370** actions (E-VAEP, P-VAEP)
-- the 360 freeze-frame subset: **51,172** actions (PS-VAEP only)
-
-Section 3.6 of the paper explicitly says all ablation metrics are reported on the
-matched 51,172-action subset, and warns that mixing universes "would systematically
-advantage PS-VAEP". Table 3's discrimination row does follow that rule. Table 2,
-Table 3's ECE row, and all of Section 4.3 do not.
+Sources: `outputs/tables/rebuttal/` and `outputs/tables/experiments/`.
 
 ---
 
-## 1. Table 2 (transfer) is computed on mixed universes
+## Part 1 — The error in the submitted paper
 
-E-VAEP and P-VAEP were evaluated on 60,370 actions, PS-VAEP on 51,172.
-Recomputed with every model on the matched subset:
+Three action universes were mixed. PS-VAEP exists only on the 51,172 actions
+with a freeze frame; E-VAEP and P-VAEP were measured on all 60,370. Section 3.6
+of the submitted paper forbids exactly this. Table 3's discrimination rows obeyed
+it; Table 2, Table 3's ECE row, and all of Section 4.3 did not.
 
-| Strategy | E-VAEP | P-VAEP | PS-VAEP |
-|---|---|---|---|
-| Women-only — paper | 0.820 | 0.828 | 0.802 |
-| Women-only — **matched** | **0.811** | **0.827** | 0.802 |
-| Men-only — paper | 0.830 | 0.830 | 0.840 |
-| Men-only — **matched** | **0.834** | **0.833** | **0.841** |
-| Fine-tuned — paper | 0.824 | 0.826 | 0.837 |
-| Fine-tuned — **matched** | **0.831** | **0.831** | 0.837 |
-| Pooled — paper | 0.837 | 0.858 | 0.851 |
-| Pooled — **matched** | 0.837 | **0.860** | 0.851 |
+The player analysis was worst affected. Recomputed on matched actions with the
+same 117 players, rho(E, PS) rises from 0.69 to 0.82, and the named rank gains
+collapse:
 
-The paper's headline transfer conclusion — pooled beats every other strategy for all
-three models — survives. But under men-only and fine-tuned transfer, P-VAEP is now
-marginally *below* E-VAEP, so the claim that phase helps under every strategy does not.
-
-## 2. Table 3's ECE row is wrong
-
-The ECE values were taken from `outputs/tables/calibration_summary.csv`, which computes
-E-VAEP and P-VAEP on the full set. The PS-VAEP values match no file in the repository
-and appear to come from a superseded run.
-
-| Metric | E-VAEP | P-VAEP | PS-VAEP |
-|---|---|---|---|
-| Scoring ECE — paper | 0.00323 | 0.00322 | 0.00349 |
-| Scoring ECE — **actual matched** | 0.00375 | 0.00370 | **0.00356** |
-| Conceding ECE — paper | 0.00144 | 0.00127 | 0.00134 |
-| Conceding ECE — **actual matched** | 0.00140 | 0.00127 | **0.00146** |
-
-Two directions flip. PS-VAEP is in fact the **best** on scoring ECE and the **worst**
-on conceding ECE — the opposite of what the text asserts in both cases.
-
-Under adaptive (equal-frequency) binning, which Reviewer 2 asks for in C4 because
-equal-width bins are uninformative at a 0.34% positive rate, E-VAEP is best calibrated
-on both heads (scoring 0.00366, conceding 0.00091). The claim that P-VAEP gives "the
-best calibration" does not survive either binning scheme cleanly.
-
-## 3. Table 4 and the player-valuation section are the most affected
-
-Player VAEP totals for E-VAEP and P-VAEP were summed over 60,370 actions, but over
-51,172 for PS-VAEP. Roughly 9,200 actions therefore contribute to a player's E-VAEP
-total but not to her PS-VAEP total, so part of the reported "redistribution" is just
-the missing 15% of each player's actions.
-
-Recomputed on the matched action set, using the same 117 players with 270+ minutes:
-
-| Model pair | Paper | **Matched** | 95% CI (match bootstrap) |
-|---|---|---|---|
-| E-VAEP vs P-VAEP | 0.973 | 0.974 | [0.940, 0.979] |
-| E-VAEP vs PS-VAEP | 0.691 | **0.834** | [0.704, 0.836] |
-| P-VAEP vs PS-VAEP | 0.672 | **0.828** | [0.690, 0.832] |
-
-The redistribution is real — 0.83 against 0.97 for E-vs-P — but substantially smaller
-than the reported 0.69.
-
-**The named examples are almost entirely artefact.** The unmatched comparison exactly
-reproduces the paper's figures, which confirms the diagnosis:
-
-| Player | Paper (unmatched) | **Matched** |
+| Player | Submitted (unmatched) | Matched |
 |---|---|---|
-| Wullaert | 116 → 14 (**+102**) | 17 → 14 (**+3**) |
-| Blackstenius | 114 → 20 (**+94**) | 41 → 20 (**+21**) |
-| González | 98 → 10 (**+88**) | 15 → 10 (**+5**) |
-| Girelli | 79 → 21 (**+58**) | 22 → 21 (**+1**) |
-| Pajor | 117 → 78 (**+39**) | 113 → 78 (**+35**) |
-| Maanum | 10 → 3 | 10 → 3 (**+7**, robust) |
+| Wullaert | +102 | +3 |
+| Blackstenius | +94 | +21 |
+| González | +88 | +5 |
+| Girelli | +58 | +1 |
 
-The PS-VAEP ranks are stable; it is the E-VAEP ranks that move, because they were
-computed over the larger action set.
-
-On matched data the largest robust risers are Severini (+50), Hoffmann (+41),
-Pajor (+35), Bacha (+34), James (+31) and Naalsund (+29) — a positionally mixed group
-of midfielders, forwards and a full-back, not "all centre-forwards". Only 36 of 117
-players have a rank change whose 95% interval excludes zero.
-
-Note that even in the paper's own numbers the riser list is misstated: the top six by
-rank gain are Wullaert, Blackstenius, González, Girelli, Hoffmann and **Schertenleib
-(+47)** — Pajor (+39) is ninth — and all six have negative E-VAEP per 90, not "four of
-them".
-
-## 4. What survives the bootstrap
-
-Paired match-level bootstrap, B = 1000, resampling the 31 evaluation matches and
-recomputing every model on the same resample.
-
-Only two differences in the pooled ablation have a 95% interval excluding zero:
-
-| Comparison | Metric | Difference | 95% CI | Robust |
-|---|---|---|---|---|
-| P-VAEP − E-VAEP | conceding ROC-AUC | +0.0231 | [+0.0081, +0.0387] | **yes** |
-| PS-VAEP − P-VAEP | scoring ROC-AUC | −0.0051 | [−0.0102, −0.0002] | **yes** |
-| P-VAEP − E-VAEP | conceding AP | +0.0060 | [−0.0187, +0.0298] | no |
-| PS-VAEP − P-VAEP | conceding AP | +0.0062 | [−0.0272, +0.0380] | no |
-| PS-VAEP − P-VAEP | conceding ROC-AUC | −0.0092 | [−0.0373, +0.0149] | no |
-| P-VAEP − E-VAEP | conceding log loss | −0.0003 | [−0.0009, +0.0003] | no |
-
-**The paper's central claim holds**: phase context robustly improves conceding
-discrimination under pooled training. The claim that PS-VAEP "achieves the best
-conceding AP" does not — that difference is well inside noise.
-
-In Table 2, only the pooled P-vs-E difference is robust; every men-only, women-only and
-fine-tuned difference has an interval spanning zero.
-
-### Where the AP difference comes from
-
-PS-VAEP's conceding AP advantage rests on a handful of actions at the very top of the
-ranking. Cumulative true positives out of 175 total concessions:
-
-| Model | top 10 | top 25 | top 50 | top 100 | top 500 |
-|---|---|---|---|---|---|
-| E-VAEP | 7 | 19 | 29 | 34 | 52 |
-| P-VAEP | 6 | 20 | 27 | 37 | 59 |
-| PS-VAEP | 8 | 17 | 30 | 35 | 53 |
-
-PS-VAEP is *worse* than P-VAEP at every threshold from 1% to 50% of the ranking. The
-interpretation offered in the draft rebuttal to R2-C4 — that spatial features sharpen
-the ranking of the rare positive class — is not supported.
-
-## 5. Two claims with no supporting code
-
-- Section 3.3 states that the phase layer adds "the one-hot phase label **and its
-  interactions with action type**". `features_phase.parquet` contains six one-hot
-  columns and nothing else; no interaction terms are constructed anywhere in
-  `modelling.py`.
-- Section 5 states that the P-VAEP gain "remains positive under match-level bootstrap
-  resampling". No bootstrap existed in the repository before this revision. The claim
-  now happens to be **true** (see §4), but it was unsupported when written.
-
-## 6. Results that came out in the paper's favour
-
-- **Freeze-frame visibility is not driving the redistribution** (Reviewer 2, C6). The
-  Spearman correlation between the number of visible players and the change in value is
-  0.019 overall and 0.065 in the penalty area. Coverage does vary by zone (14.4 visible
-  players in midfield against 12.2 in the penalty area), but it is essentially unrelated
-  to the revaluation. This is a clean answer to the reviewer's strongest methodological
-  concern.
-- **The congestion mechanism has partial support.** Stratifying the change from P-VAEP
-  to PS-VAEP, the only stratum with a robustly positive mean change is actions with
-  3 or more opponents within 5 m (+0.0023, CI [+0.0005, +0.0039], 5.2% of actions).
-
-  However, there is no gradient by distance to the nearest opponent (−0.0015, −0.0018,
-  −0.0014, −0.0013 across <2 m, 2–5 m, 5–10 m, >10 m) and none by pitch zone. The
-  largest robust negative shifts are throw-ins (−0.0105) and keeper claims (−0.0159),
-  not "high-volume progression in open space"; passes shift down slightly (−0.0026) and
-  dribbles are unchanged (−0.0001).
-
-  So the density half of the mechanism claim is supported and the pressure half is not.
+The unmatched comparison was reproduced exactly before concluding this, so the
+diagnosis is confirmed rather than inferred.
 
 ---
 
-## Recommended revisions
+## Part 2 — Results after retraining
 
-1. Recompute Tables 2, 3 and 4 on the matched 51,172-action subset. This makes the
-   paper consistent with its own Section 3.6 and makes the answer to R2-C8b true.
-2. Replace the named-player examples. The +102/+94/+88/+58 figures cannot be defended.
-3. Reframe the redistribution as ρ ≈ 0.83, positionally mixed, with 36 of 117 rank
-   changes robust — still a genuine and reportable effect.
-4. Lead with the bootstrap result. That phase robustly improves conceding
-   discrimination while nothing else survives resampling *is* the prediction-versus-
-   revaluation thesis, stated more sharply than the submitted version manages.
-5. Drop the "interactions with action type" clause, or implement the interactions.
-6. Report the visibility check — it answers R2-C6 favourably and pre-empts the concern.
-7. Restate the mechanism claim as congestion-driven only, and drop the pressure and
-   open-space progression framing that the strata do not support.
+### The 2x2 ablation (pooled, matched)
+
+| | E-VAEP | P-VAEP | ES-VAEP | PS-VAEP |
+|---|---|---|---|---|
+| Scoring ROC-AUC | 0.825 | 0.827 | 0.823 | 0.823 |
+| Conceding ROC-AUC | 0.837 | **0.865** | 0.840 | 0.849 |
+| Conceding AP | 0.171 | 0.178 | 0.167 | 0.156 |
+
+Effect decomposition on conceding ROC-AUC:
+
+- phase without space (P − E) = **+0.027**; phase with space (PS − ES) = +0.010
+- space without phase (ES − E) = +0.003; space with phase (PS − P) = −0.015
+- interaction = **−0.018**
+
+The two layers are substitutes, not complements: they carry overlapping
+information about conceding risk, and adding space on top of phase *reduces*
+performance. Only the P − E contrast has a bootstrap interval excluding zero
+(**+0.027, CI [+0.013, +0.046]**). The main effects of space and the interaction
+are individually not identifiable at n = 31 matches, exactly as expected.
+
+**The phase x action-type interactions helped**: the phase effect grew from
++0.023 to +0.027 after implementing them.
+
+**PS-VAEP's conceding-AP advantage is gone.** It fell from 0.184 to 0.156, now
+below both E-VAEP and P-VAEP. The "best conceding AP" claim should be dropped
+outright rather than merely qualified.
+
+### Player valuation (matched, B = 1000)
+
+| Model pair | Spearman | 95% CI |
+|---|---|---|
+| E-VAEP vs P-VAEP | 0.977 | [0.933, 0.976] |
+| E-VAEP vs PS-VAEP | 0.824 | [0.694, 0.845] |
+| P-VAEP vs PS-VAEP | 0.808 | [0.701, 0.841] |
+
+25 of 117 players have a rank change whose interval excludes zero. Largest
+robust risers: Severini +69, Hoffmann +39, Pajor +39, Giuliani +35, Tysiak +32,
+Naalsund +29. Largest robust fallers: Groenen −51, Deloose −48,
+Zigiotti-Olme −32, Conca −21. Positionally mixed in both directions.
+
+### The congestion mechanism no longer holds
+
+On the retrained models the 3+ opponents within 5 m stratum gives
+**+0.0010, CI [−0.0003, +0.0023]** — the interval now includes zero. On the
+previous models this was the one stratum supporting the mechanism
+(+0.0023, CI [+0.0005, +0.0039]).
+
+No stratification — nearest-opponent distance, defensive density, pitch zone,
+action type or outcome — now shows a robust positive shift. **The paper should
+not claim a mechanism for the redistribution.** It can report that the
+redistribution happens and that its cause is not established.
+
+### Freeze-frame visibility (R2-C6) — clean
+
+Correlation between visible-player count and the change in value: **0.020**.
+Coverage varies by zone (14.4 visible players in midfield against 12.2 in the
+penalty area) but is essentially unrelated to the revaluation. Real polygon
+measures are now available: mean visible area 24% of the pitch, actor a median
+6.7 m from the frame boundary.
+
+---
+
+## Part 3 — New experiments
+
+### Transfer: it is mostly sample size (R1-Q2, R2-C3)
+
+Conceding ROC-AUC, mean over 5 seeds:
+
+| Strategy | Train matches | Conceding AUC | SD |
+|---|---|---|---|
+| Pooled, full | 295 | 0.854 | 0.006 |
+| Pooled, domain-balanced | 190 | 0.851 | 0.008 |
+| Men-only, full | 200 | 0.844 | 0.010 |
+| Pooled, size-matched | 190 | 0.842 | 0.009 |
+| Men-only, size-matched | 95 | 0.822 | 0.015 |
+| Women-only | 95 | 0.821 | 0.009 |
+
+At equal size (95 matches) men-only and women-only are indistinguishable
+(0.822 vs 0.821). Performance tracks the number of training matches far more
+than their provenance. **The honest conclusion is that more 360 data helps
+regardless of whether it is men's or women's football** — which is itself a
+useful finding for women's football analytics, and is what the paper should say.
+
+Note: "size-matched" and "domain-balanced" as implemented are the same design
+(95 men + 95 women) sampled with different seeds. Their 0.009 gap is therefore a
+second read on seed noise, not a real contrast. Worth either merging them or
+redefining domain-balanced.
+
+### Competition type matters more than gender (R1-C6/Q5)
+
+Proxy A-distance (0 = indistinguishable, 2 = trivially separable):
+
+| Domain A | Domain B | A-distance |
+|---|---|---|
+| Men's international | Women's target | 0.713 |
+| Men's club (Bundesliga) | Women's target | **0.955** |
+| Men's international | Men's club | 0.214 |
+
+Bundesliga is **further** from the women's target than men's international
+football is, despite matching on gender. Size-matched transfer agrees: from 34
+matches, international gives 0.755 and club 0.717. This confirms Reviewer 1's
+hypothesis and vindicates the reviewer's concern about the corpus construction.
+
+### Spatial features are recoverable from event data (R1-C4/Q4)
+
+Predicting each spatial feature from event features alone, then rebuilding VAEP
+on the predictions:
+
+| Variant | Conceding AUC | Conceding AP |
+|---|---|---|
+| PS-VAEP (observed 360) | 0.853 | 0.159 |
+| Pseudo-Space VAEP (predicted) | **0.858** | **0.161** |
+
+The approximation is as good as the real thing. Zone features are perfectly
+recoverable (they are deterministic functions of coordinates, which are event
+features — this should be stated rather than presented as a result). Density
+features reach r² 0.39–0.70. This strongly supports the paper's own conclusion
+that the spatial layer adds little predictive information.
+
+Two features returned NaN (`nearest_opponent_distance`,
+`nearest_teammate_distance`) because they are NaN when the actor is not
+locatable in the frame; the approximation code needs to drop those rows.
+
+### Grouped ablation (R1-C4/Q4)
+
+All variants trained on the freeze-frame subset, so these are not directly
+comparable with Table 3.
+
+| Variant | Conceding AUC | Conceding AP |
+|---|---|---|
+| Baseline only | 0.847 | 0.177 |
+| All groups | 0.853 | 0.159 |
+| Drop defensive density | **0.860** | **0.194** |
+| Drop defensive structure | 0.858 | 0.187 |
+| Drop zone context | 0.845 | 0.139 |
+
+Dropping the defensive-density group *improves* both metrics. Grouped SHAP
+ranks pressure/support highest among spatial groups (0.074) ahead of phase
+(0.044), but attribution and usefulness disagree — SHAP measures how much the
+model uses a feature, not whether using it helps.
+
+### Sensitivity — the most important caveat (R1-C8/Q7)
+
+Ten seeds, all variants trained on the freeze-frame subset:
+
+| Variant | Mean conceding AUC | SD | Range |
+|---|---|---|---|
+| E-VAEP | 0.850 | 0.009 | 0.834–0.863 |
+| P-VAEP | 0.848 | 0.004 | 0.842–0.856 |
+| ES-VAEP | 0.849 | 0.007 | 0.838–0.857 |
+| PS-VAEP | 0.852 | 0.008 | 0.836–0.864 |
+
+**In this configuration the phase advantage disappears.** Seed-to-seed variation
+(SD ≈ 0.004–0.009, range up to 0.03) is comparable to the +0.027 effect claimed
+from a single seed.
+
+This is not yet a refutation, because the sensitivity run trains every variant
+on the 360 subset (459k rows), whereas production E-VAEP and P-VAEP train on the
+full stream (531k rows). The two configurations are not comparable. But it does
+mean **the headline result has not been shown to survive seed variation in the
+configuration the paper actually reports**.
+
+`python -m src.experiments seedcheck` was written to settle this: it repeats the
+production setup across seeds and reports the paired P − E difference per seed.
+**This should be run before the paper is submitted.**
+
+Partial reassurance: the ordering holds under both alternative learners.
+Logistic regression gives P 0.840 vs E 0.820; XGBoost gives P 0.865 vs E 0.860
+(and XGBoost beats LightGBM throughout, 0.857–0.865).
+
+---
+
+## What the paper should now claim
+
+1. Phase improves conceding-risk estimation — **pending the seedcheck result**.
+2. Space does not improve aggregate prediction, and degrades it when added to
+   phase. The two layers are substitutes.
+3. Space reorders the player ranking substantially (rho 0.98 to 0.82), with no
+   established mechanism and no claim that the reordering is more accurate.
+4. Transfer benefits come from data volume, not from cross-domain information.
+5. Competition type matters more than gender for source similarity.
+6. The spatial features are approximable from event data, so the approach
+   transfers to competitions without 360 coverage.
+7. Broadcast coverage does not explain the redistribution.
+
+Points 4, 5 and 6 are new contributions the submitted paper did not have, and
+they are more interesting than the claims that were lost.

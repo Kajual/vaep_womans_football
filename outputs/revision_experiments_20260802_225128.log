@@ -1,0 +1,410 @@
+
+=== Preflight: all four model variants must exist ===
+
+=== 1/6 Freeze-frame coverage features (R2-C6) ===
+2026-08-02 22:51:30,683 INFO Extracting coverage for 326 matches with 360 data
+coverage:   0%|          | 0/326 [00:00<?, ?it/s]coverage:   1%|          | 2/326 [00:00<00:26, 12.12it/s]coverage:   1%|          | 4/326 [00:00<00:26, 12.14it/s]coverage:   2%|▏         | 6/326 [00:00<00:25, 12.36it/s]coverage:   2%|▏         | 8/326 [00:00<00:24, 13.05it/s]coverage:   3%|▎         | 10/326 [00:00<00:24, 12.81it/s]coverage:   4%|▎         | 12/326 [00:00<00:25, 12.43it/s]coverage:   4%|▍         | 14/326 [00:01<00:25, 12.30it/s]coverage:   5%|▍         | 16/326 [00:01<00:24, 12.68it/s]coverage:   6%|▌         | 18/326 [00:01<00:24, 12.52it/s]coverage:   6%|▌         | 20/326 [00:01<00:23, 13.02it/s]coverage:   7%|▋         | 22/326 [00:01<00:23, 12.81it/s]coverage:   7%|▋         | 24/326 [00:01<00:22, 13.34it/s]coverage:   8%|▊         | 26/326 [00:02<00:22, 13.32it/s]coverage:   9%|▊         | 28/326 [00:02<00:22, 13.00it/s]coverage:   9%|▉         | 30/326 [00:02<00:22, 12.94it/s]coverage:  10%|▉         | 32/326 [00:02<00:22, 13.31it/s]coverage:  10%|█         | 34/326 [00:02<00:22, 13.20it/s]coverage:  11%|█         | 36/326 [00:02<00:21, 13.60it/s]coverage:  12%|█▏        | 38/326 [00:02<00:23, 12.23it/s]coverage:  12%|█▏        | 40/326 [00:03<00:23, 12.27it/s]coverage:  13%|█▎        | 42/326 [00:03<00:21, 13.37it/s]coverage:  13%|█▎        | 44/326 [00:03<00:23, 12.17it/s]coverage:  14%|█▍        | 46/326 [00:03<00:23, 11.67it/s]coverage:  15%|█▍        | 48/326 [00:03<00:23, 11.91it/s]coverage:  15%|█▌        | 50/326 [00:03<00:23, 11.56it/s]coverage:  16%|█▌        | 52/326 [00:04<00:24, 11.37it/s]coverage:  17%|█▋        | 54/326 [00:04<00:22, 12.23it/s]coverage:  17%|█▋        | 56/326 [00:04<00:20, 12.94it/s]coverage:  18%|█▊        | 58/326 [00:04<00:20, 13.06it/s]coverage:  18%|█▊        | 60/326 [00:04<00:19, 13.84it/s]coverage:  19%|█▉        | 62/326 [00:04<00:18, 14.16it/s]coverage:  20%|█▉        | 64/326 [00:05<00:19, 13.58it/s]coverage:  20%|██        | 66/326 [00:05<00:19, 13.44it/s]coverage:  21%|██        | 68/326 [00:05<00:18, 13.98it/s]coverage:  21%|██▏       | 70/326 [00:05<00:19, 13.47it/s]2026-08-02 22:51:36,190 WARNING Malformed three-sixty JSON for match 3835338 at 3835338.json — skipping (Expecting value: line 181321 column 20 (char 5193728))
+coverage:  22%|██▏       | 72/326 [00:05<00:17, 14.51it/s]coverage:  23%|██▎       | 74/326 [00:05<00:17, 14.65it/s]2026-08-02 22:51:36,437 WARNING Malformed three-sixty JSON for match 3835342 at 3835342.json — skipping (Expecting ',' delimiter: line 171856 column 109 (char 4882432))
+coverage:  23%|██▎       | 76/326 [00:05<00:16, 14.81it/s]coverage:  24%|██▍       | 78/326 [00:05<00:16, 14.68it/s]2026-08-02 22:51:36,781 WARNING Malformed three-sixty JSON for match 3845506 at 3845506.json — skipping (Expecting ',' delimiter: line 92794 column 3 (char 2637824))
+coverage:  25%|██▍       | 80/326 [00:06<00:15, 15.53it/s]coverage:  25%|██▌       | 82/326 [00:06<00:16, 15.12it/s]coverage:  26%|██▌       | 84/326 [00:06<00:17, 13.53it/s]coverage:  26%|██▋       | 86/326 [00:06<00:17, 13.43it/s]coverage:  27%|██▋       | 88/326 [00:06<00:17, 13.39it/s]coverage:  28%|██▊       | 90/326 [00:06<00:17, 13.77it/s]coverage:  28%|██▊       | 92/326 [00:06<00:16, 13.84it/s]coverage:  29%|██▉       | 94/326 [00:07<00:17, 13.15it/s]coverage:  29%|██▉       | 96/326 [00:07<00:17, 13.49it/s]coverage:  30%|███       | 98/326 [00:07<00:17, 13.21it/s]coverage:  31%|███       | 100/326 [00:07<00:17, 13.28it/s]coverage:  31%|███▏      | 102/326 [00:07<00:16, 13.46it/s]coverage:  32%|███▏      | 104/326 [00:07<00:16, 13.40it/s]coverage:  33%|███▎      | 106/326 [00:08<00:16, 13.36it/s]coverage:  33%|███▎      | 108/326 [00:08<00:16, 13.12it/s]coverage:  34%|███▎      | 110/326 [00:08<00:16, 13.37it/s]coverage:  34%|███▍      | 112/326 [00:08<00:16, 12.91it/s]coverage:  35%|███▍      | 114/326 [00:08<00:16, 13.12it/s]coverage:  36%|███▌      | 116/326 [00:08<00:15, 13.28it/s]coverage:  36%|███▌      | 118/326 [00:08<00:15, 13.42it/s]coverage:  37%|███▋      | 120/326 [00:09<00:15, 12.97it/s]coverage:  37%|███▋      | 122/326 [00:09<00:16, 12.74it/s]coverage:  38%|███▊      | 124/326 [00:09<00:17, 11.81it/s]coverage:  39%|███▊      | 126/326 [00:09<00:16, 12.07it/s]coverage:  39%|███▉      | 128/326 [00:09<00:15, 12.55it/s]coverage:  40%|███▉      | 130/326 [00:09<00:15, 12.92it/s]coverage:  40%|████      | 132/326 [00:10<00:14, 13.13it/s]coverage:  41%|████      | 134/326 [00:10<00:15, 12.55it/s]coverage:  42%|████▏     | 136/326 [00:10<00:16, 11.58it/s]coverage:  42%|████▏     | 138/326 [00:10<00:15, 11.83it/s]coverage:  43%|████▎     | 140/326 [00:10<00:16, 11.57it/s]coverage:  44%|████▎     | 142/326 [00:10<00:16, 11.43it/s]coverage:  44%|████▍     | 144/326 [00:11<00:15, 11.57it/s]coverage:  45%|████▍     | 146/326 [00:11<00:15, 11.75it/s]coverage:  45%|████▌     | 148/326 [00:11<00:13, 12.76it/s]coverage:  46%|████▌     | 150/326 [00:11<00:13, 13.16it/s]coverage:  47%|████▋     | 152/326 [00:11<00:12, 13.79it/s]coverage:  47%|████▋     | 154/326 [00:11<00:12, 13.37it/s]coverage:  48%|████▊     | 156/326 [00:12<00:12, 13.56it/s]coverage:  48%|████▊     | 158/326 [00:12<00:12, 13.84it/s]coverage:  49%|████▉     | 160/326 [00:12<00:12, 13.48it/s]coverage:  50%|████▉     | 162/326 [00:12<00:11, 13.76it/s]coverage:  50%|█████     | 164/326 [00:12<00:11, 13.53it/s]coverage:  51%|█████     | 166/326 [00:12<00:12, 12.78it/s]coverage:  52%|█████▏    | 168/326 [00:12<00:12, 12.69it/s]coverage:  52%|█████▏    | 170/326 [00:13<00:11, 13.34it/s]coverage:  53%|█████▎    | 172/326 [00:13<00:11, 13.75it/s]coverage:  53%|█████▎    | 174/326 [00:13<00:10, 14.17it/s]coverage:  54%|█████▍    | 176/326 [00:13<00:10, 14.71it/s]coverage:  55%|█████▍    | 178/326 [00:13<00:10, 13.78it/s]coverage:  55%|█████▌    | 180/326 [00:13<00:10, 13.90it/s]coverage:  56%|█████▌    | 182/326 [00:13<00:10, 13.34it/s]coverage:  56%|█████▋    | 184/326 [00:14<00:10, 13.92it/s]coverage:  57%|█████▋    | 186/326 [00:14<00:09, 14.34it/s]coverage:  58%|█████▊    | 188/326 [00:14<00:10, 13.46it/s]coverage:  58%|█████▊    | 190/326 [00:14<00:10, 13.58it/s]coverage:  59%|█████▉    | 192/326 [00:14<00:09, 14.54it/s]coverage:  60%|█████▉    | 194/326 [00:14<00:08, 14.89it/s]coverage:  60%|██████    | 196/326 [00:14<00:09, 13.30it/s]coverage:  61%|██████    | 198/326 [00:15<00:10, 12.34it/s]coverage:  61%|██████▏   | 200/326 [00:15<00:10, 11.58it/s]coverage:  62%|██████▏   | 202/326 [00:15<00:10, 11.45it/s]coverage:  63%|██████▎   | 204/326 [00:15<00:10, 11.33it/s]coverage:  63%|██████▎   | 206/326 [00:15<00:11, 10.90it/s]coverage:  64%|██████▍   | 208/326 [00:16<00:10, 10.95it/s]coverage:  64%|██████▍   | 210/326 [00:16<00:10, 10.99it/s]coverage:  65%|██████▌   | 212/326 [00:16<00:10, 11.06it/s]coverage:  66%|██████▌   | 214/326 [00:16<00:10, 10.60it/s]coverage:  66%|██████▋   | 216/326 [00:16<00:10, 10.76it/s]coverage:  67%|██████▋   | 218/326 [00:16<00:09, 10.90it/s]coverage:  67%|██████▋   | 220/326 [00:17<00:09, 11.01it/s]coverage:  68%|██████▊   | 222/326 [00:17<00:09, 11.02it/s]coverage:  69%|██████▊   | 224/326 [00:17<00:09, 11.18it/s]coverage:  69%|██████▉   | 226/326 [00:17<00:08, 11.52it/s]coverage:  70%|██████▉   | 228/326 [00:17<00:08, 11.52it/s]coverage:  71%|███████   | 230/326 [00:18<00:08, 11.84it/s]coverage:  71%|███████   | 232/326 [00:18<00:07, 12.29it/s]coverage:  72%|███████▏  | 234/326 [00:18<00:07, 11.84it/s]coverage:  72%|███████▏  | 236/326 [00:18<00:07, 12.49it/s]coverage:  73%|███████▎  | 238/326 [00:18<00:07, 12.45it/s]coverage:  74%|███████▎  | 240/326 [00:18<00:06, 13.06it/s]coverage:  74%|███████▍  | 242/326 [00:18<00:06, 13.93it/s]coverage:  75%|███████▍  | 244/326 [00:19<00:05, 14.20it/s]coverage:  75%|███████▌  | 246/326 [00:19<00:05, 13.58it/s]coverage:  76%|███████▌  | 248/326 [00:19<00:06, 12.83it/s]coverage:  77%|███████▋  | 250/326 [00:19<00:06, 12.63it/s]coverage:  77%|███████▋  | 252/326 [00:19<00:05, 12.57it/s]coverage:  78%|███████▊  | 254/326 [00:19<00:05, 12.31it/s]coverage:  79%|███████▊  | 256/326 [00:20<00:05, 12.30it/s]coverage:  79%|███████▉  | 258/326 [00:20<00:05, 12.17it/s]coverage:  80%|███████▉  | 260/326 [00:20<00:05, 12.11it/s]coverage:  80%|████████  | 262/326 [00:20<00:05, 11.98it/s]coverage:  81%|████████  | 264/326 [00:20<00:05, 12.14it/s]coverage:  82%|████████▏ | 266/326 [00:20<00:05, 11.80it/s]coverage:  82%|████████▏ | 268/326 [00:21<00:04, 12.13it/s]coverage:  83%|████████▎ | 270/326 [00:21<00:04, 12.60it/s]coverage:  83%|████████▎ | 272/326 [00:21<00:04, 13.19it/s]coverage:  84%|████████▍ | 274/326 [00:21<00:04, 12.80it/s]coverage:  85%|████████▍ | 276/326 [00:21<00:03, 12.80it/s]coverage:  85%|████████▌ | 278/326 [00:21<00:03, 12.50it/s]coverage:  86%|████████▌ | 280/326 [00:21<00:03, 12.49it/s]coverage:  87%|████████▋ | 282/326 [00:22<00:03, 12.06it/s]coverage:  87%|████████▋ | 284/326 [00:22<00:03, 11.15it/s]coverage:  88%|████████▊ | 286/326 [00:22<00:03, 10.89it/s]coverage:  88%|████████▊ | 288/326 [00:22<00:03, 11.69it/s]coverage:  89%|████████▉ | 290/326 [00:22<00:03, 10.74it/s]coverage:  90%|████████▉ | 292/326 [00:23<00:03, 10.27it/s]coverage:  90%|█████████ | 294/326 [00:23<00:02, 10.97it/s]coverage:  91%|█████████ | 296/326 [00:23<00:02, 11.88it/s]coverage:  91%|█████████▏| 298/326 [00:23<00:02, 12.84it/s]coverage:  92%|█████████▏| 300/326 [00:23<00:02, 12.97it/s]coverage:  93%|█████████▎| 302/326 [00:23<00:01, 13.65it/s]coverage:  93%|█████████▎| 304/326 [00:23<00:01, 13.84it/s]coverage:  94%|█████████▍| 306/326 [00:24<00:01, 13.90it/s]coverage:  94%|█████████▍| 308/326 [00:24<00:01, 14.50it/s]coverage:  95%|█████████▌| 310/326 [00:24<00:01, 14.64it/s]coverage:  96%|█████████▌| 312/326 [00:24<00:00, 14.06it/s]coverage:  96%|█████████▋| 314/326 [00:24<00:00, 15.02it/s]coverage:  97%|█████████▋| 316/326 [00:24<00:00, 14.09it/s]coverage:  98%|█████████▊| 318/326 [00:24<00:00, 14.79it/s]coverage:  98%|█████████▊| 320/326 [00:25<00:00, 15.33it/s]coverage:  99%|█████████▉| 322/326 [00:25<00:00, 13.94it/s]coverage:  99%|█████████▉| 324/326 [00:25<00:00, 13.13it/s]coverage: 100%|██████████| 326/326 [00:25<00:00, 12.11it/s]coverage: 100%|██████████| 326/326 [00:25<00:00, 12.75it/s]
+2026-08-02 22:51:56,327 INFO Wrote 587978 rows to /Users/xividi/vaep-womens-football/data/processed/features/coverage_features.parquet
+2026-08-02 22:51:56,372 INFO Summary:
+       visible_area_frac  actor_dist_to_boundary_m  n_visible_players
+count      587978.000000             587978.000000      587978.000000
+mean            0.279414                  8.215694          15.178204
+std             0.090663                  4.277328           3.482090
+min             0.018249                  0.000000           1.000000
+25%             0.210078                  4.950925          13.000000
+50%             0.266544                  7.870018          16.000000
+75%             0.339357                 11.135000          18.000000
+max             0.901074                 79.807516          22.000000
+
+=== 2/6 Post-hoc extras: calibration, coverage controls, phase example ===
+2026-08-02 22:51:57,630 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:58,000 INFO Wrote brier_decomposition.csv, reliability_curves.csv, ece_bin_sensitivity.csv
+2026-08-02 22:51:58,014 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:58,465 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:58,498 INFO Action panel: 51172 rows
+2026-08-02 22:51:58,922 INFO Wrote coverage_by_zone.csv, coverage_association.csv, coverage_subsets.csv
+2026-08-02 22:51:58,936 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,351 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,395 INFO Action panel: 51172 rows
+2026-08-02 22:51:59,511 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,512 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,512 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,512 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,513 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,513 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,513 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,513 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,514 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,514 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,514 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,514 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,515 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,515 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,515 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,515 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,516 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,516 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,516 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,517 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,517 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,517 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,517 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,518 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,518 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,518 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,518 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,519 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,519 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,519 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,520 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,520 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,520 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,520 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,520 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,521 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,521 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,521 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,522 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,522 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,522 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,522 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,523 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,523 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,523 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,523 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,524 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,524 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,525 INFO ES-VAEP found: reporting the full 2x2 ablation.
+2026-08-02 22:51:59,529 INFO Wrote phase_matched_strata.csv and phase_example_summary.csv
+   phase  n_cells  n_actions  observed  model_A  model_B  model_ES  model_C
+build_up       48       5826  0.005819 0.002713 0.002854  0.003201 0.003354
+2026-08-02 22:51:59,531 INFO Done. Results in /Users/xividi/vaep-womens-football/outputs/tables/rebuttal
+
+=== 3/6 Grouped ablation and grouped SHAP (R1-C4/Q4) ===
+2026-08-02 22:52:00,656 INFO === RUNNING groups ===
+2026-08-02 22:52:01,148 INFO Loaded baseline features: 1484206 rows × 208 cols
+2026-08-02 22:52:01,190 INFO Loaded phase features: 1484206 rows × 50 cols
+2026-08-02 22:52:01,204 INFO Loaded space features: 587978 rows × 19 cols
+2026-08-02 22:52:02,266 INFO Loaded labels k=10: 1484206 rows
+2026-08-02 22:52:02,471 INFO Dataset for ['baseline', 'phase', 'space']: 587978 rows x 275 cols
+2026-08-02 22:52:10,172 INFO baseline_only: concede AUC 0.8468 (206 feats)
+2026-08-02 22:52:18,776 INFO all_groups: concede AUC 0.8531 (271 feats)
+2026-08-02 22:52:25,838 INFO add_only_phase: concede AUC 0.8474 (254 feats)
+2026-08-02 22:52:33,989 INFO drop_phase: concede AUC 0.8469 (223 feats)
+2026-08-02 22:52:41,353 INFO add_only_pressure_support: concede AUC 0.8427 (208 feats)
+2026-08-02 22:52:49,374 INFO drop_pressure_support: concede AUC 0.8529 (269 feats)
+2026-08-02 22:52:57,612 INFO add_only_defensive_density: concede AUC 0.8485 (210 feats)
+2026-08-02 22:53:06,999 INFO drop_defensive_density: concede AUC 0.8604 (267 feats)
+2026-08-02 22:53:17,636 INFO add_only_defensive_structure: concede AUC 0.8555 (210 feats)
+2026-08-02 22:53:28,905 INFO drop_defensive_structure: concede AUC 0.8579 (267 feats)
+2026-08-02 22:53:39,506 INFO add_only_zone_context: concede AUC 0.8568 (213 feats)
+2026-08-02 22:53:52,646 INFO drop_zone_context: concede AUC 0.8450 (264 feats)
+2026-08-02 22:53:52,651 INFO Wrote grouped_ablation.csv
+2026-08-02 22:54:27,368 INFO Wrote grouped_shap.csv
+2026-08-02 22:54:27,409 INFO Done. Results in /Users/xividi/vaep-womens-football/outputs/tables/experiments
+
+=== 4/6 Pseudo-Space VAEP: event-data approximation (R1-C4/Q4) ===
+2026-08-02 22:54:29,201 INFO === RUNNING pseudospace ===
+2026-08-02 22:54:29,606 INFO Loaded baseline features: 1484206 rows × 208 cols
+2026-08-02 22:54:29,638 INFO Loaded phase features: 1484206 rows × 50 cols
+2026-08-02 22:54:29,655 INFO Loaded space features: 587978 rows × 19 cols
+2026-08-02 22:54:30,674 INFO Loaded labels k=10: 1484206 rows
+2026-08-02 22:54:31,036 INFO Dataset for ['baseline', 'phase', 'space']: 587978 rows x 275 cols
+2026-08-02 22:55:00,020 INFO approximated nearest_opponent_distance: nan
+2026-08-02 22:55:24,975 INFO approximated nearest_teammate_distance: nan
+2026-08-02 22:55:49,155 INFO approximated defensive_density_around_ball_5m: 0.5432872070967778
+2026-08-02 22:56:14,719 INFO approximated defensive_density_around_ball_10m: 0.666182628724638
+2026-08-02 22:56:40,498 INFO approximated defensive_density_around_ball_15m: 0.6952883225484232
+2026-08-02 22:57:02,635 INFO approximated defensive_density_in_front_of_ball: 0.3944453485548912
+2026-08-02 22:57:26,055 INFO approximated n_opponents_ahead_of_ball: 0.5397230000491761
+2026-08-02 22:57:51,971 INFO approximated n_opponents_between_ball_and_goal: 0.5813148606199143
+2026-08-02 22:58:15,348 INFO approximated n_opponents_visible: 0.5605266852089894
+2026-08-02 22:58:38,646 INFO approximated n_teammates_visible: 0.3284589997530789
+2026-08-02 22:58:49,360 INFO approximated is_central_zone: 0.9999920135898972
+2026-08-02 22:59:00,771 INFO approximated is_half_space_left: 0.9999680188900901
+2026-08-02 22:59:11,603 INFO approximated is_half_space_right: 0.9999520719321275
+2026-08-02 22:59:23,181 INFO approximated is_wide_zone: 0.9999814996569688
+2026-08-02 22:59:32,480 INFO approximated is_box_action: 0.9998770949851775
+2026-08-02 22:59:41,181 INFO approximated is_box_entry: 0.9999952502124244
+2026-08-02 22:59:52,491 INFO approximated is_final_third_entry: 0.9999904253071686
+2026-08-02 23:00:20,329 INFO Wrote pseudospace_*.csv/parquet
+2026-08-02 23:00:20,450 INFO Done. Results in /Users/xividi/vaep-womens-football/outputs/tables/experiments
+
+=== 5/6 Transfer controls: size-matched, domain-balanced, curves, A-distance ===
+2026-08-02 23:00:22,097 INFO === RUNNING transfer ===
+2026-08-02 23:00:22,402 INFO Loaded baseline features: 1484206 rows × 208 cols
+2026-08-02 23:00:22,434 INFO Loaded phase features: 1484206 rows × 50 cols
+2026-08-02 23:00:22,447 INFO Loaded space features: 587978 rows × 19 cols
+2026-08-02 23:00:23,230 INFO Loaded labels k=10: 1484206 rows
+2026-08-02 23:00:23,483 INFO Dataset for ['baseline', 'phase', 'space']: 587978 rows x 275 cols
+2026-08-02 23:00:29,936 INFO women_only (seed 42): concede AUC 0.8285
+2026-08-02 23:00:38,607 INFO men_only_full (seed 42): concede AUC 0.8351
+2026-08-02 23:00:44,215 INFO men_only_size_matched (seed 42): concede AUC 0.8062
+2026-08-02 23:00:56,805 INFO pooled_full (seed 42): concede AUC 0.8531
+2026-08-02 23:01:06,078 INFO pooled_size_matched (seed 42): concede AUC 0.8358
+2026-08-02 23:01:15,803 INFO pooled_domain_balanced (seed 42): concede AUC 0.8493
+2026-08-02 23:01:19,521 INFO men_international_size_matched (seed 42): concede AUC 0.8102
+2026-08-02 23:01:23,589 INFO men_club_size_matched (seed 42): concede AUC 0.7825
+2026-08-02 23:01:28,986 INFO women_only (seed 43): concede AUC 0.8122
+2026-08-02 23:01:40,538 INFO men_only_full (seed 43): concede AUC 0.8598
+2026-08-02 23:01:46,926 INFO men_only_size_matched (seed 43): concede AUC 0.8450
+2026-08-02 23:01:59,682 INFO pooled_full (seed 43): concede AUC 0.8643
+2026-08-02 23:02:08,641 INFO pooled_size_matched (seed 43): concede AUC 0.8406
+2026-08-02 23:02:18,224 INFO pooled_domain_balanced (seed 43): concede AUC 0.8554
+2026-08-02 23:02:21,088 INFO men_international_size_matched (seed 43): concede AUC 0.6656
+2026-08-02 23:02:25,125 INFO men_club_size_matched (seed 43): concede AUC 0.7473
+2026-08-02 23:02:30,235 INFO women_only (seed 44): concede AUC 0.8128
+2026-08-02 23:02:39,590 INFO men_only_full (seed 44): concede AUC 0.8351
+2026-08-02 23:02:46,192 INFO men_only_size_matched (seed 44): concede AUC 0.8183
+2026-08-02 23:03:01,993 INFO pooled_full (seed 44): concede AUC 0.8542
+2026-08-02 23:03:12,680 INFO pooled_size_matched (seed 44): concede AUC 0.8323
+2026-08-02 23:03:23,128 INFO pooled_domain_balanced (seed 44): concede AUC 0.8431
+2026-08-02 23:03:26,034 INFO men_international_size_matched (seed 44): concede AUC 0.7652
+2026-08-02 23:03:30,576 INFO men_club_size_matched (seed 44): concede AUC 0.7952
+2026-08-02 23:03:35,630 INFO women_only (seed 45): concede AUC 0.8333
+2026-08-02 23:03:47,983 INFO men_only_full (seed 45): concede AUC 0.8454
+2026-08-02 23:03:54,513 INFO men_only_size_matched (seed 45): concede AUC 0.8298
+2026-08-02 23:04:13,525 INFO pooled_full (seed 45): concede AUC 0.8521
+2026-08-02 23:04:23,630 INFO pooled_size_matched (seed 45): concede AUC 0.8493
+2026-08-02 23:04:33,961 INFO pooled_domain_balanced (seed 45): concede AUC 0.8622
+2026-08-02 23:04:36,839 INFO men_international_size_matched (seed 45): concede AUC 0.7227
+2026-08-02 23:04:40,579 INFO men_club_size_matched (seed 45): concede AUC 0.5827
+2026-08-02 23:04:46,802 INFO women_only (seed 46): concede AUC 0.8190
+2026-08-02 23:04:56,761 INFO men_only_full (seed 46): concede AUC 0.8458
+2026-08-02 23:05:02,098 INFO men_only_size_matched (seed 46): concede AUC 0.8125
+2026-08-02 23:05:17,048 INFO pooled_full (seed 46): concede AUC 0.8472
+2026-08-02 23:05:27,176 INFO pooled_size_matched (seed 46): concede AUC 0.8535
+2026-08-02 23:05:36,414 INFO pooled_domain_balanced (seed 46): concede AUC 0.8451
+2026-08-02 23:05:40,520 INFO men_international_size_matched (seed 46): concede AUC 0.8094
+2026-08-02 23:05:44,619 INFO men_club_size_matched (seed 46): concede AUC 0.6772
+2026-08-02 23:05:44,623 INFO Wrote transfer_controls.csv
+2026-08-02 23:05:47,701 INFO curve men n=20 seed=42: concede AUC 0.7825
+2026-08-02 23:05:49,631 INFO curve men n=20 seed=43: concede AUC 0.5845
+2026-08-02 23:05:52,718 INFO curve men n=20 seed=44: concede AUC 0.6938
+2026-08-02 23:05:56,223 INFO curve men n=20 seed=45: concede AUC 0.7900
+2026-08-02 23:06:00,500 INFO curve men n=50 seed=42: concede AUC 0.7962
+2026-08-02 23:06:04,328 INFO curve men n=50 seed=43: concede AUC 0.6973
+2026-08-02 23:06:09,330 INFO curve men n=50 seed=44: concede AUC 0.8090
+2026-08-02 23:06:12,845 INFO curve men n=50 seed=45: concede AUC 0.7511
+2026-08-02 23:06:19,751 INFO curve men n=100 seed=42: concede AUC 0.7875
+2026-08-02 23:06:25,801 INFO curve men n=100 seed=43: concede AUC 0.8075
+2026-08-02 23:06:31,922 INFO curve men n=100 seed=44: concede AUC 0.8176
+2026-08-02 23:06:39,323 INFO curve men n=100 seed=45: concede AUC 0.8279
+2026-08-02 23:06:47,489 INFO curve men n=150 seed=42: concede AUC 0.8425
+2026-08-02 23:06:55,901 INFO curve men n=150 seed=43: concede AUC 0.8342
+2026-08-02 23:07:04,261 INFO curve men n=150 seed=44: concede AUC 0.8476
+2026-08-02 23:07:12,583 INFO curve men n=150 seed=45: concede AUC 0.8447
+2026-08-02 23:07:21,091 INFO curve men n=200 seed=42: concede AUC 0.8351
+2026-08-02 23:07:32,647 INFO curve men n=200 seed=43: concede AUC 0.8598
+2026-08-02 23:07:41,628 INFO curve men n=200 seed=44: concede AUC 0.8351
+2026-08-02 23:07:53,446 INFO curve men n=200 seed=45: concede AUC 0.8454
+2026-08-02 23:07:55,614 INFO curve women n=10 seed=42: concede AUC 0.7174
+2026-08-02 23:07:58,287 INFO curve women n=10 seed=43: concede AUC 0.7098
+2026-08-02 23:08:00,574 INFO curve women n=10 seed=44: concede AUC 0.7073
+2026-08-02 23:08:04,264 INFO curve women n=10 seed=45: concede AUC 0.8115
+2026-08-02 23:08:07,505 INFO curve women n=24 seed=42: concede AUC 0.7121
+2026-08-02 23:08:10,731 INFO curve women n=24 seed=43: concede AUC 0.7560
+2026-08-02 23:08:13,262 INFO curve women n=24 seed=44: concede AUC 0.7374
+2026-08-02 23:08:15,888 INFO curve women n=24 seed=45: concede AUC 0.6208
+2026-08-02 23:08:19,713 INFO curve women n=48 seed=42: concede AUC 0.7617
+2026-08-02 23:08:23,244 INFO curve women n=48 seed=43: concede AUC 0.6869
+2026-08-02 23:08:27,104 INFO curve women n=48 seed=44: concede AUC 0.7950
+2026-08-02 23:08:30,936 INFO curve women n=48 seed=45: concede AUC 0.8111
+2026-08-02 23:08:36,062 INFO curve women n=71 seed=42: concede AUC 0.8232
+2026-08-02 23:08:40,239 INFO curve women n=71 seed=43: concede AUC 0.7965
+2026-08-02 23:08:44,686 INFO curve women n=71 seed=44: concede AUC 0.7846
+2026-08-02 23:08:49,292 INFO curve women n=71 seed=45: concede AUC 0.7822
+2026-08-02 23:08:56,035 INFO curve women n=95 seed=42: concede AUC 0.8285
+2026-08-02 23:09:01,506 INFO curve women n=95 seed=43: concede AUC 0.8122
+2026-08-02 23:09:06,404 INFO curve women n=95 seed=44: concede AUC 0.8128
+2026-08-02 23:09:11,355 INFO curve women n=95 seed=45: concede AUC 0.8333
+2026-08-02 23:09:14,727 INFO curve pooled n=30 seed=42: concede AUC 0.6638
+2026-08-02 23:09:17,273 INFO curve pooled n=30 seed=43: concede AUC 0.6954
+2026-08-02 23:09:20,834 INFO curve pooled n=30 seed=44: concede AUC 0.7949
+2026-08-02 23:09:23,508 INFO curve pooled n=30 seed=45: concede AUC 0.7431
+2026-08-02 23:09:28,200 INFO curve pooled n=74 seed=42: concede AUC 0.8084
+2026-08-02 23:09:32,780 INFO curve pooled n=74 seed=43: concede AUC 0.8054
+2026-08-02 23:09:38,218 INFO curve pooled n=74 seed=44: concede AUC 0.8132
+2026-08-02 23:09:42,833 INFO curve pooled n=74 seed=45: concede AUC 0.7775
+2026-08-02 23:09:51,170 INFO curve pooled n=148 seed=42: concede AUC 0.8456
+2026-08-02 23:09:58,713 INFO curve pooled n=148 seed=43: concede AUC 0.8360
+2026-08-02 23:10:08,057 INFO curve pooled n=148 seed=44: concede AUC 0.8459
+2026-08-02 23:10:15,278 INFO curve pooled n=148 seed=45: concede AUC 0.8187
+2026-08-02 23:10:27,259 INFO curve pooled n=221 seed=42: concede AUC 0.8555
+2026-08-02 23:10:38,403 INFO curve pooled n=221 seed=43: concede AUC 0.8507
+2026-08-02 23:10:48,854 INFO curve pooled n=221 seed=44: concede AUC 0.8510
+2026-08-02 23:11:00,193 INFO curve pooled n=221 seed=45: concede AUC 0.8533
+2026-08-02 23:11:12,951 INFO curve pooled n=295 seed=42: concede AUC 0.8531
+2026-08-02 23:11:25,704 INFO curve pooled n=295 seed=43: concede AUC 0.8643
+2026-08-02 23:11:39,995 INFO curve pooled n=295 seed=44: concede AUC 0.8542
+2026-08-02 23:11:58,747 INFO curve pooled n=295 seed=45: concede AUC 0.8521
+2026-08-02 23:11:58,751 INFO Wrote transfer_learning_curves.csv
+2026-08-02 23:12:02,154 INFO A-distance men_all vs women_target: 0.675
+2026-08-02 23:12:06,169 INFO A-distance men_international vs women_target: 0.713
+2026-08-02 23:12:10,259 INFO A-distance men_club vs women_target: 0.955
+2026-08-02 23:12:11,832 INFO A-distance men_international vs men_club: 0.214
+2026-08-02 23:12:11,833 INFO Wrote domain_divergence.csv
+2026-08-02 23:12:11,844 INFO Done. Results in /Users/xividi/vaep-womens-football/outputs/tables/experiments
+
+=== 6/6 Sensitivity: seeds, hyperparameter grid, alternative learners ===
+2026-08-02 23:12:13,353 INFO === RUNNING sensitivity ===
+2026-08-02 23:12:13,691 INFO Loaded baseline features: 1484206 rows × 208 cols
+2026-08-02 23:12:13,718 INFO Loaded phase features: 1484206 rows × 50 cols
+2026-08-02 23:12:13,735 INFO Loaded space features: 587978 rows × 19 cols
+2026-08-02 23:12:14,798 INFO Loaded labels k=10: 1484206 rows
+2026-08-02 23:12:15,042 INFO Dataset for ['baseline', 'phase', 'space']: 587978 rows x 275 cols
+2026-08-02 23:12:15,411 INFO Loaded baseline features: 1484206 rows × 208 cols
+2026-08-02 23:12:15,419 INFO Loaded labels k=10: 1484206 rows
+2026-08-02 23:12:15,695 INFO Dataset for ['baseline']: 1484206 rows x 210 cols
+2026-08-02 23:12:27,438 INFO [seed] E-VAEP seed=0 concede AUC 0.8468
+2026-08-02 23:12:39,324 INFO [seed] E-VAEP seed=1 concede AUC 0.8558
+2026-08-02 23:12:50,340 INFO [seed] E-VAEP seed=2 concede AUC 0.8341
+2026-08-02 23:13:04,835 INFO [seed] E-VAEP seed=3 concede AUC 0.8605
+2026-08-02 23:13:15,889 INFO [seed] E-VAEP seed=4 concede AUC 0.8502
+2026-08-02 23:13:30,094 INFO [seed] E-VAEP seed=5 concede AUC 0.8632
+2026-08-02 23:13:42,228 INFO [seed] E-VAEP seed=6 concede AUC 0.8424
+2026-08-02 23:13:55,205 INFO [seed] E-VAEP seed=7 concede AUC 0.8549
+2026-08-02 23:14:07,336 INFO [seed] E-VAEP seed=8 concede AUC 0.8473
+2026-08-02 23:14:19,127 INFO [seed] E-VAEP seed=9 concede AUC 0.8436
+2026-08-02 23:14:33,226 INFO [grid] E-VAEP leaves=31 lr=0.03 ff=0.6 concede AUC 0.8623
+2026-08-02 23:14:45,898 INFO [grid] E-VAEP leaves=31 lr=0.03 ff=0.8 concede AUC 0.8611
+2026-08-02 23:14:56,564 INFO [grid] E-VAEP leaves=31 lr=0.05 ff=0.6 concede AUC 0.8573
+2026-08-02 23:15:06,151 INFO [grid] E-VAEP leaves=31 lr=0.05 ff=0.8 concede AUC 0.8637
+2026-08-02 23:15:14,136 INFO [grid] E-VAEP leaves=31 lr=0.10 ff=0.6 concede AUC 0.8302
+2026-08-02 23:15:21,852 INFO [grid] E-VAEP leaves=31 lr=0.10 ff=0.8 concede AUC 0.8203
+2026-08-02 23:15:37,986 INFO [grid] E-VAEP leaves=63 lr=0.03 ff=0.6 concede AUC 0.8590
+2026-08-02 23:15:52,944 INFO [grid] E-VAEP leaves=63 lr=0.03 ff=0.8 concede AUC 0.8614
+2026-08-02 23:16:04,847 INFO [grid] E-VAEP leaves=63 lr=0.05 ff=0.6 concede AUC 0.8552
+2026-08-02 23:16:15,543 INFO [grid] E-VAEP leaves=63 lr=0.05 ff=0.8 concede AUC 0.8468
+2026-08-02 23:16:24,866 INFO [grid] E-VAEP leaves=63 lr=0.10 ff=0.6 concede AUC 0.8408
+2026-08-02 23:16:33,659 INFO [grid] E-VAEP leaves=63 lr=0.10 ff=0.8 concede AUC 0.8188
+2026-08-02 23:16:51,256 INFO [grid] E-VAEP leaves=127 lr=0.03 ff=0.6 concede AUC 0.8449
+2026-08-02 23:17:09,374 INFO [grid] E-VAEP leaves=127 lr=0.03 ff=0.8 concede AUC 0.8498
+2026-08-02 23:17:24,065 INFO [grid] E-VAEP leaves=127 lr=0.05 ff=0.6 concede AUC 0.8496
+2026-08-02 23:17:38,102 INFO [grid] E-VAEP leaves=127 lr=0.05 ff=0.8 concede AUC 0.8442
+2026-08-02 23:17:50,394 INFO [grid] E-VAEP leaves=127 lr=0.10 ff=0.6 concede AUC 0.8281
+2026-08-02 23:18:02,701 INFO [grid] E-VAEP leaves=127 lr=0.10 ff=0.8 concede AUC 0.7960
+2026-08-02 23:18:25,439 INFO [learner] E-VAEP logreg concede AUC 0.8199
+2026-08-02 23:18:42,052 INFO [learner] E-VAEP xgboost concede AUC 0.8600
+2026-08-02 23:18:42,506 INFO Loaded baseline features: 1484206 rows × 208 cols
+2026-08-02 23:18:42,546 INFO Loaded phase features: 1484206 rows × 50 cols
+2026-08-02 23:18:43,043 INFO Loaded labels k=10: 1484206 rows
+2026-08-02 23:18:43,822 INFO Dataset for ['baseline', 'phase']: 1484206 rows x 258 cols
+2026-08-02 23:18:55,281 INFO [seed] P-VAEP seed=0 concede AUC 0.8474
+2026-08-02 23:19:06,130 INFO [seed] P-VAEP seed=1 concede AUC 0.8430
+2026-08-02 23:19:18,229 INFO [seed] P-VAEP seed=2 concede AUC 0.8469
+2026-08-02 23:19:32,349 INFO [seed] P-VAEP seed=3 concede AUC 0.8527
+2026-08-02 23:19:45,719 INFO [seed] P-VAEP seed=4 concede AUC 0.8492
+2026-08-02 23:19:58,505 INFO [seed] P-VAEP seed=5 concede AUC 0.8440
+2026-08-02 23:20:09,515 INFO [seed] P-VAEP seed=6 concede AUC 0.8418
+2026-08-02 23:20:20,971 INFO [seed] P-VAEP seed=7 concede AUC 0.8555
+2026-08-02 23:20:35,555 INFO [seed] P-VAEP seed=8 concede AUC 0.8511
+2026-08-02 23:20:48,087 INFO [seed] P-VAEP seed=9 concede AUC 0.8496
+2026-08-02 23:21:01,514 INFO [grid] P-VAEP leaves=31 lr=0.03 ff=0.6 concede AUC 0.8577
+2026-08-02 23:21:14,609 INFO [grid] P-VAEP leaves=31 lr=0.03 ff=0.8 concede AUC 0.8606
+2026-08-02 23:21:24,546 INFO [grid] P-VAEP leaves=31 lr=0.05 ff=0.6 concede AUC 0.8545
+2026-08-02 23:21:33,834 INFO [grid] P-VAEP leaves=31 lr=0.05 ff=0.8 concede AUC 0.8605
+2026-08-02 23:21:41,312 INFO [grid] P-VAEP leaves=31 lr=0.10 ff=0.6 concede AUC 0.8462
+2026-08-02 23:21:49,062 INFO [grid] P-VAEP leaves=31 lr=0.10 ff=0.8 concede AUC 0.8365
+2026-08-02 23:22:04,502 INFO [grid] P-VAEP leaves=63 lr=0.03 ff=0.6 concede AUC 0.8652
+2026-08-02 23:22:19,664 INFO [grid] P-VAEP leaves=63 lr=0.03 ff=0.8 concede AUC 0.8629
+2026-08-02 23:22:31,728 INFO [grid] P-VAEP leaves=63 lr=0.05 ff=0.6 concede AUC 0.8583
+2026-08-02 23:22:42,492 INFO [grid] P-VAEP leaves=63 lr=0.05 ff=0.8 concede AUC 0.8474
+2026-08-02 23:22:51,826 INFO [grid] P-VAEP leaves=63 lr=0.10 ff=0.6 concede AUC 0.8342
+2026-08-02 23:23:00,516 INFO [grid] P-VAEP leaves=63 lr=0.10 ff=0.8 concede AUC 0.8307
+2026-08-02 23:23:19,428 INFO [grid] P-VAEP leaves=127 lr=0.03 ff=0.6 concede AUC 0.8578
+2026-08-02 23:23:38,898 INFO [grid] P-VAEP leaves=127 lr=0.03 ff=0.8 concede AUC 0.8535
+2026-08-02 23:23:53,033 INFO [grid] P-VAEP leaves=127 lr=0.05 ff=0.6 concede AUC 0.8359
+2026-08-02 23:24:07,179 INFO [grid] P-VAEP leaves=127 lr=0.05 ff=0.8 concede AUC 0.8424
+2026-08-02 23:24:19,370 INFO [grid] P-VAEP leaves=127 lr=0.10 ff=0.6 concede AUC 0.8124
+2026-08-02 23:24:31,202 INFO [grid] P-VAEP leaves=127 lr=0.10 ff=0.8 concede AUC 0.8199
+2026-08-02 23:24:57,556 INFO [learner] P-VAEP logreg concede AUC 0.8396
+2026-08-02 23:25:16,890 INFO [learner] P-VAEP xgboost concede AUC 0.8654
+2026-08-02 23:25:17,339 INFO Loaded baseline features: 1484206 rows × 208 cols
+2026-08-02 23:25:17,376 INFO Loaded phase features: 1484206 rows × 50 cols
+2026-08-02 23:25:17,397 INFO Loaded space features: 587978 rows × 19 cols
+2026-08-02 23:25:18,493 INFO Loaded labels k=10: 1484206 rows
+2026-08-02 23:25:18,767 INFO Dataset for ['baseline', 'phase', 'space']: 587978 rows x 275 cols
+2026-08-02 23:25:31,275 INFO [seed] PS-VAEP seed=0 concede AUC 0.8531
+2026-08-02 23:25:44,014 INFO [seed] PS-VAEP seed=1 concede AUC 0.8643
+2026-08-02 23:25:58,282 INFO [seed] PS-VAEP seed=2 concede AUC 0.8542
+2026-08-02 23:26:16,276 INFO [seed] PS-VAEP seed=3 concede AUC 0.8521
+2026-08-02 23:26:31,349 INFO [seed] PS-VAEP seed=4 concede AUC 0.8472
+2026-08-02 23:26:45,288 INFO [seed] PS-VAEP seed=5 concede AUC 0.8358
+2026-08-02 23:26:56,898 INFO [seed] PS-VAEP seed=6 concede AUC 0.8498
+2026-08-02 23:27:11,221 INFO [seed] PS-VAEP seed=7 concede AUC 0.8621
+2026-08-02 23:27:25,876 INFO [seed] PS-VAEP seed=8 concede AUC 0.8571
+2026-08-02 23:27:38,915 INFO [seed] PS-VAEP seed=9 concede AUC 0.8464
+2026-08-02 23:27:53,644 INFO [grid] PS-VAEP leaves=31 lr=0.03 ff=0.6 concede AUC 0.8618
+2026-08-02 23:28:07,402 INFO [grid] PS-VAEP leaves=31 lr=0.03 ff=0.8 concede AUC 0.8630
+2026-08-02 23:28:17,974 INFO [grid] PS-VAEP leaves=31 lr=0.05 ff=0.6 concede AUC 0.8618
+2026-08-02 23:28:28,081 INFO [grid] PS-VAEP leaves=31 lr=0.05 ff=0.8 concede AUC 0.8567
+2026-08-02 23:28:36,067 INFO [grid] PS-VAEP leaves=31 lr=0.10 ff=0.6 concede AUC 0.8448
+2026-08-02 23:28:44,199 INFO [grid] PS-VAEP leaves=31 lr=0.10 ff=0.8 concede AUC 0.8271
+2026-08-02 23:29:00,247 INFO [grid] PS-VAEP leaves=63 lr=0.03 ff=0.6 concede AUC 0.8635
+2026-08-02 23:29:17,099 INFO [grid] PS-VAEP leaves=63 lr=0.03 ff=0.8 concede AUC 0.8612
+2026-08-02 23:29:29,885 INFO [grid] PS-VAEP leaves=63 lr=0.05 ff=0.6 concede AUC 0.8638
+2026-08-02 23:29:42,198 INFO [grid] PS-VAEP leaves=63 lr=0.05 ff=0.8 concede AUC 0.8531
+2026-08-02 23:29:52,555 INFO [grid] PS-VAEP leaves=63 lr=0.10 ff=0.6 concede AUC 0.8233
+2026-08-02 23:30:01,965 INFO [grid] PS-VAEP leaves=63 lr=0.10 ff=0.8 concede AUC 0.8326
+2026-08-02 23:30:20,607 INFO [grid] PS-VAEP leaves=127 lr=0.03 ff=0.6 concede AUC 0.8517
+2026-08-02 23:30:39,747 INFO [grid] PS-VAEP leaves=127 lr=0.03 ff=0.8 concede AUC 0.8470
+2026-08-02 23:30:55,282 INFO [grid] PS-VAEP leaves=127 lr=0.05 ff=0.6 concede AUC 0.8496
+2026-08-02 23:31:09,997 INFO [grid] PS-VAEP leaves=127 lr=0.05 ff=0.8 concede AUC 0.8446
+2026-08-02 23:31:22,930 INFO [grid] PS-VAEP leaves=127 lr=0.10 ff=0.6 concede AUC 0.8295
+2026-08-02 23:31:34,954 INFO [grid] PS-VAEP leaves=127 lr=0.10 ff=0.8 concede AUC 0.7970
+2026-08-02 23:31:59,204 INFO [learner] PS-VAEP logreg concede AUC 0.8439
+2026-08-02 23:32:30,250 INFO [learner] PS-VAEP xgboost concede AUC 0.8629
+2026-08-02 23:32:30,643 INFO Loaded baseline features: 1484206 rows × 208 cols
+2026-08-02 23:32:30,661 INFO Loaded space features: 587978 rows × 19 cols
+2026-08-02 23:32:31,210 INFO Loaded labels k=10: 1484206 rows
+2026-08-02 23:32:31,910 INFO Dataset for ['baseline', 'space']: 587978 rows x 227 cols
+2026-08-02 23:32:44,810 INFO [seed] ES-VAEP seed=0 concede AUC 0.8469
+2026-08-02 23:32:56,398 INFO [seed] ES-VAEP seed=1 concede AUC 0.8473
+2026-08-02 23:33:08,686 INFO [seed] ES-VAEP seed=2 concede AUC 0.8387
+2026-08-02 23:33:25,946 INFO [seed] ES-VAEP seed=3 concede AUC 0.8533
+2026-08-02 23:33:39,266 INFO [seed] ES-VAEP seed=4 concede AUC 0.8541
+2026-08-02 23:33:53,670 INFO [seed] ES-VAEP seed=5 concede AUC 0.8379
+2026-08-02 23:34:05,343 INFO [seed] ES-VAEP seed=6 concede AUC 0.8475
+2026-08-02 23:34:19,687 INFO [seed] ES-VAEP seed=7 concede AUC 0.8573
+2026-08-02 23:34:33,237 INFO [seed] ES-VAEP seed=8 concede AUC 0.8501
+2026-08-02 23:34:47,010 INFO [seed] ES-VAEP seed=9 concede AUC 0.8571
+2026-08-02 23:35:02,170 INFO [grid] ES-VAEP leaves=31 lr=0.03 ff=0.6 concede AUC 0.8552
+2026-08-02 23:35:15,902 INFO [grid] ES-VAEP leaves=31 lr=0.03 ff=0.8 concede AUC 0.8605
+2026-08-02 23:35:27,071 INFO [grid] ES-VAEP leaves=31 lr=0.05 ff=0.6 concede AUC 0.8538
+2026-08-02 23:35:37,116 INFO [grid] ES-VAEP leaves=31 lr=0.05 ff=0.8 concede AUC 0.8518
+2026-08-02 23:35:46,078 INFO [grid] ES-VAEP leaves=31 lr=0.10 ff=0.6 concede AUC 0.8204
+2026-08-02 23:35:53,619 INFO [grid] ES-VAEP leaves=31 lr=0.10 ff=0.8 concede AUC 0.8382
+2026-08-02 23:36:10,033 INFO [grid] ES-VAEP leaves=63 lr=0.03 ff=0.6 concede AUC 0.8518
+2026-08-02 23:36:26,372 INFO [grid] ES-VAEP leaves=63 lr=0.03 ff=0.8 concede AUC 0.8551
+2026-08-02 23:36:38,312 INFO [grid] ES-VAEP leaves=63 lr=0.05 ff=0.6 concede AUC 0.8550
+2026-08-02 23:36:51,180 INFO [grid] ES-VAEP leaves=63 lr=0.05 ff=0.8 concede AUC 0.8469
+2026-08-02 23:37:02,007 INFO [grid] ES-VAEP leaves=63 lr=0.10 ff=0.6 concede AUC 0.8171
+2026-08-02 23:37:11,064 INFO [grid] ES-VAEP leaves=63 lr=0.10 ff=0.8 concede AUC 0.8249
+2026-08-02 23:37:32,593 INFO [grid] ES-VAEP leaves=127 lr=0.03 ff=0.6 concede AUC 0.8500
+2026-08-02 23:37:53,824 INFO [grid] ES-VAEP leaves=127 lr=0.03 ff=0.8 concede AUC 0.8455
+2026-08-02 23:38:09,497 INFO [grid] ES-VAEP leaves=127 lr=0.05 ff=0.6 concede AUC 0.8384
+2026-08-02 23:38:23,152 INFO [grid] ES-VAEP leaves=127 lr=0.05 ff=0.8 concede AUC 0.8518
+2026-08-02 23:38:38,915 INFO [grid] ES-VAEP leaves=127 lr=0.10 ff=0.6 concede AUC 0.8171
+2026-08-02 23:38:55,083 INFO [grid] ES-VAEP leaves=127 lr=0.10 ff=0.8 concede AUC 0.8282
+2026-08-02 23:39:24,615 INFO [learner] ES-VAEP logreg concede AUC 0.8286
+2026-08-02 23:39:56,953 INFO [learner] ES-VAEP xgboost concede AUC 0.8572
+2026-08-02 23:39:56,961 INFO Wrote sensitivity_*.csv
+2026-08-02 23:39:57,019 INFO Done. Results in /Users/xividi/vaep-womens-football/outputs/tables/experiments
+
+=== Done ===
+
+New results are in:
+
+  outputs/tables/experiments/     grouped_ablation, grouped_shap,
+                                  pseudospace_*, transfer_controls,
+                                  transfer_learning_curves, domain_divergence,
+                                  sensitivity_seeds / _grid / _learners
+  outputs/tables/rebuttal/        brier_decomposition, reliability_curves,
+                                  ece_bin_sensitivity, coverage_*,
+                                  phase_example_summary
+
+Commit and push these and I will fold them into the paper.

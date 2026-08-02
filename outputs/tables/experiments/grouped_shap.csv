@@ -1,0 +1,13 @@
+head,group,mean_abs_shap,n_features
+score,baseline,1.6205704489528436,206
+score,phase,0.035149595137766845,48
+score,pressure_support,0.018326251318429555,2
+score,defensive_density,0.011986679360853065,4
+score,defensive_structure,0.028978341663541504,4
+score,zone_context,0.021041914076399396,7
+concede,baseline,1.3711105003302146,206
+concede,phase,0.04415525116370362,48
+concede,pressure_support,0.07418583915796738,2
+concede,defensive_density,0.025928540562323448,4
+concede,defensive_structure,0.01495683539514972,4
+concede,zone_context,0.0027220096682715883,7

@@ -595,11 +595,65 @@ def run_sensitivity(cfg: Config, k: int, n_seeds: int, out_dir: Path) -> None:
 # CLI
 # ---------------------------------------------------------------------------
 
+def run_seedcheck(cfg: Config, k: int, n_seeds: int, out_dir: Path) -> None:
+    """Seed variation for E-VAEP and P-VAEP in the *production* configuration.
+
+    ``run_sensitivity`` trains every variant on the freeze-frame subset so that
+    all four are directly comparable, which costs E-VAEP and P-VAEP about 13%
+    of their training rows. The headline phase result in Table 3 comes from the
+    production setup, where both train on the full action stream. This routine
+    repeats exactly that setup across seeds, so the reported phase advantage can
+    be compared against the noise induced by the train/validation split and the
+    learner's own randomisation.
+
+    Evaluation is still restricted to the matched 51,172-action subset, so the
+    numbers are comparable with Table 3.
+    """
+    train = corpus_matches(cfg, ["men_360_source", "women_360_finetune"])
+    eval_m = corpus_matches(cfg, ["women_360_evaluation"])
+
+    space_keys = build_dataset(cfg, ["baseline", "space"], k)[["match_id", "action_id"]]
+    space_keys = space_keys.drop_duplicates()
+
+    rows: list[dict] = []
+    for name, fsets in (("E-VAEP", ["baseline"]), ("P-VAEP", ["baseline", "phase"])):
+        data = build_dataset(cfg, fsets, k)
+        cols = _feature_columns(data)
+        for seed in range(n_seeds):
+            s = cfg.split.random_seed + seed
+            res = fit_and_eval(data, cols, train, eval_m, cfg, seed=s,
+                               return_predictions=True)
+            # Score on the matched subset so this lines up with Table 3.
+            pr = res.pop("_predictions").merge(space_keys, on=["match_id", "action_id"])
+            row = {"variant": name, "seed": s,
+                   "n_train_rows": res["n_train_rows"], "n_eval_matched": len(pr)}
+            for head in HEADS:
+                row.update(metrics_for(pr[f"{head}_label"].to_numpy(),
+                                       pr[f"p_{head}"].to_numpy(), head))
+            rows.append(row)
+            log.info("[seedcheck] %s seed=%d concede AUC %.4f", name, s, row["concede_auc"])
+
+    df = pd.DataFrame(rows)
+    df.to_csv(out_dir / "seedcheck_production.csv", index=False)
+
+    summary = df.groupby("variant")["concede_auc"].agg(["mean", "std", "min", "max", "size"])
+    paired = (df[df.variant == "P-VAEP"].set_index("seed")["concede_auc"]
+              - df[df.variant == "E-VAEP"].set_index("seed")["concede_auc"])
+    log.info("Concede AUC by variant:\n%s", summary.to_string())
+    log.info("Paired P-E difference per seed: mean %.4f, sd %.4f, min %.4f, max %.4f, "
+             "positive in %d/%d seeds",
+             paired.mean(), paired.std(), paired.min(), paired.max(),
+             int((paired > 0).sum()), len(paired))
+    paired.rename("phase_effect").to_csv(out_dir / "seedcheck_paired_phase_effect.csv")
+    log.info("Wrote seedcheck_production.csv and seedcheck_paired_phase_effect.csv")
+
+
 EXPERIMENTS = {
     "transfer": lambda cfg, k, n, d: run_transfer(cfg, k, n, d),
     "groups": lambda cfg, k, n, d: run_groups(cfg, k, d),
     "pseudospace": lambda cfg, k, n, d: run_pseudospace(cfg, k, d),
     "sensitivity": lambda cfg, k, n, d: run_sensitivity(cfg, k, n, d),
+    "seedcheck": lambda cfg, k, n, d: run_seedcheck(cfg, k, n, d),
 }
 
 SENTINELS = {
@@ -607,6 +661,7 @@ SENTINELS = {
     "groups": "grouped_shap.csv",
     "pseudospace": "pseudospace_metrics.csv",
     "sensitivity": "sensitivity_learners.csv",
+    "seedcheck": "seedcheck_production.csv",
 }
 
 

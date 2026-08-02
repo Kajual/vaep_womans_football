@@ -1,0 +1,5 @@
+domain_a,domain_b,n_matches_a,n_matches_b,proxy_a_distance
+men_all,women_target,200,95,0.6746321495740679
+men_international,women_target,166,95,0.7134043746494672
+men_club,women_target,34,95,0.9552962399233327
+men_international,men_club,166,34,0.21376105531404588
