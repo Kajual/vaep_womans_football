@@ -1,118 +1,118 @@
 player_id,player_name,rank_E_VAEP,rank_PS_VAEP,delta_rank_observed,ci_lo,ci_hi,excludes_zero,n_boot
-49695.0,Emma Severini,111.0,61.0,50.0,9.0,69.54999999999995,True,699
-46880.0,Giovanna Hoffmann,105.0,64.0,41.0,11.0,56.0,True,482
-15214.0,Ewa Pajor,113.0,78.0,35.0,8.0,69.0,True,593
-15471.0,Selma Bacha,51.0,17.0,34.0,3.75,76.25,True,711
-276907.0,Amber Tysiak,102.0,70.0,32.0,-4.024999999999999,39.0,False,560
-15577.0,Angharad James,77.0,46.0,31.0,15.0,42.0,True,594
-386105.0,Lisa Fjeldstad Naalsund,74.0,45.0,29.0,15.0,39.0,True,512
-49972.0,Martina Lenzini,81.0,54.0,27.0,-6.824999999999999,41.0,False,688
-62667.0,Jennifer Miley Falk,114.0,90.0,24.0,8.0,30.0,True,778
-10417.0,Viola Calligaris,116.0,93.0,23.0,7.0,37.0,True,788
-10218.0,Laura Giuliani,100.0,77.0,23.0,5.275000000000002,29.0,True,892
-46885.0,Rebecca Knaak,64.0,41.0,23.0,2.0,40.0,True,850
-10229.0,Emma Stina Blackstenius,41.0,20.0,21.0,2.0,68.0,True,705
-31534.0,Ella Toone,79.0,58.0,21.0,-5.0,29.0,False,836
-45295.0,Catalina Thomas Coll Lluch,92.0,72.0,20.0,-1.0,28.0,False,599
-276579.0,Nadine Riesen,49.0,29.0,20.0,1.0,40.924999999999955,True,564
-224828.0,Anna Koivunen,103.0,83.0,20.0,5.0,25.0,True,602
-392355.0,Oona Siren,63.0,43.0,20.0,5.0,25.975000000000023,True,602
-10666.0,Dominique Johanna Anna Petrone Janssen,68.0,49.0,19.0,7.0,26.0,True,589
-460753.0,Iman Beney,108.0,89.0,19.0,-10.675,20.674999999999955,False,734
-276288.0,Tuva Hansen,73.0,55.0,18.0,4.0,29.149999999999977,True,795
-10370.0,Cecilia Salvai,97.0,79.0,18.0,2.0,37.049999999999955,True,879
-22032.0,Hannah Hampton,110.0,92.0,18.0,7.0,39.0,True,957
-87185.0,Stine Ballisager Pedersen,101.0,84.0,17.0,-9.325,27.0,False,588
-47521.0,Alessia Russo,84.0,67.0,17.0,-21.224999999999998,44.22500000000002,False,912
-15615.0,Pauline Peyraud Magnin,91.0,74.0,17.0,1.0,29.0,True,786
-10135.0,Ingibjörg Sigurðardóttir,47.0,31.0,16.0,4.0,32.0,True,512
-50375.0,María Méndez Fernández,60.0,44.0,16.0,2.0,28.399999999999977,True,585
-24374.0,Ingrid Syrstad Engen,87.0,71.0,16.0,0.0,18.0,False,600
-15619.0,Bethany Mead,48.0,32.0,16.0,-4.0,54.174999999999955,False,634
-443269.0,Sydney Schertenleib,82.0,66.0,16.0,-8.0,28.0,False,546
-46224.0,Lucia Di Guglielmo,72.0,56.0,16.0,3.0,25.524999999999977,True,660
-62666.0,Ingrid Filippa Angeldal,20.0,7.0,13.0,1.0,38.47500000000002,True,742
-10514.0,Guro Reiten,71.0,60.0,11.0,-11.0,23.0,False,600
-26093.0,Gun Nathalie Björn,53.0,42.0,11.0,1.0,20.0,True,698
-135217.0,Lisa Lichtfus,117.0,107.0,10.0,1.0,16.0,True,560
-10167.0,Tatiana Vanessa Ferreira Pinto,62.0,52.0,10.0,0.0,15.149999999999977,False,595
-224849.0,Saara Katariina Kosola,31.0,22.0,9.0,-2.0,10.0,False,538
-10222.0,Jonna Ann-Charlotte Andersson,32.0,23.0,9.0,-14.0,13.274999999999977,False,630
-24370.0,Cecilie Fiskerstrand,89.0,81.0,8.0,-26.0,23.0,False,795
-10419.0,Géraldine Reuteler,88.0,80.0,8.0,-54.325,48.0,False,788
-10386.0,Caroline Graham Hansen,26.0,18.0,8.0,2.0,21.0,True,531
-10516.0,Frida Maanum,10.0,3.0,7.0,0.0,31.0,False,528
-25770.0,Lisa Boattin,30.0,24.0,6.0,-5.0,11.0,False,566
-402017.0,Maja Bay Østergaard,96.0,91.0,5.0,-3.0,17.0,False,588
-50146.0,Esther Gonzalez Rodríguez,15.0,10.0,5.0,0.0,38.549999999999955,False,779
-407639.0,Smilla Vallotto,52.0,47.0,5.0,-9.325,10.0,False,788
-49913.0,Athenea del Castillo Belvide,39.0,35.0,4.0,-37.0,59.5,False,581
-190348.0,Sveindís Jane Jónsdóttir,13.0,9.0,4.0,-1.0,10.0,False,576
-32143.0,Diana Catarina Ribeiro Gomes,34.0,30.0,4.0,-6.0,11.0,False,595
-32838.0,Claudia Pina Medina,6.0,2.0,4.0,-5.0,25.0,False,721
-276303.0,Thea Bjelde,54.0,51.0,3.0,-7.0,13.0,False,568
-10099.0,Tessa Wullaert,17.0,14.0,3.0,-6.024999999999999,32.0,False,560
-15287.0,Patricia Guijarro Gutiérrez,18.0,16.0,2.0,-5.0,16.0,False,940
-10161.0,María Francesca Caldentey Oliver,8.0,6.0,2.0,-4.0,10.0,False,896
-25729.0,Klara Bühl,14.0,13.0,1.0,-7.0,16.674999999999955,False,894
-10203.0,Cristiana Girelli,22.0,21.0,1.0,-10.0,11.0,False,733
-10220.0,Kosovare Asllani,5.0,4.0,1.0,-16.0,8.0,False,537
-10143.0,Alexia Putellas Segura,12.0,11.0,1.0,-5.0,20.0,False,916
-392291.0,Joanna Tynnilä,58.0,57.0,1.0,-20.0,13.0,False,599
-4658.0,Keira Walsh,27.0,26.0,1.0,-10.0,5.0,False,957
-443270.0,Emilia Urszula Szymczak,115.0,114.0,1.0,-5.0,26.399999999999864,False,593
-15570.0,Chloe Kelly,1.0,1.0,0.0,-5.174999999999999,6.0,False,554
-10088.0,Katrine Veje,69.0,69.0,0.0,-22.0,19.0,False,588
-10117.0,Sakina Karchaoui,7.0,8.0,-1.0,-19.0,6.2999999999999545,False,589
-276906.0,Sari Kees,93.0,94.0,-1.0,-5.0,11.0,False,560
-31531.0,Lauren James,11.0,12.0,-1.0,-10.0,13.0,False,781
-10252.0,Alex Greenwood,36.0,37.0,-1.0,-49.099999999999994,18.0,False,957
-10178.0,Lucy Bronze,23.0,25.0,-2.0,-47.175,17.34999999999991,False,954
-10165.0,Irene Paredes Hernandez,38.0,40.0,-2.0,-16.0,25.0,False,877
-316795.0,Kinga Szemik,112.0,115.0,-3.0,-10.0,12.0,False,593
-10097.0,Frederikke Thøgersen,59.0,62.0,-3.0,-19.0,7.0,False,577
-10272.0,Onema Grace Geyoro,2.0,5.0,-3.0,-19.0,1.0,False,616
-46987.0,Jule Brand,29.0,34.0,-5.0,-42.775,5.0,False,890
-32339.0,Daphne van Domselaar,106.0,111.0,-5.0,-36.0,9.299999999999955,False,589
-10162.0,Carole da Silva Costa,104.0,109.0,-5.0,-13.0,11.0,False,595
-142770.0,Emma Skou Færge,107.0,112.0,-5.0,-40.0,41.0,False,588
-13865.0,Natalia Kuikka,9.0,15.0,-6.0,-10.0,2.9750000000000227,False,602
-45638.0,Sofia Cantore,42.0,50.0,-8.0,-31.0,16.0,False,742
-193268.0,Cecilía Rán Rúnarsdóttir,109.0,117.0,-8.0,-13.0,10.0,False,576
-15555.0,Lauren Hemp,50.0,59.0,-9.0,-50.0,18.0,False,917
-46546.0,Elisa Senß,65.0,75.0,-10.0,-34.0,18.0,False,863
-32099.0,Livia Peng,95.0,105.0,-10.0,-21.0,18.324999999999932,False,788
-4643.0,Georgia Stanway,16.0,27.0,-11.0,-65.325,2.0,False,908
-49836.0,Olga  Carmona García,37.0,48.0,-11.0,-67.7,20.699999999999932,False,853
-10208.0,Elena Linari,99.0,110.0,-11.0,-21.0,25.0,False,892
-224144.0,Eva Nyström,94.0,106.0,-12.0,-28.975,16.0,False,602
-62710.0,Johanna Rytting-Kaneryd,21.0,33.0,-12.0,-57.0,5.0,False,777
+49695.0,Emma Severini,111.0,42.0,69.0,11.0,83.0,True,699
+46880.0,Giovanna Hoffmann,105.0,66.0,39.0,11.0,51.974999999999966,True,482
+15214.0,Ewa Pajor,113.0,74.0,39.0,8.0,76.0,True,593
+10419.0,Géraldine Reuteler,88.0,51.0,37.0,-54.0,88.0,False,788
+10218.0,Laura Giuliani,100.0,65.0,35.0,11.0,45.0,True,892
+15577.0,Angharad James,77.0,44.0,33.0,-6.0,53.0,False,594
+276907.0,Amber Tysiak,102.0,70.0,32.0,9.0,38.0,True,560
+386105.0,Lisa Fjeldstad Naalsund,74.0,45.0,29.0,12.0,37.0,True,512
+46885.0,Rebecca Knaak,64.0,38.0,26.0,-2.7749999999999986,56.0,False,850
+24374.0,Ingrid Syrstad Engen,87.0,63.0,24.0,5.0,30.0,True,600
+276579.0,Nadine Riesen,49.0,25.0,24.0,2.0,48.0,True,564
+10229.0,Emma Stina Blackstenius,41.0,18.0,23.0,1.6000000000000014,77.0,True,705
+62667.0,Jennifer Miley Falk,114.0,92.0,22.0,9.425,30.0,True,778
+460753.0,Iman Beney,108.0,87.0,21.0,-18.675,26.0,False,734
+46224.0,Lucia Di Guglielmo,72.0,52.0,20.0,8.0,31.0,True,660
+31534.0,Ella Toone,79.0,59.0,20.0,-3.0,28.0,False,836
+10417.0,Viola Calligaris,116.0,99.0,17.0,0.0,17.0,False,788
+62666.0,Ingrid Filippa Angeldal,20.0,3.0,17.0,1.0,46.0,True,742
+10097.0,Frederikke Thøgersen,59.0,43.0,16.0,2.0,19.600000000000023,True,577
+276288.0,Tuva Hansen,73.0,58.0,15.0,1.0,21.149999999999977,True,795
+45295.0,Catalina Thomas Coll Lluch,92.0,78.0,14.0,2.0,16.049999999999955,True,599
+402017.0,Maja Bay Østergaard,96.0,82.0,14.0,1.6750000000000007,23.0,True,588
+10666.0,Dominique Johanna Anna Petrone Janssen,68.0,54.0,14.0,-4.0,26.0,False,589
+10514.0,Guro Reiten,71.0,57.0,14.0,-10.024999999999999,29.0,False,600
+443269.0,Sydney Schertenleib,82.0,69.0,13.0,-1.0,20.0,False,546
+407639.0,Smilla Vallotto,52.0,39.0,13.0,-5.0,14.0,False,788
+135217.0,Lisa Lichtfus,117.0,104.0,13.0,0.0,23.0,False,560
+49972.0,Martina Lenzini,81.0,68.0,13.0,-14.0,26.0,False,688
+392355.0,Oona Siren,63.0,50.0,13.0,2.0,17.0,True,602
+224828.0,Anna Koivunen,103.0,90.0,13.0,2.0,20.0,True,602
+10165.0,Irene Paredes Hernandez,38.0,26.0,12.0,-2.0,33.0,False,877
+15619.0,Bethany Mead,48.0,36.0,12.0,-16.0,32.0,False,634
+50375.0,María Méndez Fernández,60.0,48.0,12.0,-3.0,27.0,False,585
+22032.0,Hannah Hampton,110.0,98.0,12.0,0.0,26.0,False,957
+10222.0,Jonna Ann-Charlotte Andersson,32.0,21.0,11.0,-15.0,15.0,False,630
+392291.0,Joanna Tynnilä,58.0,47.0,11.0,1.0,15.0,True,599
+15287.0,Patricia Guijarro Gutiérrez,18.0,8.0,10.0,-1.0,19.0,False,940
+87185.0,Stine Ballisager Pedersen,101.0,91.0,10.0,-5.0,17.0,False,588
+10167.0,Tatiana Vanessa Ferreira Pinto,62.0,53.0,9.0,-3.0,15.149999999999977,False,595
+49913.0,Athenea del Castillo Belvide,39.0,30.0,9.0,-25.5,59.5,False,581
+10370.0,Cecilia Salvai,97.0,89.0,8.0,-2.0,18.0,False,879
+45638.0,Sofia Cantore,42.0,34.0,8.0,-8.0,30.0,False,742
+25770.0,Lisa Boattin,30.0,23.0,7.0,-1.0,10.0,False,566
+276906.0,Sari Kees,93.0,86.0,7.0,-2.0,12.0,False,560
+224849.0,Saara Katariina Kosola,31.0,24.0,7.0,-5.0,8.0,False,538
+10088.0,Katrine Veje,69.0,62.0,7.0,-17.0,22.0,False,588
+10386.0,Caroline Graham Hansen,26.0,20.0,6.0,1.0,16.0,True,531
+24370.0,Cecilie Fiskerstrand,89.0,83.0,6.0,-28.15,23.0,False,795
+49583.0,Alice Sombath,78.0,73.0,5.0,-6.0,11.0,False,628
+4658.0,Keira Walsh,27.0,22.0,5.0,-2.0,12.0,False,957
+32143.0,Diana Catarina Ribeiro Gomes,34.0,29.0,5.0,-6.0,10.0,False,595
+276303.0,Thea Bjelde,54.0,49.0,5.0,-2.8249999999999993,11.0,False,568
+10516.0,Frida Maanum,10.0,6.0,4.0,-2.0,13.0,False,528
+10161.0,María Francesca Caldentey Oliver,8.0,4.0,4.0,-3.0,9.0,False,896
+10220.0,Kosovare Asllani,5.0,1.0,4.0,-4.0,6.600000000000023,False,537
+190348.0,Sveindís Jane Jónsdóttir,13.0,10.0,3.0,-3.0,12.0,False,576
+15615.0,Pauline Peyraud Magnin,91.0,88.0,3.0,-14.0,27.0,False,786
+443270.0,Emilia Urszula Szymczak,115.0,113.0,2.0,-5.0,31.799999999999727,False,593
+62710.0,Johanna Rytting-Kaneryd,21.0,19.0,2.0,-55.0,18.600000000000023,False,777
+10099.0,Tessa Wullaert,17.0,16.0,1.0,-3.0,17.0,False,560
+10143.0,Alexia Putellas Segura,12.0,11.0,1.0,-5.0,21.0,False,916
+46987.0,Jule Brand,29.0,28.0,1.0,-20.0,6.0,False,890
+32838.0,Claudia Pina Medina,6.0,5.0,1.0,-26.0,10.0,False,721
+50146.0,Esther Gonzalez Rodríguez,15.0,15.0,0.0,-5.0,29.0,False,779
+10117.0,Sakina Karchaoui,7.0,7.0,0.0,-12.0,5.0,False,589
+13865.0,Natalia Kuikka,9.0,9.0,0.0,-10.0,13.0,False,602
+47521.0,Alessia Russo,84.0,85.0,-1.0,-39.0,42.0,False,912
+15570.0,Chloe Kelly,1.0,2.0,-1.0,-4.0,11.0,False,554
+10252.0,Alex Greenwood,36.0,37.0,-1.0,-49.0,20.0,False,957
+31531.0,Lauren James,11.0,13.0,-2.0,-5.0,18.0,False,781
+25729.0,Klara Bühl,14.0,17.0,-3.0,-9.0,7.0,False,894
+10162.0,Carole da Silva Costa,104.0,107.0,-3.0,-10.0,15.149999999999977,False,595
+316795.0,Kinga Szemik,112.0,116.0,-4.0,-11.0,5.0,False,593
+142770.0,Emma Skou Færge,107.0,111.0,-4.0,-40.0,49.0,False,588
+49836.0,Olga  Carmona García,37.0,41.0,-4.0,-50.4,17.699999999999932,False,853
+32339.0,Daphne van Domselaar,106.0,110.0,-4.0,-35.0,13.0,False,589
+10203.0,Cristiana Girelli,22.0,27.0,-5.0,-14.0,6.0,False,733
+32099.0,Livia Peng,95.0,101.0,-6.0,-19.0,20.0,False,788
+15555.0,Lauren Hemp,50.0,56.0,-6.0,-51.0,31.0,False,917
+193268.0,Cecilía Rán Rúnarsdóttir,109.0,117.0,-8.0,-13.0,8.0,False,576
+10178.0,Lucy Bronze,23.0,32.0,-9.0,-53.0,11.174999999999955,False,954
+46881.0,Janina Minge,85.0,94.0,-9.0,-53.3,26.0,False,895
+15471.0,Selma Bacha,51.0,61.0,-10.0,-24.0,4.0,False,711
+47008.0,Sjoeke Nüsken,4.0,14.0,-10.0,-35.0,0.0,False,765
+10272.0,Onema Grace Geyoro,2.0,12.0,-10.0,-17.625,-0.375,True,616
+10208.0,Elena Linari,99.0,109.0,-10.0,-20.0,20.0,False,892
+32162.0,Arianna Caruso,24.0,35.0,-11.0,-50.724999999999994,12.0,False,892
+224144.0,Eva Nyström,94.0,106.0,-12.0,-27.975,17.975000000000023,False,602
 34873.0,Fátima Alexandra Figueira Pinto,90.0,102.0,-12.0,-26.0,29.0,False,595
-32162.0,Arianna Caruso,24.0,36.0,-12.0,-51.0,7.0,False,892
-15560.0,Ann-Katrin Berger,86.0,99.0,-13.0,-33.0,15.0,False,895
-46881.0,Janina Minge,85.0,98.0,-13.0,-53.0,10.0,False,895
-46639.0,Ona Batlle Pascual,25.0,39.0,-14.0,-78.0,12.0,False,863
-47008.0,Sjoeke Nüsken,4.0,19.0,-15.0,-41.9,-2.0,True,765
-18999.0,Leah Williamson,56.0,73.0,-17.0,-48.0,12.0,False,953
-225394.0,Guðrún Arnardóttir,83.0,100.0,-17.0,-40.0,11.0,False,576
-49583.0,Alice Sombath,78.0,95.0,-17.0,-28.325,7.0,False,628
-16381.0,Gemma Evans,98.0,116.0,-18.0,-25.174999999999997,-1.0,True,594
-15284.0,Aitana Bonmati Conca,19.0,38.0,-19.0,-65.5,1.0,False,861
-10100.0,Janice Cayman,33.0,53.0,-20.0,-33.0,21.0,False,560
-47011.0,Tanja Pawollek,80.0,101.0,-21.0,-32.075,11.0,False,518
-50371.0,Adriana Nanclares Romero,76.0,97.0,-21.0,-42.0,21.0,False,566
-32210.0,Laia Aleixandri López,43.0,65.0,-22.0,-65.0,18.0,False,793
-63308.0,Justine Vanhaevermaet,40.0,63.0,-23.0,-62.0,14.0,False,555
-63788.0,Victoria Pelova,3.0,28.0,-25.0,-83.3,0.0,False,589
-10404.0,Noelle Maritz,70.0,96.0,-26.0,-53.325,13.0,False,788
-19422.0,Jessica Carter,75.0,103.0,-28.0,-49.0,19.75,False,811
-135326.0,Sarai Linder,57.0,86.0,-29.0,-63.0,16.0,False,609
-31633.0,Oriane Jean-François,55.0,85.0,-30.0,-60.0,21.0,False,601
-30969.0,Elisa De Almeida,44.0,76.0,-32.0,-65.0,17.0,False,548
-10228.0,Manuela Giugliano,45.0,82.0,-37.0,-70.0,9.0,False,732
-46545.0,Carlotta Wamser,66.0,104.0,-38.0,-53.0,0.0,False,591
-46331.0,Elisabetta Oliviero,28.0,68.0,-40.0,-76.25,3.0,False,711
-10388.0,Laura Deloose,67.0,108.0,-41.0,-57.0,-6.0,True,555
-10405.0,Lia Wälti,46.0,88.0,-42.0,-70.0,-4.0,True,788
-10654.0,Jackie Groenen,61.0,113.0,-52.0,-60.0,-2.0,True,583
-26094.0,Julia Zigiotti-Olme,35.0,87.0,-52.0,-75.0,-4.0,True,547
+46546.0,Elisa Senß,65.0,77.0,-12.0,-38.0,16.0,False,863
+10135.0,Ingibjörg Sigurðardóttir,47.0,60.0,-13.0,-38.0,11.0,False,512
+16381.0,Gemma Evans,98.0,114.0,-16.0,-25.0,3.1749999999999545,False,594
+4643.0,Georgia Stanway,16.0,33.0,-17.0,-65.0,1.0,False,908
+26093.0,Gun Nathalie Björn,53.0,71.0,-18.0,-33.0,3.0,False,698
+15560.0,Ann-Katrin Berger,86.0,105.0,-19.0,-35.0,11.299999999999955,False,895
+47011.0,Tanja Pawollek,80.0,100.0,-20.0,-31.075,11.0,False,518
+15284.0,Aitana Bonmati Conca,19.0,40.0,-21.0,-65.0,-1.0,True,861
+50371.0,Adriana Nanclares Romero,76.0,97.0,-21.0,-41.875,28.0,False,566
+32210.0,Laia Aleixandri López,43.0,64.0,-21.0,-65.0,13.0,False,793
+46639.0,Ona Batlle Pascual,25.0,46.0,-21.0,-80.0,11.449999999999932,False,863
+10100.0,Janice Cayman,33.0,55.0,-22.0,-37.0,25.024999999999977,False,560
+135326.0,Sarai Linder,57.0,79.0,-22.0,-58.8,19.0,False,609
+18999.0,Leah Williamson,56.0,80.0,-24.0,-50.0,2.0,False,953
+225394.0,Guðrún Arnardóttir,83.0,108.0,-25.0,-42.0,10.625,False,576
+10404.0,Noelle Maritz,70.0,96.0,-26.0,-57.0,16.0,False,788
+10405.0,Lia Wälti,46.0,72.0,-26.0,-65.0,12.0,False,788
+46545.0,Carlotta Wamser,66.0,93.0,-27.0,-38.0,3.0,False,591
+63788.0,Victoria Pelova,3.0,31.0,-28.0,-85.3,0.0,False,589
+19422.0,Jessica Carter,75.0,103.0,-28.0,-48.0,12.0,False,811
+31633.0,Oriane Jean-François,55.0,84.0,-29.0,-58.0,12.0,False,601
+26094.0,Julia Zigiotti-Olme,35.0,67.0,-32.0,-56.0,-3.0,True,547
+63308.0,Justine Vanhaevermaet,40.0,76.0,-36.0,-64.15,7.149999999999977,False,555
+10228.0,Manuela Giugliano,45.0,81.0,-36.0,-69.0,5.725000000000023,False,732
+46331.0,Elisabetta Oliviero,28.0,75.0,-47.0,-80.0,4.25,False,711
+10388.0,Laura Deloose,67.0,115.0,-48.0,-61.15,-9.0,True,555
+10654.0,Jackie Groenen,61.0,112.0,-51.0,-62.0,-5.550000000000068,True,583
+30969.0,Elisa De Almeida,44.0,95.0,-51.0,-70.325,8.0,False,548

@@ -11,6 +11,6 @@
   "n_women_rows": 133293,
   "n_calib_rows": 25217,
   "n_eval_rows": 51172,
-  "best_iter_score": 59,
-  "best_iter_concede": 56
+  "best_iter_score": 64,
+  "best_iter_concede": 178
 }

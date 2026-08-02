@@ -15,6 +15,6 @@
   "n_train_rows": 530866,
   "n_val_rows": 98029,
   "n_eval_rows": 60370,
-  "best_iter_score": 62,
-  "best_iter_concede": 46
+  "best_iter_score": 67,
+  "best_iter_concede": 39
 }
