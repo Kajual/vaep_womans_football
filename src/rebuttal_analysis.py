@@ -48,8 +48,15 @@ from sklearn.metrics import (
 log = logging.getLogger(__name__)
 
 # Model identifiers as used by the pipeline, and their paper-facing names.
-BASE_MODELS = ["model_A", "model_B", "model_C"]
-PAPER_NAME = {"model_A": "E-VAEP", "model_B": "P-VAEP", "model_C": "PS-VAEP"}
+# model_ES (event + space, no phase) completes the 2x2 ablation requested by
+# Reviewer 2; it is optional, and everything below adapts to its absence.
+ALL_MODELS = ["model_A", "model_B", "model_ES", "model_C"]
+PAPER_NAME = {
+    "model_A": "E-VAEP",
+    "model_B": "P-VAEP",
+    "model_ES": "ES-VAEP",
+    "model_C": "PS-VAEP",
+}
 TRANSFER_VARIANTS = ["men_only", "women_only", "fine_tuned"]
 HEADS = ["score", "concede"]
 
@@ -147,6 +154,14 @@ def top_k_precision_recall(y: np.ndarray, p: np.ndarray, k_frac: float) -> tuple
 # Loading
 # ---------------------------------------------------------------------------
 
+def available_models() -> list[str]:
+    """Which of the four model variants actually have pooled predictions on disk."""
+    present = [m for m in ALL_MODELS if (PRED_DIR / f"{m}_predictions.parquet").exists()]
+    if "model_ES" in present:
+        log.info("ES-VAEP found: reporting the full 2x2 ablation.")
+    return present
+
+
 def load_predictions(model_id: str, variant: str | None = None) -> pd.DataFrame | None:
     name = model_id if variant is None else f"{model_id}_{variant}"
     path = PRED_DIR / f"{name}_predictions.parquet"
@@ -181,7 +196,7 @@ def run_matched_metrics(keys: pd.DataFrame) -> pd.DataFrame:
     the full set. Both are recomputed here on one action universe.
     """
     rows: list[dict] = []
-    for model_id in BASE_MODELS:
+    for model_id in available_models():
         for variant in [None, *TRANSFER_VARIANTS]:
             preds = load_predictions(model_id, variant)
             if preds is None:
@@ -201,7 +216,7 @@ def run_matched_metrics(keys: pd.DataFrame) -> pd.DataFrame:
 def run_top_k_analysis(keys: pd.DataFrame) -> pd.DataFrame:
     """Precision/recall at the sharp end of the conceding ranking (R2-C4)."""
     rows: list[dict] = []
-    for model_id in BASE_MODELS:
+    for model_id in available_models():
         preds = load_predictions(model_id)
         if preds is None:
             continue
@@ -225,7 +240,20 @@ BOOT_METRICS = [
     f"{h}_{m}" for h in HEADS
     for m in ("auc", "ap", "brier", "logloss", "ece", "ace")
 ]
-BOOT_PAIRS = [("model_B", "model_A"), ("model_C", "model_B"), ("model_C", "model_A")]
+def boot_pairs(models: list[str]) -> list[tuple[str, str]]:
+    """Contrasts to report.
+
+    With only A, B and C available these are the two nested steps plus the
+    end-to-end comparison. When ES-VAEP is present the 2x2 design is complete,
+    so we add the contrasts that identify the main effects separately: phase
+    measured with and without space (B-A and C-ES), and space measured with and
+    without phase (ES-A and C-B). The difference between the two estimates of
+    the same main effect is the interaction.
+    """
+    pairs = [("model_B", "model_A"), ("model_C", "model_B"), ("model_C", "model_A")]
+    if "model_ES" in models:
+        pairs += [("model_ES", "model_A"), ("model_C", "model_ES")]
+    return [(a, b) for a, b in pairs if a in models and b in models]
 DRAWS_DIR = OUT_DIR / "boot_draws"
 
 
@@ -250,7 +278,7 @@ def draw_bootstrap_chunk(
     """
     strategy = "pooled" if variant is None else variant
     frames: dict[str, pd.DataFrame] = {}
-    for model_id in BASE_MODELS:
+    for model_id in available_models():
         preds = load_predictions(model_id, variant)
         if preds is None:
             continue
@@ -259,7 +287,7 @@ def draw_bootstrap_chunk(
     if len(frames) < 2:
         raise RuntimeError(f"Need at least two models for strategy {strategy}")
 
-    matches = np.sort(frames[BASE_MODELS[0]]["match_id"].unique())
+    matches = np.sort(next(iter(frames.values()))["match_id"].unique())
     rng = np.random.default_rng(seed + chunk_id)
 
     records: list[dict] = []
@@ -295,12 +323,12 @@ def combine_bootstrap(keys: pd.DataFrame) -> pd.DataFrame:
         # Point estimates on the observed (unresampled) sample.
         variant = None if strategy == "pooled" else strategy
         point: dict[str, dict[str, float]] = {}
-        for model_id in BASE_MODELS:
+        for model_id in available_models():
             preds = load_predictions(model_id, variant)
             if preds is not None:
                 point[model_id] = all_metrics(restrict(preds, keys))
 
-        for a, b_ in BOOT_PAIRS:
+        for a, b_ in boot_pairs(available_models()):
             for metric in BOOT_METRICS:
                 col_a, col_b = f"{a}__{metric}", f"{b_}__{metric}"
                 if col_a not in draws or col_b not in draws:
@@ -331,7 +359,7 @@ def combine_bootstrap(keys: pd.DataFrame) -> pd.DataFrame:
 def build_action_panel(keys: pd.DataFrame) -> pd.DataFrame:
     """One row per evaluation action, carrying VAEP values and spatial context."""
     values = pd.read_parquet(PRED_DIR / "all_models_vaep_values.parquet")
-    values = values[values["model_id"].isin(BASE_MODELS)]
+    values = values[values["model_id"].isin(available_models())]
 
     wide = values.pivot_table(
         index=["match_id", "action_id"],
@@ -360,7 +388,7 @@ def build_action_panel(keys: pd.DataFrame) -> pd.DataFrame:
     panel = restrict(panel, keys)
 
     # Prediction columns for within-stratum discrimination.
-    for model_id in BASE_MODELS:
+    for model_id in available_models():
         preds = load_predictions(model_id)
         if preds is None:
             continue
@@ -561,7 +589,8 @@ def run_ranking_bootstrap(
         return pd.DataFrame(), pd.DataFrame()
 
     # Per-player, per-match VAEP totals for each model.
-    value_cols = {m: f"vaep_value__{m}" for m in BASE_MODELS}
+    models = available_models()
+    value_cols = {m: f"vaep_value__{m}" for m in models}
     per_match = (
         panel.groupby(["match_id", "player_id"])[list(value_cols.values())]
         .sum()
@@ -578,10 +607,10 @@ def run_ranking_bootstrap(
     def aggregate(frame: pd.DataFrame) -> pd.DataFrame:
         grp = frame.groupby("player_id").agg(
             minutes_played=("minutes_played", "sum"),
-            **{m: (value_cols[m], "sum") for m in BASE_MODELS},
+            **{m: (value_cols[m], "sum") for m in models},
         )
         grp = grp[grp["minutes_played"] >= min_minutes]
-        for m in BASE_MODELS:
+        for m in models:
             grp[f"per90_{m}"] = grp[m] / grp["minutes_played"] * 90.0
         return grp
 
