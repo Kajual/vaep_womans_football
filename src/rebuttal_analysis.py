@@ -591,14 +591,13 @@ def run_ranking_bootstrap(
     corr_draws: dict[str, list[float]] = {f"{a}_vs_{b}": [] for a, b in pairs}
     rank_draws: dict[int, list[float]] = {}
 
+    # Index once by match so each replicate is a lookup rather than 31 scans.
+    indexed = per_match.set_index("match_id", drop=False).sort_index()
+
     for _ in range(n_boot):
         sampled = rng.choice(matches, size=len(matches), replace=True)
-        # Concatenate the sampled matches, allowing repeats.
-        rep = pd.concat(
-            [per_match[per_match["match_id"] == m] for m in sampled],
-            ignore_index=True,
-        )
-        agg = aggregate(rep)
+        # .loc with repeats concatenates the sampled matches, repeats included.
+        agg = aggregate(indexed.loc[sampled])
         if len(agg) < 10:
             continue
         for a, b in pairs:
