@@ -2,21 +2,19 @@
 
 Phase- and space-aware VAEP for women's football, with men-to-women transfer learning.
 
-Master's thesis pipeline (Kaj Skubiszak, UAM Poznań, 2026). Follows the 18-stage architecture defined in `plan_vaep_python_only.md`, extended with cross-gender transfer learning.
 
 ## Quick start
 
 ```bash
-# 1. Clone StatsBomb open data (one-time, ~3GB)
 cd data/raw
 git clone https://github.com/statsbomb/open-data.git statsbomb_open_data
 
-# 2. Install dependencies
+# Install dependencies
 python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
-# 3. Run the pipeline, stage by stage
+# Run the pipeline, stage by stage
 python -m src.data_inventory       # Stage 1: inventory
 python -m src.preprocessing        # Stage 3: clean events
 python -m src.spadl_conversion     # Stage 4: SPADL
@@ -33,25 +31,6 @@ python -m src.aggregation          # Stage 15: player rankings
 python -m src.case_studies         # Stage 16: case studies
 python -m src.visualisation        # Stage 17: figures
 python -m src.reporting            # Stage 18: technical report
-```
-
-## Configuration
-
-All paths and hyperparameters live in `configs/default.yaml`. Override on the CLI or set `VAEP_CONFIG=path/to/other.yaml`.
-
-## Repo layout
-
-```
-vaep-womens-football/
-  data/
-    raw/statsbomb_open_data/          # cloned StatsBomb repo
-    interim/                          # cleaned events, 360 joined
-    processed/                        # actions, labels, features, model outputs
-  notebooks/                          # exploration & validation only (no pipeline code)
-  src/                                # pipeline modules
-  outputs/                            # figures, tables, reports
-  models/                             # trained model artifacts
-  configs/                            # YAML configs
 ```
 
 ## Pipeline modules
@@ -79,6 +58,3 @@ vaep-womens-football/
 
 For Models A/B/C, the default config trains on men's 360 competitions (WC 2022, EURO 2024, etc.) and evaluates on women's UEFA EURO 2025. Three transfer variants are reported: zero-shot, fine-tuned, and women-only control. See `src/modelling.py --help` for flags.
 
-## License
-
-Thesis code, released under MIT. StatsBomb open data is © StatsBomb Ltd. and governed by their open-data license.
