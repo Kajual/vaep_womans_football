@@ -1,0 +1,445 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+\usepackage{microtype}
+\usepackage[a4paper,margin=2.25cm]{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{titlesec}
+\usepackage{newunicodechar}
+\usepackage{hyperref}
+
+\newunicodechar{’}{\textquoteright}
+\newunicodechar{“}{\textquotedblleft}
+\newunicodechar{”}{\textquotedblright}
+\newunicodechar{×}{\ensuremath{\times}}
+
+\definecolor{navy}{HTML}{17365D}
+\definecolor{reviewbg}{HTML}{F3F5F7}
+\definecolor{reviewframe}{HTML}{AAB4BF}
+\definecolor{responsebg}{HTML}{F7FBF8}
+\definecolor{responseframe}{HTML}{9CB8A4}
+\definecolor{locationbg}{HTML}{FBFAF5}
+\definecolor{locationframe}{HTML}{C5B98F}
+\definecolor{textgray}{HTML}{4B5563}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=navy,
+  urlcolor=navy,
+  pdftitle={Response to Reviewers -- Paper 306},
+  pdfauthor={Tomasz Piłka, Kaj Skubiszak, Piotr Andrzejewski, Patryk Żyliński}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Response to Reviewers -- Paper 306}
+\rhead{MLSA 2026}
+\cfoot{\thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\titleformat{\section}
+  {\Large\bfseries\color{navy}}
+  {}{0pt}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{navy}}
+  {}{0pt}{}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlist[itemize]{leftmargin=1.5em,itemsep=2pt,topsep=3pt}
+\setlist[enumerate]{leftmargin=1.8em,itemsep=3pt,topsep=3pt}
+
+\newtcolorbox{reviewbox}[1][]{
+  enhanced,
+  breakable,
+  colback=reviewbg,
+  colframe=reviewframe,
+  boxrule=0.6pt,
+  arc=1.5mm,
+  left=3mm,
+  right=3mm,
+  top=2.5mm,
+  bottom=2.5mm,
+  fonttitle=\bfseries,
+  coltitle=navy,
+  title=#1
+}
+
+\newtcolorbox{responsebox}{
+  enhanced,
+  breakable,
+  colback=responsebg,
+  colframe=responseframe,
+  boxrule=0.6pt,
+  arc=1.5mm,
+  left=3mm,
+  right=3mm,
+  top=2.5mm,
+  bottom=2.5mm
+}
+
+\newtcolorbox{locationbox}{
+  enhanced,
+  breakable,
+  colback=locationbg,
+  colframe=locationframe,
+  boxrule=0.6pt,
+  arc=1.5mm,
+  left=3mm,
+  right=3mm,
+  top=2mm,
+  bottom=2mm
+}
+
+\definecolor{statuspending}{HTML}{B8860B}
+\definecolor{statusnew}{HTML}{C0392B}
+
+\newcommand{\pending}[1]{\textcolor{statuspending}{#1}}
+\newcommand{\newwork}[1]{\textcolor{statusnew}{#1}}
+
+\newcommand{\TODO}[1]{\textcolor{red}{\textbf{[#1]}}}
+
+\newcommand{\response}[2]{%
+  \begin{responsebox}
+  \textbf{Response:}
+
+  #1
+  \end{responsebox}
+  \begin{locationbox}
+  \textbf{Location in the revised manuscript:}
+
+  #2
+  \end{locationbox}
+}
+
+\newcommand{\emptyresponse}{%
+  \begin{responsebox}
+  \textbf{Response:}
+
+  \vspace{12mm}
+  \end{responsebox}
+  \begin{locationbox}
+  \textbf{Location in the revised manuscript:}
+
+  \vspace{5mm}
+  \end{locationbox}
+}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries\color{navy} Response to Reviewers}\\[5pt]
+  {\large Paper ID 306}\\[10pt]
+  {\Large\bfseries Prediction or Revaluation? Phase- and Space-Aware VAEP for Women's Football}\\[8pt]
+    \begin{tabular}{@{}l@{}}
+  Tomasz Piłka, Kaj Skubiszak, Piotr Andrzejewski, and Patryk Żyliński
+  \end{tabular} 
+\end{center}
+
+\vspace{4mm}
+\hrule
+\vspace{7mm}
+
+\section{Summary of changes, and a correction}
+
+We are grateful for two reviews that were unusually specific and, as it turned out, unusually productive. Every additional experiment requested has been carried out. Before responding point by point we report an error that Reviewer~2's Comment~8(b) uncovered, because it changes several numbers both reviewers commented on.
+
+\textbf{The error.} PS-VAEP is defined only on the 51{,}172 actions carrying a 360 freeze frame, whereas E-VAEP and P-VAEP are defined on all 60{,}370 evaluation actions. Section~3.6 of the submitted paper states that all ablation metrics are reported on the matched subset and warns that mixing universes would distort the comparison. The discrimination rows of Table~3 followed that rule; Table~2, the ECE row of Table~3, and all of Section~4.3 did not.
+
+The player analysis was worst affected. Player totals were summed over 60{,}370 actions for E-VAEP and 51{,}172 for PS-VAEP, so roughly 9{,}200 actions contributed to a player's E-VAEP total but not to her PS-VAEP total. Recomputed on matched actions with the same 117 players, the headline correlation rises from $\rho = 0.69$ to $\rho = 0.82$, and the named rank gains largely dissolve: the shifts we reported as $+102$, $+94$, $+88$ and $+58$ become $+3$, $+21$, $+5$ and $+1$. Those figures measured the missing actions, not the spatial features. All tables in the revision are computed on the single matched action set.
+
+\textbf{A second correction, of our own finding.} In addressing Reviewer~1's Comment~8 we repeated every headline comparison across ten random seeds. Seed variation turns out to be of the same order as the differences the ablation is asked to resolve. The phase advantage on the conceding head, which a single run puts at $+0.027$, averages $+0.006$ over ten seeds (95\% CI $[+0.001, +0.011]$, positive in 8 of 10). The effect is real and its direction survives, but the single-seed figure overstates it roughly fourfold. The revision reports the seed-averaged value and, throughout, both sources of uncertainty --- the match-level bootstrap for evaluation noise and the seed distribution for training noise. We are not aware of comparable action-valuation work that reports both, and we think the reviewers' insistence on uncertainty has made the paper considerably more honest.
+
+\textbf{What the new experiments changed.} Three of the paper's claims did not survive, and three new findings replaced them. The claim that PS-VAEP achieves the best conceding AP is withdrawn: on the retrained models its AP is the lowest of the four variants. The claim that the redistribution is driven by pressure and congestion is withdrawn: no stratum of density, distance, zone, action type or outcome shows a robustly positive shift. The transfer claim is narrowed: at equal corpus size, men's and women's training data are interchangeable, so the benefit is data volume rather than cross-domain complementarity.
+
+In their place: the completed $2 \times 2$ design shows the two context layers to be \emph{substitutes} rather than complements, with an interaction of $-0.018$ on conceding ROC-AUC; the proxy $\mathcal{A}$-distance shows competition type to govern source similarity more than gender does, with the men's club corpus further from the women's target ($0.955$) than men's international football ($0.713$); and a model built on spatial features \emph{predicted from event data} matches one built on observed freeze frames, which means the approach is not confined to competitions with 360 coverage. We consider these more interesting than the claims they replace.
+
+\clearpage
+\section{Reviewer \#1}
+
+\subsection{Reviewer assessment of the main contribution}
+
+\begin{reviewbox}
+The paper studies whether tactical phase information and spatial context from StatsBomb 360 freeze frames can improve VAEP-style action valuation in women's football. The authors introduce Phase-VAEP, which adds rule-based tactical phase annotations, and Phase-Space VAEP, which also incorporates geometric features describing pressure, support, defensive density, defensive structure, and zone occupation.
+
+The paper also compares several source-target learning strategies to address the limited availability of StatsBomb 360 data for women's competitions: women-only training, zero-shot transfer from men's football, sequential fine-tuning, and pooled training on men's and women's data. The results suggest that phase annotations improve probability estimation, especially for the probability of conceding, while spatial features mainly change how value is distributed across players and tactical situations rather than consistently improving aggregate predictive performance.
+\end{reviewbox}
+
+\subsection{Detailed assessment}
+
+\begin{reviewbox}
+The paper presents several worthwhile ideas and could be an interesting addition to the workshop. The distinction between improving predictive performance and changing how action value is allocated is particularly relevant.
+
+However, the motivation and experimental evaluation are somewhat limited. The paper combines phase annotations, spatial freeze-frame features, and transfer learning from men's to women's football, but the connection between these contributions is not always clear. The reported differences between several models are also small, and the evaluation relies heavily on aggregate metrics. Since the main benefit of the spatial features appears to concern specific tactical situations and player-value redistribution, more detailed analysis of those situations would strengthen the paper.
+
+Given the workshop's emphasis on original ideas rather than fully mature execution, I view the paper positively overall.
+\end{reviewbox}
+
+\subsection{Comments}
+
+\begin{reviewbox}[Comment 1]
+The practical motivation for adding tactical phase annotations could be clearer. The statement that two actions with the same event description may differ in difficulty and value seems more directly related to spatial context. A concrete example where the absence of phase information leads to an implausible valuation would help.
+\end{reviewbox}
+\response{We thank the reviewer for this observation, which identified a genuine conflation in our Introduction. The ``same event description, different difficulty'' argument does indeed motivate \emph{spatial} context, and we used it to motivate both layers. We have now separated the two motivations.
+
+The motivation for phase is different in kind: phase encodes the \emph{possession regime} a state belongs to, not the local geometry. Canonical VAEP observes a fixed-length history of three preceding actions, which represents the recent past but not whether the possession is settled or has just changed hands. Two own-third passes can be identical in type, body part, start and end coordinates, score state and all three preceding actions, and still carry very different conceding risk depending on whether they occur in a settled build-up or three seconds after a turnover with the opponent pressing forward.
+
+We attempted the matched example in the form we first envisaged --- two own-third passes differing only in whether they occur in settled build-up or in defensive transition --- and it cannot be constructed, for a reason worth stating. Our phase rules assign the defensive-transition label only to defensive actions (tackle, interception, clearance, block, foul), so no pass in the corpus carries it. The example as we described it is incompatible with the taxonomy in Section~3.3.
+
+The evaluation set does support a closely related one, which we now use. Among own-third passes, E-VAEP assigns a \emph{higher} mean conceding probability to transition-attack passes ($0.0026$) than to build-up passes ($0.0019$), whereas the observed rates run the other way: $0.0000$ over 229 transition-attack passes against $0.0036$ over 6{,}042 build-up passes. P-VAEP reverses the ordering to the correct direction ($0.0016$ against $0.0021$). The event-only model mistakes recently-recovered possession for elevated risk, and the phase label is what corrects it --- the error pattern our motivation predicts, on the head where the phase gain appears.
+
+We report this with its limitation: with no concessions among the 229 transition-attack passes, the observed contrast bounds rather than estimates the true rate, so we present it as an illustration of the mechanism and not as evidence of effect size.}{Section~1 (Introduction), paragraph~2 split into two paragraphs with separate motivations for phase and space; new worked example added as paragraph~3. Cross-referenced from Section~4.2 (Ablation) and Section~5 (Discussion).}
+
+\begin{reviewbox}[Comment 2]
+The related-work section states that subsequent work extended action valuation to pass valuation and cites reference [2]. Although reference [2] was published in the same year as the original VAEP paper, the underlying work predates VAEP, so this wording may be misleading.
+\end{reviewbox}
+\response{We agree; the wording was inaccurate. Bransen et al.\ is not a successor to VAEP, and describing it as ``subsequent work'' misrepresents the chronology. We have reworded the passage so that pass-valuation work is presented as a parallel line of research on valuing specific action types, developed alongside rather than after the VAEP framework, with the survey of action-type-specific valuation separated from the description of later learning-paradigm extensions.}{Section~2.1 (Action Valuation in Football), final paragraph, sentence beginning ``Subsequent work has extended\ldots'' rewritten.}
+
+\begin{reviewbox}[Comment 3]
+The evaluation focuses mainly on aggregate metrics, while the discussion suggests that spatial features matter most in specific high-risk situations. A systematic analysis of the types of actions or situations that benefit most would strengthen the conclusions.
+\end{reviewbox}
+\response{We agree that this was the main evidential gap: we asserted that spatial features matter in specific high-risk situations, but reported only aggregate metrics. Reviewer~2 raised the same point (Comment~5), and we have addressed it with a new stratified analysis rather than with additional aggregate numbers.
+
+\newwork{The revised paper adds Section~4.3, in which we decompose the per-action change $\Delta = V_{\mathrm{PS}}(a) - V_{\mathrm{P}}(a)$ across five stratifications: nearest-opponent distance ($<2$, $2$--$5$, $5$--$10$, $>10$~m), number of visible opponents within 5~m, action type (pass / carry / take-on / shot / defensive), pitch zone (own, middle and final third; penalty area; half-space; wide channel), and action outcome. For each stratum we report the share of actions, mean $\Delta$ with match-level bootstrap confidence intervals, and conceding-head ROC-AUC and AP computed \emph{within} the stratum, so that the claim about high-risk situations is tested where it is made rather than in aggregate.}
+
+\newwork{We also report discrimination restricted to the highest-risk decile of states and precision/recall in the top~1\% of the conceding ranking, which is where the AP gain of PS-VAEP originates (see also our response to Reviewer~2, Comment~4). The Maanum case study is retained but demoted to an illustration of a mechanism that is now established quantitatively.}}{New Section~4.3 (Where the Added Context Matters) with a stratified $\Delta$ table and a density~$\times$~zone heat map; former Section~4.3 renumbered to~4.5; case study moved under the new section as an illustrative paragraph.}
+
+\begin{reviewbox}[Comment 4]
+A feature-importance or grouped ablation analysis would help clarify the contribution of the added phase and spatial features. It would also be useful to assess whether the most informative spatial features could be approximated from event data or another source when 360 data is unavailable.
+\end{reviewbox}
+\response{We have added both analyses requested.
+
+\newwork{\textbf{Grouped ablation.} The seventeen spatial features fall into four interpretable groups (pressure and support; defensive density; defensive structure; zone context). We now report leave-one-group-out and add-one-group-in variants for these four groups and for the phase layer, on both heads, on the matched 51{,}172-action subset and with bootstrap intervals. This is complemented, not replaced, by grouped SHAP attributions aggregated to the same five groups.}
+
+\newwork{\textbf{Event-data approximation.} We find this the more practically interesting question, since it determines whether the phase-space approach transfers to competitions without 360 coverage. We now train, for each spatial feature, a regression or classification model that predicts it from event features alone, and report predictive quality per feature. We then build a \emph{Pseudo-Space VAEP} using the predicted rather than observed spatial features, and quantify how much of the PS-VAEP effect survives -- separately for the (small) aggregate predictive effect and for the (large) player-ranking redistribution. Our expectation, to be confirmed by the final numbers, is that coarse zone-context features are well approximated from events while local pressure and density features are not, which would explain why the redistribution is driven mainly by the latter.}}{New Section~4.4 (Feature Groups and Event-Data Approximation); full per-feature approximation results and grouped SHAP figures in Appendix~B.}
+
+\begin{reviewbox}[Comment 5]
+Table 3 uses inconsistent numerical precision. More importantly, the paper places considerable emphasis on small differences between models. Without uncertainty estimates, some of these differences may not be robust.
+\end{reviewbox}
+\response{Both points are well taken.
+
+\textbf{Precision.} Numerical precision is now uniform: all discrimination and probability metrics are reported to three decimal places, and ECE is reported in units of $10^{-3}$ so that it is legible at the same precision as the other metrics. Bolding of ``best'' values is removed where the difference is not distinguishable from zero.
+
+\pending{\textbf{Uncertainty.} We agree that the original paper leaned on differences that were never shown to be robust; this was also the substance of Reviewer~2's Comment~2. We now report \emph{paired} match-level bootstrap confidence intervals ($B = 1000$ resamples of the 31 evaluation matches) for every entry in Tables~2 and~3. Because all variants are evaluated on the identical action set, we resample matches once per replicate and recompute all models' metrics on the same resample, so the intervals we report are for the \emph{difference} between variants, which is the quantity our claims concern.}
+
+The reviewer's suspicion was correct, and more so than we expected. Of every difference in the pooled ablation, exactly one has an interval excluding zero: P-VAEP over E-VAEP on conceding ROC-AUC ($+0.027$, CI $[+0.013, +0.046]$). The conceding-AP advantage we emphasised for PS-VAEP is not robust, and on the retrained models it has reversed sign entirely. No log-loss or calibration difference is robust under either binning scheme, so we no longer claim a calibration advantage for any variant.
+
+We also acted on the implication of the reviewer's Comment~8 that evaluation noise is not the only noise. Repeating the ablation across ten seeds shows training-time variation of the same order as the effects themselves, and reduces the phase effect from $+0.027$ to a ten-seed mean of $+0.006$ (CI $[+0.001, +0.011]$). Both sources are now reported throughout; the summary on page~1 gives the detail.
+
+We present this as a finding rather than a caveat. That phase produces the ablation's only robust predictive gain while space produces none, yet space alone reorders the player ranking, states the prediction-versus-revaluation thesis more sharply than the submitted version managed.}{Section~3.6 (Evaluation Metrics), new paragraph on the bootstrap protocol; Tables~2 and~3 reformatted with uniform precision and paired confidence intervals; Sections~4.1, 4.2 and~5 rewritten to distinguish robust from non-robust differences.}
+
+\begin{reviewbox}[Comment 6]
+The construction of the men's source dataset could be motivated better. It combines men's international tournaments with a domestic Bundesliga season. Competition type may be at least as important as gender for domain similarity.
+\end{reviewbox}
+\response{We accept this criticism. The source corpus was assembled to maximise the available men's 360 data, and the paper presented that pragmatic choice as though it were a design decision. Moreover, the reviewer's underlying hypothesis -- that competition type may matter as much as gender for domain similarity -- is testable with the data we already have, and we have now tested it.
+
+We ran both analyses the reviewer's hypothesis calls for, and the hypothesis is confirmed.
+
+Splitting the men's source into an international subset (World Cup 2022, Euro 2020, Euro 2024) and a club subset (Bundesliga 2023/24) and estimating a proxy $\mathcal{A}$-distance with a domain classifier trained to separate action feature vectors, men's international football sits at $0.713$ from the women's target while the men's club corpus sits at $0.955$ --- the club corpus is the \emph{more distant} source despite matching the rest of the men's data on gender. The two men's subsets are only $0.214$ apart from each other. Size-matched transfer agrees: from 34 matches, an international source reaches conceding ROC-AUC $0.755$ against $0.717$ for a club source.
+
+Competition type therefore governs source similarity more than gender does in this setting, exactly as the reviewer suspected. This is now reported as a finding in Section~4.1 rather than left as an assumption, and we are grateful for a criticism that turned into one of the paper's more useful results.
+
+\pending{The revised Section~3.2 motivates the corpus construction explicitly and reports the outcome of this test.}}{Section~3.2 (Train, Adaptation, and Evaluation Splits), extended motivation paragraph; new results paragraph and divergence table in Section~4.1 (Transfer Learning).}
+
+\begin{reviewbox}[Comment 7]
+The relationship to the VAEP360 approach used in the Un-XPass paper should be discussed more explicitly. A direct comparison with Phase-Space VAEP would help position the contribution.
+\end{reviewbox}
+\response{We agree that the positioning was too implicit; the submitted paper cited Un-XPass only for its use of freeze-frame context and did not discuss VAEP360 at all.
+
+The revised Section~2.2 now discusses the relationship explicitly along three axes: (i)~\emph{objective} -- VAEP360 as used in Un-XPass supports the evaluation of passing decisions and creativity, whereas our target is valuation of the full on-ball action stream, including carries, take-ons and defensive actions; (ii)~\emph{representation} -- VAEP360 consumes the freeze frame through learned surface-based representations, while we use a compact set of seventeen handcrafted geometric features chosen for interpretability and for robustness under partial visibility in a small target corpus; (iii)~\emph{data regime} -- our setting is explicitly data-scarce and cross-domain, which is what motivates the low-capacity feature-based route.
+
+On a direct empirical comparison we would prefer to be candid: a faithful reimplementation of VAEP360 within our source-target protocol is beyond what we can complete for this revision, and an unfaithful one would be worse than none. We therefore provide a structured conceptual comparison and state the empirical comparison as explicit future work rather than claiming superiority we have not demonstrated.}{Section~2.2 (Spatial Context and Freeze-Frame Data), new paragraph and comparison table; Section~5 (Discussion and Limitations), future-work sentence.}
+
+\begin{reviewbox}[Comment 8]
+The choice of LightGBM and the selected hyperparameters require more justification. Given the small differences between some models, sensitivity to these choices may matter.
+\end{reviewbox}
+\response{The choice was under-justified. We now state the reasoning: the feature set is tabular, low-dimensional and mixes categorical with continuous variables; the positive classes are rare ($\approx 1.5\%$ and $0.34\%$); the target corpus is small; and gradient-boosted trees are the standard learner in the VAEP literature and in the reference \texttt{socceraction} implementation, which makes our results comparable to prior work. The hyperparameters were taken from that reference configuration rather than tuned per variant, which we now say explicitly -- it is a fairness property of the ablation, since all variants share the configuration.
+
+\pending{Given that several differences are small, we add a sensitivity analysis: (i)~ten random seeds per model--strategy cell, reporting the standard deviation of each metric, so that the reader can compare between-variant differences against seed noise; (ii)~a small grid over \texttt{num\_leaves} $\in \{31, 63, 127\}$, learning rate $\in \{0.03, 0.05, 0.1\}$ and feature fraction, reporting the range of each metric rather than a single point; and (iii)~logistic-regression and XGBoost baselines to confirm that the E~/~P~/~PS ordering is a property of the feature sets rather than of the learner.}}{Section~3.4 (Training and Evaluation Protocol), extended justification; new sensitivity results summarised in Section~4.2 and reported in full in Appendix~C.}
+
+\subsection{Questions}
+
+\begin{reviewbox}[Question 1]
+Which concrete applications of VAEP require explicit tactical phase annotations, and can the authors provide an example where missing phase information leads to an implausible valuation?
+\end{reviewbox}
+\response{\pending{Our substantive answer is in the response to Comment~1, which now includes the requested worked example of an implausible valuation.}
+
+On concrete applications: phase annotation is required whenever valuation is aggregated or compared \emph{conditionally} rather than in total. Three cases in which we consider it necessary rather than merely useful are (i)~role-specific player evaluation, where a deep-lying midfielder's contribution in settled build-up should not be pooled with her contribution in defensive transition, since the two carry different risk profiles; (ii)~phase-specific team and opponent scouting, where the standard analytical unit is already the phase and an unconditioned VAEP total cannot be decomposed into one; and (iii)~risk-aware valuation, where the cost of a turnover depends on the possession regime -- which is exactly what the conceding-head gain in our ablation measures. The revised Introduction states these applications explicitly, so that the phase layer is motivated by use cases and not only by a metric improvement.}{Section~1 (Introduction), new applications paragraph and worked example; see also our response to Comment~1.}
+
+\begin{reviewbox}[Question 2]
+In the transfer-learning experiments, is the main benefit simply the availability of more 360 data, regardless of whether it comes from men's or women's football? How is the effect of sample size separated from the effect of cross-domain transfer?
+\end{reviewbox}
+\response{This is the right challenge to our transfer claim, and Reviewer~2 raised it as Comment~3. As submitted, our pooled result cannot distinguish cross-domain complementarity from a pure sample-size effect, because pooled training simply sees more data than either single-domain strategy.
+
+\pending{We separate the two effects in the revision with three experiments: (i)~\emph{learning curves} -- target-domain metrics as a function of the number of training matches, computed separately for men-only, women-only and pooled training, which isolates the marginal value of an additional match as a function of its domain; (ii)~a \emph{size-matched} comparison, subsampling the men's corpus to the 95~matches of the women's adaptation corpus and comparing men-only, women-only and pooled training at equal total training size; and (iii)~a \emph{domain-balanced} pooled variant with equal match counts per domain.}
+
+\pending{If the pooled advantage persists at matched size, the effect is cross-domain complementarity; if it disappears, the honest conclusion is that more 360 data helps regardless of provenance -- which is itself a useful finding for women's football analytics, and we will report it as such. We prefer to narrow the claim to what the size-matched comparison supports rather than retain the stronger phrasing of the submitted version.}}{Section~4.1 (Transfer Learning), new learning-curve figure and size-matched comparison table; claim narrowed in the Abstract, Section~1 and Section~5.}
+
+\begin{reviewbox}[Question 3]
+Which actions or tactical situations benefit most from the phase and spatial features? Can the authors provide a systematic analysis of the ``rare high-risk cases''?
+\end{reviewbox}
+\response{\newwork{Please see our response to Comment~3, which describes the new Section~4.3 in full. In short: we now stratify the per-action change by nearest-opponent distance, defensive density, action type, pitch zone and outcome, and report within-stratum discrimination together with top-decile and top-1\% performance on the conceding head, so that the phrase ``rare high-risk cases'' is replaced by a measured quantity. Where the stratified evidence does not support the original claim, we will revise the claim rather than the framing.}}{New Section~4.3 (Where the Added Context Matters); see also our response to Comment~3.}
+
+\begin{reviewbox}[Question 4]
+What is the individual contribution of the different phase and spatial feature groups? Could some of the most informative spatial features be approximated from event data?
+\end{reviewbox}
+\response{\newwork{Please see our response to Comment~4. The grouped ablation reports the individual contribution of the four spatial feature groups and of the phase layer, using leave-one-group-out and add-one-group-in variants with bootstrap intervals, supplemented by grouped SHAP attributions. The approximation question is answered directly by the Pseudo-Space VAEP experiment, in which each spatial feature is predicted from event data alone and the model is rebuilt on the predicted features, allowing us to report which parts of the spatial signal are recoverable without 360 coverage.}}{New Section~4.4 (Feature Groups and Event-Data Approximation); Appendix~B; see also our response to Comment~4.}
+
+\begin{reviewbox}[Question 5]
+Why was Bundesliga 2023/24 included alongside men's international tournaments? Did the authors examine whether competition type is more important than gender for source-target similarity?
+\end{reviewbox}
+\response{Please see our response to Comment~6 for the new analysis. To answer the first part directly: Bundesliga 2023/24 was included because it is the largest men's 360 corpus in the public StatsBomb release, and excluding it would have reduced the source domain substantially. This was a data-availability decision, and the submitted paper should have said so.
+
+\pending{We had not examined whether competition type matters more than gender, and we agree that we should have. The revision reports transfer from the international and club subsets separately under a size-matched protocol, together with pairwise domain-divergence estimates, so that the question is answered empirically rather than assumed.}}{Section~3.2, corpus motivation; Section~4.1, competition-type transfer comparison and divergence table.}
+
+\begin{reviewbox}[Question 6]
+How does Phase-Space VAEP differ from the VAEP360 approach used in Un-XPass? Could VAEP360 also be extended with the proposed phase annotations?
+\end{reviewbox}
+\response{Please see our response to Comment~7 for the full discussion. Briefly: the approaches differ in objective (pass-choice and creativity evaluation versus valuation of the complete on-ball action stream), in spatial representation (learned surface-based representations versus seventeen compact handcrafted geometric features), and in data regime (our setting is deliberately low-capacity because the target corpus is small and cross-domain).
+
+On the second question -- yes. The phase layer is a property of the game state, not of the spatial encoder, and is therefore orthogonal to how the freeze frame is represented. It could be supplied to VAEP360 as additional conditioning input without modification. We regard this as a natural extension and now say so explicitly; our results suggest it would be worth testing, since in our setting the phase layer contributed the more reliable predictive gain of the two.}{Section~2.2, comparison paragraph and table; Section~5 (Discussion and Limitations), future-work sentence.}
+
+\begin{reviewbox}[Question 7]
+Why was LightGBM selected, and how sensitive are the results to the chosen hyperparameters and random variation?
+\end{reviewbox}
+\response{\pending{Please see our response to Comment~8. The selection rationale (tabular low-dimensional features, rare positives, small target corpus, comparability with the reference VAEP implementation) is now stated in Section~3.4, together with the fact that hyperparameters were fixed across all variants rather than tuned per variant. Sensitivity is addressed by ten-seed repetitions with reported standard deviations, a small hyperparameter grid reported as metric ranges, and logistic-regression and XGBoost baselines confirming that the ordering of the feature sets does not depend on the learner.}}{Section~3.4; sensitivity results in Section~4.2 and Appendix~C.}
+
+\clearpage
+\section{Reviewer \#2}
+
+\subsection{Reviewer assessment of the main contribution}
+
+\begin{reviewbox}
+The paper’s main contribution is to show that adding contextual information to VAEP can affect prediction and valuation in different ways. Tactical phase features improve probability estimation, particularly for conceding risk, while freeze-frame spatial features mainly redistribute player credit across roles and situations. This prediction-versus-revaluation distinction provides a useful framework for evaluating contextual action-valuation models beyond aggregate predictive metrics alone.
+\end{reviewbox}
+
+\subsection{Detailed assessment}
+
+\begin{reviewbox}
+Summary: The paper extends event-based VAEP with two interpretable context layers: rule-based tactical phases and geometric features extracted from StatsBomb 360 freeze frames. It evaluates Event-VAEP, Phase-VAEP, and Phase-Space VAEP on a held-out women’s tournament under four men-to-women training strategies.
+
+The central contribution is the empirical distinction between predictive improvement and value redistribution. Phase context improves probability estimation, mainly for the conceding head, while spatial context does not consistently improve aggregate prediction but substantially redistributes player credit. This distinction between prediction and revaluation is useful and generalizes beyond the specific VAEP implementation.
+
+Strengths
+\begin{itemize}
+  \item The paper addresses an important and underserved setting: contextual player valuation in women’s football under limited public spatial data.
+  \item The experimental design includes good controls, particularly match-level splits and evaluation of all model variants on the same 51,172-action freeze-frame subset.
+  \item The prediction-versus-revaluation distinction is the paper’s strongest contribution and is presented with appropriate caution.
+  \item The authors are transparent that the spatial redistribution is not yet externally validated and should not automatically be interpreted as superior.
+  \item The use of public data, interpretable features, and disclosed primary hyperparameters provides a good foundation for reproducibility.
+\end{itemize}
+\end{reviewbox}
+
+\subsection{Weaknesses and constructive feedback}
+
+\begin{reviewbox}[Comment 1]
+Complete the ablation. The nested comparison omits an Event+Space model. The current design measures the marginal effect of space after phase has already been added, but cannot separate the main effects of phase and space from their interaction. A 2×2 Event / Phase / Space ablation would support the paper’s central argument more directly.
+\end{reviewbox}
+\response{We accept this; the omission was a design flaw rather than an oversight of reporting. The nested design was chosen because phase is cheaper to compute than freeze-frame features, but as the reviewer notes it confounds the main effect of space with its interaction with phase.
+
+\pending{We have trained an Event+Space variant (ES-VAEP) on the identical corpora and protocol, completing the $2 \times 2$ design. Table~3 is restructured accordingly into four columns (E, P, ES, PS), and we report the decomposition explicitly: the main effect of phase as $(\mathrm{P} - \mathrm{E})$ and $(\mathrm{PS} - \mathrm{ES})$, the main effect of space as $(\mathrm{ES} - \mathrm{E})$ and $(\mathrm{PS} - \mathrm{P})$, and the interaction as their difference, each with paired match-level bootstrap intervals.}
+
+\pending{This also allows us to test the paper's central claim more directly than the submitted version could: the prediction-versus-revaluation distinction predicts that the phase main effect should be visible in the probability metrics while the space main effect should be visible primarily in the player-ranking correlations. We therefore report the Spearman analysis of Table~4 for all four variants as well.}}{Section~3.3 (Model Variants), new ES-VAEP paragraph; Table~3 restructured with a $2 \times 2$ design and an effect-decomposition panel; Table~4 extended to four variants; Sections~4.2 and~5 rewritten around the decomposition.}
+
+\begin{reviewbox}[Comment 2]
+Quantify uncertainty. Several conclusions rely on small metric differences and one held-out tournament. Please report paired match-level bootstrap confidence intervals for Tables 2 and 3. For player rankings, resample matches and recompute player aggregates and correlations rather than treating players as independent observations.
+\end{reviewbox}
+\response{We agree, and we have adopted the protocol the reviewer specifies. Reviewer~1 raised the same concern in Comment~5.
+
+\pending{For Tables~2 and~3 we resample the 31 evaluation matches with replacement ($B = 1000$) and recompute all metrics for all variants on each resample. Because the variants share an evaluation action set, we form \emph{paired} differences within each replicate and report percentile intervals for the differences, which is the quantity our claims concern and which is considerably tighter than independent per-model intervals.}
+
+\pending{For the player analysis we follow the reviewer's prescription exactly: matches, not players, are the resampling unit. Within each replicate we recompute per-player minutes and VAEP per~90 from the resampled matches, then recompute the Spearman correlations of Table~4 and the individual rank changes. We report intervals for the correlations and for the named rank shifts. We anticipate that intervals for individual players near the 270-minute threshold will be wide, and we consider it better to report that ourselves and adjust the accompanying claims than to leave the point estimates unqualified.}}{Section~3.6, bootstrap protocol; Tables~2, 3 and~4 with confidence intervals; Section~4.5 (Player Valuation), rank-change intervals; Section~5, claims aligned with the intervals.}
+
+\begin{reviewbox}[Comment 3]
+Strengthen or narrow the transfer-learning claim. Pooled training is evaluated only through conceding ROC-AUC and also uses more total training data than either single-domain strategy. The current result therefore does not distinguish cross-domain complementarity from a sample-size effect. Reporting both heads and probability metrics, alongside a size-matched or domain-balanced comparison, would make this contribution more convincing.
+\end{reviewbox}
+\response{We accept both parts of this criticism, and we intend to narrow the claim rather than defend it. Reviewer~1's Question~2 raises the same confound.
+
+\pending{On reporting: Table~2 now covers both heads and reports AP, log loss, Brier score and ECE alongside ROC-AUC for all four strategies and all model variants, with bootstrap intervals. Selecting a single metric for a single head was a reporting decision that we cannot justify.}
+
+\pending{On the confound: we add a size-matched comparison in which the men's corpus is subsampled to the 95~matches of the women's adaptation corpus, a domain-balanced pooled variant, and learning curves in the number of training matches computed separately per domain. Together these separate the marginal value of additional data from the marginal value of \emph{cross-domain} data.}
+
+\pending{We will state the conclusion that these experiments support. If the pooled advantage does not survive size matching, we will report that the benefit is one of data volume rather than cross-domain complementarity, and revise the Abstract and Discussion accordingly -- this does not affect the paper's central prediction-versus-revaluation contribution.}}{Section~4.1 (Transfer Learning), expanded Table~2, size-matched comparison, domain-balanced variant and learning-curve figure; claim narrowed in the Abstract, Section~1 and Section~5.}
+
+\begin{reviewbox}[Comment 4]
+Clarify the spatial prediction result. PS-VAEP improves conceding AP monotonically, despite worsening ROC-AUC and log loss relative to P-VAEP. This suggests a potentially interesting trade-off in ranking rare positive cases rather than a general predictive improvement. The paper should highlight this distinction and quantify its uncertainty. Given the very low conceding rate, reliability diagrams or adaptive-bin calibration metrics would also support the calibration claims.
+\end{reviewbox}
+\response{We agree that this is the most interesting single result in the ablation and that the submitted paper passed over it in one sentence.
+
+We tested the reviewer's interpretation directly, and it does not hold --- the pattern is thinner than a ranking trade-off.
+
+On the models as submitted, PS-VAEP's AP advantage rested on a handful of actions at the very top of the ranking: it retrieved 8 of the 175 concessions in its top 10 predictions against P-VAEP's 6, while being equal or worse at every threshold from the top 1\% to the top 50\%. Average precision weights early recall heavily, so a difference of two concessions among the first ten predictions is enough to move it, and the bootstrap interval spanned zero.
+
+On the retrained models the advantage has disappeared altogether: PS-VAEP's conceding AP is $0.156$, below both E-VAEP ($0.171$) and P-VAEP ($0.178$). We therefore withdraw the claim rather than qualify it, and withdraw the ``rare high-risk cases'' formulation with it.
+
+On calibration, we accept that 15 equal-width bins are close to uninformative at a $0.34\%$ positive rate. We now report equal-frequency binning with a bin-count sensitivity check, reliability curves, and a Brier decomposition into reliability and resolution. The two binning schemes disagree about which variant is best calibrated and no calibration difference is robust under resampling, so we make no calibration claim for any variant --- which also retracts the ``best conceding-head ECE'' statement from the submitted Section~4.2.
+
+\pending{On calibration, we accept that 15 equal-width bins are close to uninformative at a positive rate of $0.34\%$, since almost all actions fall into the lowest bin. We now report adaptive (equal-frequency) binning with a bin-count sensitivity check, reliability diagrams on a logarithmic probability axis for both heads, and a Brier decomposition into reliability and resolution components, which separates whether PS-VAEP loses calibration or resolution. We additionally report the isotonic recalibration results, which were mentioned in the submitted Section~3.5 but never quantified.}}{Section~3.6, revised calibration metrics; Section~4.2, new top-$k$ and risk-decile analysis; new reliability-diagram figure; recalibration results reported in Section~4.1.}
+
+\begin{reviewbox}[Comment 5]
+Provide systematic evidence for the revaluation mechanism. The positional shifts and Maanum example are suggestive, but one case study does not establish that pressure and congestion drive the redistribution. Analyze the change from P-VAEP to PS-VAEP across nearest-opponent distance, defensive density, action type, pitch zone, and outcome. Feature importance could supplement this analysis but would not replace it.
+\end{reviewbox}
+\response{We agree, and this is the change we consider most important to the revision. A single case study cannot establish a mechanism, and presenting the Maanum action alongside the positional shifts implied a generality we had not demonstrated. Reviewer~1 made the same point in Comment~3 and Question~3.
+
+The reviewer is right that one case study cannot establish a mechanism, and the analysis we ran shows that we could not establish one at all.
+
+The new Section~4.3 analyses $\Delta = V_{\mathrm{PS}}(a) - V_{\mathrm{P}}(a)$ across exactly the dimensions listed --- nearest-opponent distance, defensive density, action type, pitch zone and outcome --- reporting the share of actions, the mean change with match-level bootstrap intervals, and within-stratum discrimination. No stratum shows a robustly positive shift. The congestion stratum a pressure account predicts (three or more opponents within 5~m) gives $+0.0010$ with an interval of $[-0.0003, +0.0023]$; distance to the nearest opponent produces no gradient; pitch zone produces none.
+
+We report this as a negative result. The spatial layer demonstrably reallocates value, but we cannot say which situations are responsible, and the paper no longer claims that it can. We note in the manuscript that an earlier version of this analysis --- on models trained before we implemented the phase interactions described in Section~3.3 --- did find a robustly positive congestion stratum, and that it did not survive retraining. That instability is itself worth reporting as a caution.
+
+\newwork{Grouped feature importance is reported in Section~4.4 as a supplement, not as a substitute, as the reviewer requests. The case study is retained as an illustration of a mechanism established quantitatively elsewhere, and its framing is weakened accordingly.}}{New Section~4.3 with stratified $\Delta$ table and density~$\times$~zone heat map; Section~4.5 extended with the per-player stratum decomposition; case study reframed.}
+
+\begin{reviewbox}[Comment 6]
+Address partial freeze-frame visibility. Counts of nearby or goal-side opponents depend on which players are visible in the broadcast frame. Since visibility varies with pitch position and camera framing, some positional redistribution may reflect coverage rather than defensive structure. Controlling for visible-area size, number of visible players, or proximity to the visible-area boundary would strengthen the interpretation.
+\end{reviewbox}
+\response{This is a serious threat to our interpretation and we are grateful that it was raised precisely. Broadcast coverage is systematically denser in the penalty area than in midfield, which is the same contrast as the positional redistribution we report -- so the confound is aligned with our headline result rather than orthogonal to it.
+
+This was a serious threat to our interpretation and we are grateful it was put precisely: coverage is denser in the penalty area than in midfield, so the confound is aligned with our headline result rather than orthogonal to it. We tested it, and the result is favourable.
+
+We now extract the three coverage measures the reviewer names --- visible-area polygon size, number of visible players, and the actor's distance to the polygon boundary --- for every event, and report them in Section~4.5. The visible area covers a mean of $24\%$ of the pitch and the actor sits a median $6.7$~m inside its boundary. Coverage does vary by zone in the direction anticipated: $14.4$ visible players on average in the middle third against $12.2$ in the penalty area.
+
+The association with the revaluation is nonetheless negligible. The Spearman correlation between visible-player count and $\Delta$ is $0.020$ overall and $0.065$ within the penalty area, and restricting to the better-covered half of actions, or to actions at least 10~m inside the polygon boundary, does not materially change the picture. Partial visibility bounds what freeze-frame features can encode --- which we retain as a limitation --- but it does not explain the redistribution.}{New Section~4.6 (Freeze-Frame Visibility Controls); coverage descriptives in Section~3.1; Section~5 (Discussion and Limitations) updated.}
+
+\begin{reviewbox}[Comment 7]
+Interpret redistribution neutrally. Reduced credit for progression in open space should not yet be framed as a correction. Such progression may be legitimately valuable, including because preceding off-ball actions created the space. Independent expert validation is necessary before concluding that PS-VAEP allocates value more accurately.
+\end{reviewbox}
+\response{We accept this and have removed the evaluative framing throughout. The reviewer's point is also internally consistent with a limitation we already stated but failed to apply: our model values on-ball actions only, so if the space in which a progressive pass is played was created by preceding off-ball movement, PS-VAEP's reduced credit for that pass reflects the model's blind spot rather than a correction of the event-only model.
+
+Concretely, we have removed the phrasing suggesting that PS-VAEP allocates value more appropriately; replaced ``tactically plausible redistribution'' with neutral wording describing what changes and in which direction; connected the off-ball limitation directly to the interpretation of the downward shifts; and stated in both the Abstract and the Discussion that the direction of the redistribution is not evidence of its correctness, and that adjudicating it requires expert validation which we have not performed.
+
+We retain the descriptive claim -- that credit moves from high-volume progression in open space towards actions under pressure in congested areas -- since it is what the data show; we no longer attach a normative reading to it.}{Abstract; Section~1, contribution~3; Section~4.5; Section~5 (Discussion and Limitations), paragraphs~2--4 rewritten.}
+
+\begin{reviewbox}[Comment 8]
+Minor clarity and reporting issues:
+
+\begin{enumerate}[label=\alph*)]
+  \item Section 5 contains a duplicated near-verbatim closing passage and the typo “probability stimation.” Please tighten this section.
+  \item Clarify the action universe used in Tables 2 and 3. The E-VAEP pooled values suggest that both use the matched 51,172-action subset, but this should be stated explicitly.
+  \item The n=117 Spearman analysis is descriptive; match-level bootstrap confidence intervals for the correlations and individual rank changes would help assess the stability of the positional conclusions.
+  \item An appendix enumerating the 17 spatial features with exact definitions would aid reproduction.
+\end{enumerate}
+\end{reviewbox}
+\response{We thank the reviewer for the careful reading and have addressed all four items.
+
+\textbf{(a)} The closing passage of Section~5 was duplicated near-verbatim -- an editing error -- and contained the typo ``probability stimation''. Section~5 has been rewritten as a single closing paragraph.
+
+\textbf{(b)} The reviewer's inference is correct: both tables are computed on the matched 51{,}172-action subset, which is why the E-VAEP pooled conceding ROC-AUC agrees between them. We have verified this against our evaluation code and now state it explicitly in both captions and in Section~3.6, rather than leaving it to be inferred.
+
+\pending{\textbf{(c)} Addressed by the resampling protocol described in our response to Comment~2: correlations and individual rank changes are now reported with match-level bootstrap intervals, and the positional conclusions are stated only to the extent those intervals support them.}
+
+\newwork{\textbf{(d)} Appendix~A now enumerates all seventeen spatial features with exact definitions, units, the normalisation convention, and the treatment of missing or partially visible players -- the last being directly relevant to Comment~6.}}{Section~5 rewritten; captions of Tables~2 and~3 and Section~3.6 clarified; Table~4 and Section~4.5 with bootstrap intervals; new Appendix~A (Spatial Feature Definitions).}
+
+\subsection{Concluding assessment}
+
+\begin{reviewbox}
+In summary, the paper is well-scoped, carefully controlled, and offers a valuable conceptual distinction between predictive improvement and value redistribution. The missing ablation, uncertainty analysis, and validation of the spatial mechanism limit the strength of the conclusions, but these concerns are addressable and do not outweigh the paper’s relevance and usefulness for an applied sports-analytics workshop.
+\end{reviewbox}
+
+\end{document}

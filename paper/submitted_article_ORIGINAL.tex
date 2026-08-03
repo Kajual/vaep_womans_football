@@ -1,0 +1,290 @@
+% LNCS paper, based on samplepaper.tex
+\documentclass[runningheads]{llncs}
+
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{amsmath}
+
+\usepackage[section]{placeins}
+
+\newif\ifanonymous
+%\anonymoustrue      % wersja do double blind review
+\anonymousfalse   % wersja camera-ready
+
+
+\begin{document}
+
+\title{Prediction or Revaluation? Phase- and Space-Aware VAEP for Women's Football}
+
+\titlerunning{Phase-Space VAEP for Women's Football}
+\ifanonymous
+  \author{Anonymous Author(s)}
+  \authorrunning{Anonymous Author(s)}
+  \institute{Paper under double-blind review}
+\else
+\author{
+Tomasz Piłka\inst{1}\orcidID{0000-0003-1206-2076} \and
+Kaj Skubiszak\inst{2}\orcidID{0009-0003-9004-4620} \and 
+Piotr Andrzejewski\inst{3}\orcidID{0009-0001-3721-6046} \and 
+Patryk Żyliński\inst{4}\orcidID{0009-0002-2119-5292}
+}
+
+\authorrunning{T. Piłka et al.}
+
+\institute{Faculty of Mathematics and Computer Science, \\Adam Mickiewicz University in Pozna\'n, Poland \\
+\email{tomasz.pilka@amu.edu.pl} \\
+\email{\{kajsku, pioand6, patzyl\}@st.amu.edu.pl}}
+\fi 
+
+\maketitle
+\begin{abstract}
+Event-based action valuation models, such as VAEP, assign value to on-ball actions based on their type, outcome, location, and recent context, but they do not encode the off-ball spatial configuration in which the action is performed. This limitation is particularly relevant in women's football, where public spatial data remains scarce. We study whether two interpretable context layers, rule-based tactical phase labels and geometric features from StatsBomb 360 freeze frames, affect VAEP-style action valuation in a men-to-women source-target learning setting.
+
+We compare three nested variants: Event-VAEP, Phase-VAEP and Phase-Space VAEP. The models are evaluated on a held-out women's tournament in terms of discrimination, calibration, source-target training strategy and player valuation behaviour. Tactical phase information improves probability estimation, especially for assessing risk of conceding. Freeze-frame spatial features do not consistently improve aggregate discrimination, but they substantially redistribute player values, increasing credit for actions performed under pressure in congested high-value areas and reducing credit for high-volume progression in open space. The results show that contextual action valuation should be assessed not only by predictive metrics, but also by how value is allocated across roles and tactical situations.
+
+\keywords{action valuation \and VAEP \and women's football \and StatsBomb 360 \and spatial features \and transfer learning \and football analytics}
+\end{abstract}
+
+
+\section{Introduction}
+
+Football action valuation aims to assign credit to individual on-ball actions by estimating how much they change a team's probability of scoring and conceding. Valuing Actions by Estimating Probabilities (VAEP) is one of the most widely used frameworks for this task because it values all on-ball actions, not just shots \cite{decroos2019actions}. However, classical VAEP is primarily event-based: it observes action type, result, location, body part, time, score state and a short history of previous actions, but not the spatial configuration of off-ball players around the action.
+
+This creates a structural limitation. Two actions with the same event description may differ substantially in tactical difficulty and value. A pass or take-on performed under pressure, through a compact defensive block, is not equivalent to the same action performed in open space. Event-only valuation cannot distinguish these cases and may therefore assign value incorrectly when pressure, congestion or defensive structure matter more than ball trajectory alone.
+
+The limitation is especially relevant in women's football. Event data for women's competitions is increasingly available, but public spatial data remains much more limited than in men's football. StatsBomb 360 freeze frames provide an intermediate form of spatial context: they record the visible players at the moment of each event, but not their continuous trajectories \cite{statsbomb2021freezeframe}. This makes them suitable for compact, interpretable features that describe local pressure, support, defensive density, and zone occupation.
+
+We study whether such contextual changes affect VAEP-style action valuation in women's football. Specifically, we add two interpretable layers to an event-only VAEP baseline: rule-based tactical phase labels and geometric spatial features extracted from StatsBomb 360 freeze frames. We evaluate the resulting nested models--Event-VAEP, Phase-VAEP and Phase-Space VAEP--in a controlled ablation study and in a men-to-women source-target training setting.
+
+The paper makes three contributions. First, we propose a compact, interpretable extension of VAEP that combines tactical phase annotation with freeze-frame spatial features. Second, we compare women-only training, men-only zero-shot transfer, sequential fine-tuning and pooled source-target training for a data-scarce target domain. Third, we separate predictive performance from valuation behaviour: phase context improves probability estimation, whereas spatial context mainly changes how value is allocated across players, positions and tactical situations.
+
+\section{Related Work}
+
+\subsection{Action Valuation in Football}
+
+Football action valuation addresses the problem of assigning credit to individual on-ball actions in a low-scoring and highly contextual sport. Traditional player
+evaluation based on goals, assists, shots or expected goals captures only a small fraction of the actions that shape possession. More general possession-value and
+action-value models instead represent football as a sequence of game states and estimate how actions change the value of the resulting state \cite{decroos2019actions,liu2020deep}.
+
+The most directly related framework is Valuing Actions by Estimating Probabilities (VAEP), introduced by Decroos et al. \cite{decroos2019actions}. VAEP represents matches as sequences of standardised on-ball actions and estimates two probabilities for each game state: scoring and conceding within a fixed action horizon. This makes it possible to value all on-ball actions, not only shots or passes, and to separate offensive and defensive contributions. Subsequent work has extended action valuation to specific action types and learning paradigms, including pass valuation \cite{bransen2019passes} and deep reinforcement-learning approaches to soccer action value \cite{liu2020deep}. However, these approaches remain primarily grounded in event streams and therefore do not directly observe the off-ball spatial configuration around the action.
+
+\subsection{Spatial Context and Freeze-Frame Data}
+
+A separate line of work shows that spatial context is central to football analytics. Dominant-region, pitch-control and expected-possession-value models use player locations to evaluate space occupation, receiving opportunities and the risk or reward of actions \cite{taki2000dominant,spearman2018beyond,power2017passes,fernandez2018wide,fernandez2021framework}. Related work has also explored visually interpretable spatial representations of football actions, for example by learning pitch-level probability surfaces for passing
+options and action outcomes \cite{fernandez2021soccermap}.
+
+Most of these models assume access to continuous tracking data for all players and the ball. Such data is rarely public and remains especially limited in women's football. StatsBomb 360 freeze frames provide an intermediate form of spatial context: they record the visible players at the moment of each event, but not their trajectories \cite{statsbomb2021freezeframe}. This enables lightweight spatial features such as nearest-opponent distance,  defensive density and opponents between the ball and the goal. Recent work has used the same freeze-frame context to evaluate passing decisions and player creativity \cite{robberechts2023unxpass}. Our work follows this interpretable freeze-frame route, but integrates such features into VAEP-style action valuation rather than pass-choice evaluation.
+
+\subsection{Source-Target Learning for Data-Scarce Sports Analytics}
+
+A further relevant line of work concerns transfer learning and domain adaptation. Standard supervised learning assumes that training and test data come from the same distribution, whereas transfer learning uses information from a source domain to improve learning in a related target domain \cite{pan2010survey}. Domain adaptation theory further relates target-domain error to source-domain error and to the divergence between domains \cite{bendavid2010theory}.
+
+This setting is directly relevant to women's football analytics. Public event data for women's competitions is increasingly available, but public spatial data remains much more limited than in men's football. Training a spatially aware valuation model only on a small women's 360 corpus risks overfitting, while training only on men's football risks domain shift. We therefore treat men's 360 football as a data-rich source domain and women's football as a data-scarce target domain, comparing women-only training, zero-shot transfer, sequential fine-tuning and pooled source-target training. To our knowledge, the combination of VAEP-style action valuation, StatsBomb 360 freeze-frame features and men-to-women source-target learning remains underexplored.
+
+\section{Data, Models and Training}
+
+\subsection{Data and Splits}
+
+The dataset is Hudl StatsBomb's public open-data release, accessed through the official open-data repository \cite{statsbomb2026opendata}. Event data describes each on-ball action --- pass, dribble, shot, tackle, clearance, set-piece restart --- with type, result, body part, location, and a structured timestamp. StatsBomb 360 augments these events with a freeze frame: at the instant of each event, the two-dimensional pitch positions of every player visible in the broadcast view, each labelled as actor, teammate, or opponent, and separately as a goalkeeper or outfield player~\cite{statsbomb2021freezeframe}. A visible-area polygon delimits the region the broadcast camera captured. Freeze frames are not continuous tracking: positions are sampled only at event moments and only within the camera's field of view, and some players are systematically not recorded. The freeze-frame features described below are designed to be robust to this partial visibility.
+
+\subsection{Train, Adaptation, and Evaluation Splits}
+We organise the StatsBomb data into four corpora with distinct experimental roles (Table~\ref{tab:corpora}). Men's 360 data forms the source domain, women's 360 data provides target-domain adaptation data, and UEFA Women's Euro 2025 is reserved as a held-out evaluation tournament. A separate women's event-only corpus is included only to show the asymmetry between the broad availability of event data and the much narrower availability of freeze-frame spatial data.
+
+\begin{table}[!htbp]
+\centering
+\scriptsize
+\caption{StatsBomb corpora and experimental roles. The evaluation corpus is held out from all training and model selection.}
+\label{tab:corpora}
+\begin{tabular}{@{}ll l r r r@{}}
+\toprule
+\textbf{Corpus} & \textbf{Domain} & \textbf{Role} &
+\textbf{Matches} & \textbf{Events} & \textbf{360 frames} \\
+\midrule
+Men's 360 source
+& Men
+& Source training
+& 200
+& 752{,}967
+& 652{,}881 \\
+
+Women's 360 adaptation
+& Women
+& Target training / calibration
+& 95
+& 331{,}303
+& 284{,}305 \\
+
+Women's 360 evaluation
+& Women
+& Held-out test
+& 31
+& 105{,}611
+& 90{,}722 \\
+
+Women's event-only context
+& Women
+& Descriptive context only
+& 414
+& 1{,}386{,}529
+& --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The men's 360 source corpus includes FIFA World Cup 2022, UEFA Euro 2020, UEFA Euro 2024, and Bundesliga 2023/24. The women's 360 adaptation corpus includes FIFA Women's World Cup 2023 and UEFA Women's Euro 2022, while UEFA Women's Euro 2025 is reserved as the held-out evaluation tournament. The additional event-only corpus covers FIFA Women's World Cup 2019, NWSL 2018, and three FA Women's Super League seasons.
+
+The corpus counts in Table~\ref{tab:corpora} refer to raw StatsBomb events, whereas the evaluation counts reported below refer to the SPADL-converted action stream after filtering to VAEP-eligible actions.
+
+\subsection{Model Variants}
+
+\paragraph{\textbf{Event-VAEP.}}
+Following Decroos et al. \cite{decroos2019actions}, Event-VAEP (E-VAEP) estimates two probabilities for each game state $s_i$ reached after action $a_i$: the probability that the acting team scores within the next $k = 10$ actions, $P_{\text{score}}(s_i)$, and the probability that it concedes within the same window, $P_{\text{concede}}(s_i)$. The value of action $a_i$ is the change these probabilities undergo across it:
+\[
+V(a_i) = \big[\, P_{\text{score}}(s_i) - P_{\text{score}}(s_{i-1}) \,\big] - \big[\, P_{\text{concede}}(s_i) - P_{\text{concede}}(s_{i-1}) \,\big].
+\]
+Each probability is estimated by a separate binary classifier trained on the SPADL-converted action stream. E-VAEP uses the canonical VAEP feature set: action type, result, body part, start and end coordinates, distance and angle to goal, elapsed time and time-delta, score state, and the same fields for the three preceding actions. It carries no information about any player other than the actor.
+
+\paragraph{\textbf{Phase-VAEP.}}
+
+Phase-VAEP (P-VAEP) extends E-VAEP with a six-class tactical phase label: \emph{build-up}, \emph{progression}, \emph{final-third creation}, \emph{transition attack}, \emph{defensive transition}, and \emph{set piece}. We assign labels by an explicit set of rules for interpretability. A zone default uses the SPADL coordinates of the action: actions in the attacking third are final-third creation, in the own third build-up, and otherwise progression. Three context-sensitive rules override the zone default in increasing priority. A defensive action --- tackle, interception, clearance, block or foul --- played in the own third immediately after a possession change is a defensive transition. An action within five seconds of a possession that began with a recovery or a counter-attack is a transition attack. Any action that is itself a restart, or the first action of a possession that began from one, is a set piece. The one-hot phase label and its interactions with action type are added to the feature set.
+
+\paragraph{\textbf{Phase-Space VAEP.}}
+\label{sec:spatial}
+
+Phase-Space VAEP (PS-VAEP) extends P-VAEP with seventeen geometric features computed from each StatsBomb 360 freeze frame. Coordinates are normalised so that the acting team attacks from left to right, and distances are computed on a $105 \times 68$ m pitch. The features capture four interpretable aspects of the visible spatial context: pressure and support, measured by nearest-opponent and nearest-teammate distances; defensive density, measured by the number of visible opponents within 5, 10 and 15 m of the ball and in a forward cone; defensive structure, measured by opponents ahead of the ball and inside the ball-goal corridor; and zone context, including central, half-space, wide, box, box-entry and final-third-entry indicators. These features are deliberately compact and use only the players visible in the freeze frame \cite{statsbomb2021freezeframe}.
+
+
+\subsection{Training and Evaluation Protocol}
+
+All three models share the same classifier (LightGBM \cite{ke2017lightgbm}, 63 leaves, learning rate $0.05$, up to 1500 boosting rounds with early stopping after 50 rounds without validation-loss improvement). The two heads --- scoring and conceding --- are trained as independent binary classifiers. Splits are at the match level to prevent within-match leakage: within the training corpus, 15\% of matches are reserved as a validation fold for early stopping; the test set is the entire UEFA Women's Euro 2025 tournament, disjoint from all training data. The three models are trained on identical corpora under each strategy and differ only in the input feature set.
+
+\subsection{Source-Target Training Strategies}
+
+Given the limited availability of women's 360 data, we examine how to combine men's and women's training corpora. We evaluate four strategies. \emph{Women-only} training uses only the women's 360 adaptation corpus, as a control. \emph{Men-only zero-shot} transfer applies a model trained purely on men's data to women's actions without further adaptation. \emph{Fine-tuned} pre-trains on men's data and continues boosting on women's data at a reduced learning rate. \emph{Pooled} training trains a single model on the union of men's and women's data. We additionally test post-hoc isotonic recalibration on a held-out women's calibration fold.
+
+\subsection{Evaluation Metrics}
+
+We report two families of metrics. Discrimination is measured by ROC-AUC and average precision (AP). ROC-AUC weights positives and negatives symmetrically; AP is more sensitive to the rare positive class, which is appropriate given baseline positive rates of approximately 1.5\% for scoring and 0.34\% for conceding. Probability quality is measured by Brier score, log loss, and Expected Calibration Error (ECE) over 15 equal-width bins, following common practice in probability calibration analysis \cite{guo2017calibration}. Player-valuation effects are reported through Spearman rank correlations between model rankings.
+
+Because PS-VAEP is defined only on actions with freeze-frame coverage (51{,}172 of 60{,}370 evaluation actions), the ablation comparison must be matched. We therefore report all ablation metrics on the identical 51{,}172-action 360 subset. Reporting E-VAEP and P-VAEP on the full 60{,}370-action set while restricting PS-VAEP to its 51{,}172 would compare different action sets and would systematically advantage PS-VAEP on score-head metrics, because the actions without a freeze frame are systematically harder broadcast-gap moments.
+
+\section{Results}
+
+\subsection{Transfer Learning}
+Table~\ref{tab:transfer} reports conceding-head ROC-AUC for the four source-target training strategies. Women-only training is weakest across all variants, suggesting that the available women's 360 corpus is insufficient to train the spatial model in isolation. Men-only zero-shot transfer already outperforms women-only training, especially for PS-VAEP. The best strategy is pooled source-target training, where P-VAEP reaches the highest conceding ROC-AUC ($0.858$) and PS-VAEP also improves over both women-only and fine-tuned variants. Sequential fine-tuning does not improve over zero-shot transfer, suggesting that continued boosting on the small target corpus provides less useful signal than joint training.
+
+\begin{table}[tbp]
+\footnotesize
+\centering
+\caption{Conceding-head ROC-AUC by source-target training strategy. Best values are bolded.}
+\label{tab:transfer}
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Strategy} & \textbf{E-VAEP} & \textbf{P-VAEP} & \textbf{PS-VAEP} \\
+\midrule
+Women-only (control) & 0.820 & 0.828 & 0.802 \\
+Men-only (zero-shot) & 0.830 & 0.830 & 0.840 \\
+Fine-tuned & 0.824 & 0.826 & 0.837 \\
+\textbf{Pooled} & \textbf{0.837} & \textbf{0.858} & \textbf{0.851} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Ablation: Event, Phase, and Space}
+Table~\ref{tab:ablation} shows the matched ablation on the identical 51,172-action 360 subset. Adding tactical phase information improves both heads, with the largest gain on conceding ROC-AUC ($0.837$ for E-VAEP versus $0.860$ for P-VAEP). P-VAEP also gives the best log loss on both heads and the best conceding-head ECE, indicating that the gain is not only a reordering of actions but an improvement in probability quality.
+
+Adding spatial features on top of phase does not produce a comparable aggregate gain. PS-VAEP has lower ROC-AUC than P-VAEP on both heads, although it achieves the best conceding AP. This suggests that, at the current data scale, freeze-frame spatial features mainly affect rare high-risk cases more than they improve overall discrimination.
+
+
+\begin{table}[tbp]
+\footnotesize
+\centering
+\caption{Matched ablation on the 51,172-action UEFA Women's Euro 2025 360 subset. Higher is better for ROC-AUC and AP; lower is better for log loss and ECE.}
+\label{tab:ablation}
+\begin{tabular}{lrrr}
+\toprule
+& \textbf{E-VAEP} & \textbf{P-VAEP} & \textbf{PS-VAEP} \\
+& (event-only) & (event + phase) & (event + phase + space) \\
+\midrule
+Scoring ROC-AUC & 0.8252 & \textbf{0.8286} & 0.8235 \\
+Scoring AP & \textbf{0.2909} & 0.2896 & \textbf{0.2909} \\
+Scoring log loss & 0.0628 & \textbf{0.0627} & 0.0628 \\
+Scoring ECE & 0.00323 & \textbf{0.00322} & 0.00349 \\
+\midrule
+Conceding ROC-AUC & 0.8372 & \textbf{0.8603} & 0.8511 \\
+Conceding AP & 0.1714 & 0.1775 & \textbf{0.1836} \\
+Conceding log loss & 0.0182 & \textbf{0.0179} & 0.0183 \\
+Conceding ECE & 0.00144 & \textbf{0.00127} & 0.00134 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Player Valuation}
+
+While PS-VAEP does not improve aggregate prediction, it produces a substantially different player ranking. Table~\ref{tab:ranks} reports Spearman rank correlations on the 117 players with at least 270 minutes played in the held-out tournament. E-VAEP and P-VAEP produce almost identical rankings ($\rho = 0.97$ on total VAEP per 90); phase context reorders the defensive sub-ranking ($\rho = 0.86$) but leaves the offensive one essentially unchanged ($\rho = 0.98$). PS-VAEP, by contrast, correlates with E-VAEP at only $\rho = 0.69$ on the total ranking, and the disagreement is concentrated on the offensive component ($\rho = 0.65$) -- which is consistent with spatial features primarily affecting attacking valuation.
+
+\begin{table}[tbp]
+\footnotesize
+\centering
+\caption{Spearman rank correlations between the three pooled-trained models on total, offensive-only and defensive-only VAEP per 90 minutes ($n = 117$ players with at least 270 minutes).\label{tab:ranks}}
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Model pair} & \textbf{Total} & \textbf{Offensive} & \textbf{Defensive} \\
+\midrule
+E-VAEP vs P-VAEP & 0.973 & 0.981 & 0.863 \\
+E-VAEP vs PS-VAEP & 0.691 & 0.645 & 0.736 \\
+P-VAEP vs PS-VAEP & 0.672 & 0.621 & 0.704 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\begin{figure}[t]
+\centering
+\begin{minipage}[t]{0.55\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/figure_2.png}
+
+\vspace{0.2em}
+\footnotesize \textbf{(a)} Rank under E-VAEP versus   PS-VAEP
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.40\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/article_maanum}
+
+\vspace{0.2em}
+\footnotesize \textbf{(b)} Maanum take-on freeze frame.
+\end{minipage}
+\caption{Two views of PS-VAEP revaluation. Panel (a) shows player-level rank changes after adding spatial features; points below the diagonal rise under PS-VAEP. Panel (b) shows an action-level case in which dense local pressure leads PS-VAEP to assign a higher value than E-VAEP and P-VAEP.}
+\label{fig:revaluation}
+\end{figure}
+
+The rank changes are positionally structured, as shown in panel (a) of Fig.~\ref{fig:revaluation}. The six players who rise most under PS-VAEP are all centre-forwards (Wullaert, $+102$ ranks; Blackstenius, $+94$; Gonz\'alez, $+88$; Girelli, $+58$; Hoffmann, $+51$; Pajor, $+39$); four of them have \emph{negative} per-90 VAEP under E-VAEP. The six largest downward shifts involve deep-lying midfielders or full-backs (Zigiotti-Olme, Wamser, Giugliano, Deloose, Groenen, W\"alti) whose E-VAEP value is driven by high-volume forward passing through low-density zones.
+
+\paragraph{Case study: a take-on under pressure.}
+Panel (b) of Fig.~\ref{fig:revaluation} illustrates the action-level mechanism for a take-on by Frida Maanum against Iceland. The action occurs centrally in the penalty area, with four opponents within 5 m and four opponents between the ball and the goal. E-VAEP and P-VAEP assign negative values ($-0.196$ and $-0.200$), whereas PS-VAEP assigns a positive value ($+0.204$), reflecting ball retention under dense defensive pressure. The same mechanism is consistent with Maanum rising from 10th under E-VAEP to 3rd under PS-VAEP in total VAEP per 90.
+
+
+\section{Discussion and Limitations}
+
+The results separate two effects that are often conflated in action valuation. Tactical phase context improves probability estimation, especially for defensive valuation: P-VAEP gives the strongest conceding-head discrimination, log loss and calibration in the matched ablation. Freeze-frame spatial context, by contrast, does not consistently improve aggregate predictive metrics at the present data scale, but it substantially changes player valuation. PS-VAEP raises the value of forwards acting under pressure in congested high-value areas and lowers the value of high-volume progression through open space.
+
+This suggests that contextual valuation models should not be assessed only by ROC-AUC or log loss. A model can produce similar aggregate probability quality while reallocating credit across roles and tactical situations. In our setting, PS-VAEP is best interpreted as a revaluation model rather than a predictively superior model. Whether this redistribution is tactically preferable requires independent expert validation, which is left to future work.
+
+Several limitations remain. The evaluation is restricted to one held-out women's tournament, and freeze-frame features observe only players visible in the broadcast frame rather than full tracking trajectories. The model values on-ball actions only, so off-ball runs that create space are not directly credited. The phase taxonomy is rule-based and may mislabel edge cases. Finally, we report point estimates rather than bootstrap confidence intervals, and the player-valuation redistribution has not yet been validated against independent expert assessment.
+
+Overall, pooled source-target training outperforms women-only training, phase context improves probability estimation, and spatial context mainly produces a tactically plausible redistribution of value. The main conclusion is therefore not that more context always improves prediction, but that different context layers affect different aspects of valuation: phase improves probability estimation, while space changes how value is allocated across roles and tactical situations. The P-VAEP improvement over E-VAEP on the conceding head remains positive under match-level bootstrap resampling, whereas the P-VAEP versus PS-VAEP difference is less stable. Overall, pooled source-target training outperforms
+women-only training, phase context improves probability  stimation, and spatial context mainly produces a tactically plausible redistribution of value.
+
+\paragraph{Disclosure of Interests.}
+The authors declare no competing interests.
+
+% ---- Bibliography ----
+\bibliographystyle{splncs04}
+\bibliography{women_vaep_references}
+
+\end{document}

@@ -195,9 +195,34 @@ full stream (531k rows). The two configurations are not comparable. But it does
 mean **the headline result has not been shown to survive seed variation in the
 configuration the paper actually reports**.
 
-`python -m src.experiments seedcheck` was written to settle this: it repeats the
-production setup across seeds and reports the paired P − E difference per seed.
-**This should be run before the paper is submitted.**
+#### Seed check in the production configuration — RESOLVED
+
+Ten seeds, E-VAEP and P-VAEP both trained on the full stream (532,565 rows),
+evaluated on the matched subset:
+
+| Variant | Mean conceding AUC | SD | Range |
+|---|---|---|---|
+| E-VAEP | 0.8481 | 0.0057 | 0.839–0.858 |
+| P-VAEP | 0.8540 | 0.0088 | 0.839–0.866 |
+
+Paired phase effect per seed: **mean +0.0059, SD 0.0078, positive in 8 of 10
+seeds, 95% CI on the mean [+0.0010, +0.0108]**.
+
+**The phase effect is real but roughly four times smaller than a single seed
+suggests.** The interval excludes zero, so the direction survives. But the
++0.027 that the production models give is an unrepresentative draw: it sits at
+the extreme of the seed distribution, and reporting it would overstate the
+effect by a factor of four.
+
+Note also that production E-VAEP scores 0.8372, below the seed range minimum of
+0.8389 — the production E-VAEP is an unusually weak draw, which inflates the
+gap from both directions.
+
+**Recommendation: report the phase effect as the seed-averaged paired difference,
++0.006 [+0.001, +0.011], and present both uncertainty sources — the bootstrap
+interval for evaluation noise and the seed interval for training noise.**
+Reporting both is unusual in this literature and is a methodological strength,
+not a concession.
 
 Partial reassurance: the ordering holds under both alternative learners.
 Logistic regression gives P 0.840 vs E 0.820; XGBoost gives P 0.865 vs E 0.860
@@ -207,7 +232,8 @@ Logistic regression gives P 0.840 vs E 0.820; XGBoost gives P 0.865 vs E 0.860
 
 ## What the paper should now claim
 
-1. Phase improves conceding-risk estimation — **pending the seedcheck result**.
+1. Phase improves conceding-risk estimation, by **+0.006 [+0.001, +0.011]**
+   averaged over seeds — not the +0.027 a single seed suggests.
 2. Space does not improve aggregate prediction, and degrades it when added to
    phase. The two layers are substitutes.
 3. Space reorders the player ranking substantially (rho 0.98 to 0.82), with no
